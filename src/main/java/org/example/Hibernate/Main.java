@@ -9,6 +9,8 @@ public class Main {
         session.close();
         HibernateUtil.close();
 
+        System.out.println("Hello World! ");
+
 
     }
 }
