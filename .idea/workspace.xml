@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a79d991-ceb4-48ec-8f00-615dc0f4af71" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/Project_db.hH9mAQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/Project_db.hH9mAQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/Project_db.hH9mAQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/Project_db.hH9mAQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/Project_db.hH9mAQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/Project_db.hH9mAQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3a9a044-25c3-4c94-8e8a-43eeb10db0cd/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entity/Agreement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Consultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entity/Consultation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entity/Object.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entity/Requirement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +126,7 @@
       <updated>1707477488004</updated>
       <workItem from="1707477489210" duration="152000" />
       <workItem from="1707477679196" duration="90000" />
-      <workItem from="1707477792337" duration="7448000" />
+      <workItem from="1707477792337" duration="10069000" />
     </task>
     <servers />
   </component>

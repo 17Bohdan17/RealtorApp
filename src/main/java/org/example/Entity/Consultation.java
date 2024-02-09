@@ -1,10 +1,19 @@
 package org.example.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Consultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -19,38 +28,5 @@ public class Consultation {
     @Basic
     @Column(name = "cons_status", nullable = false, length = -1)
     private String consStatus;
-
-    public Integer getConsId() {
-        return consId;
-    }
-
-    public void setConsId(Integer consId) {
-        this.consId = consId;
-    }
-
-    public Integer getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }
-
-    public Timestamp getConsDate() {
-        return consDate;
-    }
-
-    public void setConsDate(Timestamp consDate) {
-        this.consDate = consDate;
-    }
-
-    public String getConsStatus() {
-        return consStatus;
-    }
-
-    public void setConsStatus(String consStatus) {
-        this.consStatus = consStatus;
-    }
-
 
 }
