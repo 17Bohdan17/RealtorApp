@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Setter
 @Getter
@@ -29,7 +31,7 @@ public class Object {
 
     @Basic
     @Column(name = "room_count", nullable = false)
-    private Short roomCount;
+    private Integer roomCount;
 
     @Basic
     @Column(name = "area", nullable = false, precision = 0)
@@ -37,7 +39,7 @@ public class Object {
 
     @Basic
     @Column(name = "price", nullable = false)
-    private java.lang.Object price;
+    private BigDecimal price;
 
     @Basic
     @Column(name = "status", nullable = false, length = -1)

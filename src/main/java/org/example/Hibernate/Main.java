@@ -3,6 +3,8 @@ package org.example.Hibernate;
 import org.example.Entity.Object;
 import org.hibernate.Session;
 
+import java.math.BigDecimal;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -10,11 +12,11 @@ public class Main {
         session.getTransaction().begin();
 
         Object object = new Object();
-        object.setStreet("Київська");
+        object.setStreet("Шевченка");
         object.setStreetNum(91);
-        object.setRoomCount((short)4);
+        object.setRoomCount(4);
         object.setArea(45.7);
-        object.setPrice(34000);
+        object.setPrice(new BigDecimal("47000"));
         object.setStatus("AVAILABLE");
         object.setMinBedrooms((short)1);
         object.setMinBathrooms((short)1);
@@ -22,7 +24,7 @@ public class Main {
         object.setGarden(true);
         object.setPool(false);
 
-        session.save(object);
+        session.persist(object);
         session.getTransaction().commit();
         session.close();
         HibernateUtil.close();
