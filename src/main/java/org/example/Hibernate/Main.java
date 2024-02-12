@@ -1,34 +1,27 @@
 package org.example.Hibernate;
 
-import org.example.Entity.Object;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 
-import java.math.BigDecimal;
-
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
 
+        Application.launch();
+
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
-
-        Object object = new Object();
-        object.setStreet("Шевченка");
-        object.setStreetNum(91);
-        object.setRoomCount(4);
-        object.setArea(45.7);
-        object.setPrice(new BigDecimal("47000"));
-        object.setStatus("AVAILABLE");
-        object.setMinBedrooms((short)1);
-        object.setMinBathrooms((short)1);
-        object.setGarage(true);
-        object.setGarden(true);
-        object.setPool(false);
-
-        session.persist(object);
-        session.getTransaction().commit();
+//        session.getTransaction().begin();
+//        session.getTransaction().commit();
         session.close();
         HibernateUtil.close();
+    }
 
-
+    @Override
+    public void start(Stage stage) throws Exception {
+        Group root = new Group();
+        stage.setScene(new Scene(root, 400, 300));
+        stage.show();
     }
 }
