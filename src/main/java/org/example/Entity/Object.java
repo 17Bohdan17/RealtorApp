@@ -45,24 +45,4 @@ public class Object {
     @Column(name = "status", nullable = false, length = -1)
     private String status;
 
-    @Basic
-    @Column(name = "min_bedrooms", nullable = false)
-    private Short minBedrooms;
-
-    @Basic
-    @Column(name = "min_bathrooms", nullable = false)
-    private Short minBathrooms;
-
-    @Basic
-    @Column(name = "garage", nullable = false)
-    private Boolean garage;
-
-    @Basic
-    @Column(name = "garden", nullable = false)
-    private Boolean garden;
-
-    @Basic
-    @Column(name = "pool", nullable = false)
-    private Boolean pool;
-
 }

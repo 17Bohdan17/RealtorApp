@@ -3,9 +3,8 @@ module org.example.Hibernate{
     requires javafx.fxml;
     requires javafx.web;
 
-    opens org.example.Hibernate to javafx.fxml;
-
     exports org.example.Hibernate;
+    opens org.example.Hibernate;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;

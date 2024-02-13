@@ -16,6 +16,7 @@
     <mapping class="org.example.Entity.Consultation"/>
     <mapping class="org.example.Entity.Object"/>
     <mapping class="org.example.Entity.Requirement"/>
+      <mapping class="org.example.Entity.Facilities"/>
 
 
   </session-factory>

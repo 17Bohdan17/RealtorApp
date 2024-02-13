@@ -1,0 +1,16 @@
+.root {
+    -fx-background-color: #483D8B;
+    -fx-background-radius: 28;
+}
+
+.mainPain {
+    -fx-background-color: linear-gradient(to bottom right, #483D8B, darkmagenta);
+    -fx-background-radius: 28;
+}
+
+.highlight {
+    -fx-background-color: #778899;
+    -fx-background-radius: 28;
+    -fx-opacity: 0.45;
+}
+
