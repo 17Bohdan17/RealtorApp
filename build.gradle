@@ -6,16 +6,26 @@ plugins {
     id 'org.beryx.jlink' version '2.25.0'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'src/main/resources/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+            exclude '**/*.java'
+        }
+    }
+}
+
+
+
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-}
-
-ext {
-    junitVersion = '5.10.0'
 }
 
 sourceCompatibility = '21'
@@ -33,31 +43,25 @@ application {
 
 
 dependencies {
-    implementation 'org.hibernate.orm:hibernate-core:6.4.4.Final'
-    implementation 'org.postgresql:postgresql:42.7.1'
 
+    implementation'org.hibernate.orm:hibernate-core:6.4.4.Final'
+    implementation 'org.postgresql:postgresql:42.7.1'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     implementation 'org.openjfx:javafx-controls:16'
     implementation 'org.openjfx:javafx-fxml:16'
-
     implementation('org.controlsfx:controlsfx:11.1.2')
     implementation('com.dlsc.formsfx:formsfx-core:11.6.0') {
         exclude(group: 'org.openjfx')
     }
 
-    implementation('net.synedra:validatorfx:0.4.0') {
-        exclude(group: 'org.openjfx')
-    }
-
-    implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
-    implementation('eu.hansolo:tilesfx:11.48') {
-        exclude(group: 'org.openjfx')
-    }
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
+
+
 }
+
+
 
 jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
@@ -74,3 +78,10 @@ jlinkZip {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+
+
+
+
+
+
