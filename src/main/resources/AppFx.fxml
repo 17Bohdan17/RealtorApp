@@ -18,6 +18,10 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#clickButtonAddObjectTable" text="Object" />
                 <MenuItem mnemonicParsing="false" onAction="#clickButtonAddAgreementTable" text="Agreement" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickButtonAddClientTable" text="Client" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickButtonAddConsultationTable" text="Consultation" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickButtonAddFacilityTable" text="Facility" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickButtonAddRequirementTable" text="Requirement" />
               </items>
             </MenuButton>
             </children>

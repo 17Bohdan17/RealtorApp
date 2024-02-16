@@ -11,12 +11,13 @@
     <property name="connection.username">postgres</property>
     <property name="connection.password">admin</property>
 
-    <mapping class="org.example.Entity.Agreement"/>
+      <mapping class="org.example.Entity.Agreement"/>
     <mapping class="org.example.Entity.Client"/>
     <mapping class="org.example.Entity.Consultation"/>
     <mapping class="org.example.Entity.Object"/>
     <mapping class="org.example.Entity.Requirement"/>
     <mapping class="org.example.Entity.Facilities"/>
+      <mapping class="org.example.Entity.Facilities"/>
 
 
   </session-factory>

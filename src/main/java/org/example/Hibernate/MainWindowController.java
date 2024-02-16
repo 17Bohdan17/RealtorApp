@@ -8,12 +8,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.example.TableView.AgreementModel;
-import org.example.TableView.AgreementViewModel;
-import org.example.TableView.ObjectModel;
-import org.example.TableView.ObjectViewModel;
+import org.example.TableView.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class MainWindowController {
@@ -59,6 +57,22 @@ public class MainWindowController {
 
     public void clickButtonAddAgreementTable(ActionEvent actionEvent){
         addAgreementTable();
+    }
+
+    public void clickButtonAddClientTable(ActionEvent actionEvent){
+        addClientTable();
+    }
+
+    public void clickButtonAddConsultationTable (ActionEvent actionEvent){
+        addConsultationTable();
+    }
+
+    public void clickButtonAddFacilityTable (ActionEvent actionEvent){
+        addFacilityTable();
+    }
+
+    public void clickButtonAddRequirementTable (ActionEvent actionEvent){
+        addRequirementTable();
     }
 
 
@@ -129,18 +143,160 @@ public class MainWindowController {
         mainTableView.setItems(agreementModel.getAgreementViewModels());
         mainTableView.getColumns().addAll(agreementIdColumn, objectIdColumn, clientIdColumn, agreementDateColumn,
                 agreementPriceColumn, agreementStatusColumn);
+    }
+
+    public void addClientTable(){
+        mainTableView.getColumns().clear();
+
+        TableColumn<ClientViewModel, Integer> clientIdColumn = new TableColumn<>("client_id");
+        TableColumn<ClientViewModel, String> firstNameColumn = new TableColumn<>("first_name");
+        TableColumn<ClientViewModel, String> secondNameColumn = new TableColumn<>("second_name");
+        TableColumn<ClientViewModel, Long> contactNumColumn = new TableColumn<>("contact_num");
+        TableColumn<ClientViewModel, Integer> reqIdColumn = new TableColumn<>("req_id");
+
+        clientIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getClientId().getValue(),
+                cellData.getValue().getClientId()));
+
+        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().getFirstName());
+
+        secondNameColumn.setCellValueFactory(cellData -> cellData.getValue().getSecondName());
+
+        contactNumColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getContactNum().getValue(),
+                cellData.getValue().getContactNum()));
+
+        reqIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqId().getValue(),
+                cellData.getValue().getReqId()));
+
+        ClientModel clientModel = new ClientModel();
+
+        mainTableView.setItems(clientModel.getClientViewModels());
+        mainTableView.getColumns().addAll(clientIdColumn, firstNameColumn, secondNameColumn, contactNumColumn, reqIdColumn);
+    }
+
+    public void addConsultationTable(){
+        mainTableView.getColumns().clear();
+
+        TableColumn<ConsultationViewModel, Integer> consIdColumn = new TableColumn<>("cons_id");
+        TableColumn<ConsultationViewModel, Integer> clientIdColumn = new TableColumn<>("client_id");
+        TableColumn<ConsultationViewModel, Timestamp> consDateColumn = new TableColumn<>("cons_date");
+        TableColumn<ConsultationViewModel, String> consStatusColumn = new TableColumn<>("cons_status");
 
 
+        consIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getConsId().getValue(),
+                cellData.getValue().getConsId()));
 
+        clientIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getClientId().getValue(),
+                cellData.getValue().getClientId()));
 
+        consDateColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getConsDate().getValue(),
+                cellData.getValue().getConsDate()));
 
+        consStatusColumn.setCellValueFactory(cellData -> cellData.getValue().getConsStatus());
 
+        ConsultationModel consultationModel = new ConsultationModel();
 
-
-
-
+        mainTableView.setItems(consultationModel.getConsultationViewModels());
+        mainTableView.getColumns().addAll(consIdColumn, clientIdColumn, consDateColumn, consStatusColumn);
 
     }
+
+    public void addFacilityTable(){
+        mainTableView.getColumns().clear();
+
+        TableColumn<FacilityViewModel, Integer> facilityIdColumn = new TableColumn<>("facility_id");
+        TableColumn<FacilityViewModel, Integer> objectReferenceIdColumn = new TableColumn<>("object_reference_id");
+        TableColumn<FacilityViewModel, Integer> minBedroomsColumn = new TableColumn<>("min_bedrooms");
+        TableColumn<FacilityViewModel, Integer> minBathroomsColumn = new TableColumn<>("min_bathrooms");
+        TableColumn<FacilityViewModel, Boolean> garageColumn = new TableColumn<>("garage");
+        TableColumn<FacilityViewModel, Boolean> gardenColumn = new TableColumn<>("garden");
+        TableColumn<FacilityViewModel, Boolean> poolColumn = new TableColumn<>("pool");
+
+
+
+        facilityIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getFacilityId().getValue(),
+                cellData.getValue().getFacilityId()));
+
+        objectReferenceIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getObjectReferenceId().getValue(),
+                cellData.getValue().getObjectReferenceId()));
+
+        minBedroomsColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getMinBedrooms().getValue(),
+                cellData.getValue().getMinBedrooms()));
+
+        minBathroomsColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getMinBathrooms().getValue(),
+                cellData.getValue().getMinBathrooms()));
+
+        garageColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getGarage().getValue(),
+                cellData.getValue().getGarage()));
+
+        gardenColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getGarden().getValue(),
+                cellData.getValue().getGarden()));
+
+        poolColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getPool().getValue(),
+                cellData.getValue().getPool()));
+
+
+
+       FacilityModel facilityModel = new FacilityModel();
+
+        mainTableView.setItems(facilityModel.getFacilityViewModels());
+        mainTableView.getColumns().addAll(facilityIdColumn, objectReferenceIdColumn, minBedroomsColumn, minBathroomsColumn,
+                garageColumn, gardenColumn, poolColumn);
+
+    }
+
+    public void addRequirementTable(){
+        mainTableView.getColumns().clear();
+
+        TableColumn<RequirementViewModel, Integer> reqIdColumn = new TableColumn<>("req_id");
+        TableColumn<RequirementViewModel, Integer> reqMinBedroomsColumn = new TableColumn<>("req_min_bedrooms");
+        TableColumn<RequirementViewModel, Integer> reqMinBathroomsColumn = new TableColumn<>("req_min_bathrooms");
+        TableColumn<RequirementViewModel, Double> reqMinimalAreaColumn = new TableColumn<>("req_minimal_area");
+        TableColumn<RequirementViewModel, BigDecimal> reqMaxPriceColumn = new TableColumn<>("req_max_price");
+        TableColumn<RequirementViewModel, String> reqStreetColumn = new TableColumn<>("req_street");
+        TableColumn<RequirementViewModel, Boolean> reqGarageColumn = new TableColumn<>("garage");
+        TableColumn<RequirementViewModel, Boolean> reqGardenColumn = new TableColumn<>("garden");
+        TableColumn<RequirementViewModel, Boolean> reqPoolColumn = new TableColumn<>("pool");
+
+
+
+        reqIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqId().getValue(),
+                cellData.getValue().getReqId()));
+
+        reqMinBedroomsColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqMinBedrooms().getValue(),
+                cellData.getValue().getReqMinBedrooms()));
+
+        reqMinBathroomsColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqMinBathrooms().getValue(),
+                cellData.getValue().getReqMinBathrooms()));
+
+        reqMinimalAreaColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqMinimalArea().getValue(),
+                cellData.getValue().getReqMinimalArea()));
+
+        reqMaxPriceColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqMaxPrice().getValue(),
+                cellData.getValue().getReqMaxPrice()));
+
+        reqStreetColumn.setCellValueFactory(cellData -> cellData.getValue().getReqStreet());
+
+        reqGarageColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqGarage().getValue(),
+                cellData.getValue().getReqGarage()));
+
+        reqGardenColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqGarden().getValue(),
+                cellData.getValue().getReqGarden()));
+
+        reqPoolColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqPool().getValue(),
+                cellData.getValue().getReqPool()));
+
+
+
+       RequirementModel requirementModel = new RequirementModel();
+
+        mainTableView.setItems(requirementModel.getRequirementViewModels());
+        mainTableView.getColumns().addAll(reqIdColumn, reqMinBedroomsColumn, reqMinBathroomsColumn, reqMinimalAreaColumn,
+                reqMaxPriceColumn, reqStreetColumn, reqGarageColumn, reqGardenColumn, reqPoolColumn);
+
+    }
+
+
+
 
 
 }
