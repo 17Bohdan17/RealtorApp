@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.example.Hibernate.addRecordPart.AddRecordWindow;
 import org.example.TableView.*;
 
 import java.math.BigDecimal;
@@ -21,7 +22,6 @@ public class MainWindowController {
     private ImageView btnClose, btnMinimize;
     @FXML
     private TableView mainTableView;
-
 
     private double x, y;
 
@@ -55,37 +55,45 @@ public class MainWindowController {
         addObjectTable();
     }
 
-    public void clickButtonAddAgreementTable(ActionEvent actionEvent){
+    public void clickButtonAddAgreementTable(ActionEvent actionEvent) {
         addAgreementTable();
     }
 
-    public void clickButtonAddClientTable(ActionEvent actionEvent){
+    public void clickButtonAddClientTable(ActionEvent actionEvent) {
         addClientTable();
     }
 
-    public void clickButtonAddConsultationTable (ActionEvent actionEvent){
+    public void clickButtonAddConsultationTable(ActionEvent actionEvent) {
         addConsultationTable();
     }
 
-    public void clickButtonAddFacilityTable (ActionEvent actionEvent){
+    public void clickButtonAddFacilityTable(ActionEvent actionEvent) {
         addFacilityTable();
     }
 
-    public void clickButtonAddRequirementTable (ActionEvent actionEvent){
+    public void clickButtonAddRequirementTable(ActionEvent actionEvent) {
         addRequirementTable();
     }
 
+    public void clickAddRecordButton (ActionEvent actionEvent) throws Exception {
+        AddRecordWindow addRecordWindow = new AddRecordWindow();
+        addRecordWindow.init();
+    }
+
+
+
 
     public void addObjectTable() {
+        ObjectModel objectModel = new ObjectModel();
         mainTableView.getColumns().clear();
 
-        TableColumn<ObjectViewModel, Integer> idColumn = new TableColumn<>("object_id");
-        TableColumn<ObjectViewModel, String> streetColumn = new TableColumn<>("street");
-        TableColumn<ObjectViewModel, Integer> streetNumColumn = new TableColumn<>("street_num");
-        TableColumn<ObjectViewModel, Double> areaColumn = new TableColumn<>("area");
-        TableColumn<ObjectViewModel, BigDecimal> priceColumn = new TableColumn<>("price");
-        TableColumn<ObjectViewModel, String> statusColumn = new TableColumn<>("status");
-        TableColumn<ObjectViewModel, Integer> roomCountColumn = new TableColumn<>("room_count");
+        TableColumn<ObjectViewModel, Integer> idColumn = new TableColumn<>("ID об'єкту");
+        TableColumn<ObjectViewModel, String> streetColumn = new TableColumn<>("Вулиця");
+        TableColumn<ObjectViewModel, Integer> streetNumColumn = new TableColumn<>("Номер будинку");
+        TableColumn<ObjectViewModel, Double> areaColumn = new TableColumn<>("Площа");
+        TableColumn<ObjectViewModel, BigDecimal> priceColumn = new TableColumn<>("Ціна");
+        TableColumn<ObjectViewModel, String> statusColumn = new TableColumn<>("Статус");
+        TableColumn<ObjectViewModel, Integer> roomCountColumn = new TableColumn<>("Кількість кімнат");
 
         idColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getObjectId().getValue(),
                 cellData.getValue().getObjectId()));
@@ -106,20 +114,20 @@ public class MainWindowController {
         roomCountColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getRoomCount().getValue(),
                 cellData.getValue().getRoomCount()));
 
-        ObjectModel objectModel = new ObjectModel();
         mainTableView.setItems(objectModel.getObjectViewModels());
         mainTableView.getColumns().addAll(idColumn, streetColumn, streetNumColumn, areaColumn, priceColumn, statusColumn, roomCountColumn);
     }
 
     public void addAgreementTable(){
+        AgreementModel agreementModel = new AgreementModel();
         mainTableView.getColumns().clear();
 
-        TableColumn<AgreementViewModel, Integer> agreementIdColumn = new TableColumn<>("agreement_id");
-        TableColumn<AgreementViewModel, Integer> objectIdColumn = new TableColumn<>("object_id");
-        TableColumn<AgreementViewModel, Integer> clientIdColumn = new TableColumn<>("client_id");
-        TableColumn<AgreementViewModel, Date> agreementDateColumn = new TableColumn<>("agreement_date");
-        TableColumn<AgreementViewModel, Integer> agreementPriceColumn = new TableColumn<>("agreement_price");
-        TableColumn<AgreementViewModel, String> agreementStatusColumn = new TableColumn<>("agreement_status");
+        TableColumn<AgreementViewModel, Integer> agreementIdColumn = new TableColumn<>("ID угоди");
+        TableColumn<AgreementViewModel, Integer> objectIdColumn = new TableColumn<>("ID об'єкту");
+        TableColumn<AgreementViewModel, Integer> clientIdColumn = new TableColumn<>("ID клієнта");
+        TableColumn<AgreementViewModel, Date> agreementDateColumn = new TableColumn<>("Дата укладання угоди");
+        TableColumn<AgreementViewModel, Integer> agreementPriceColumn = new TableColumn<>("Ціна послуги укладання");
+        TableColumn<AgreementViewModel, String> agreementStatusColumn = new TableColumn<>("Статус угоди");
 
         agreementIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getAgreementId().getValue(),
                 cellData.getValue().getAgreementId()));
@@ -138,21 +146,20 @@ public class MainWindowController {
 
         agreementStatusColumn.setCellValueFactory(cellData -> cellData.getValue().getAgreementStatus());
 
-        AgreementModel agreementModel = new AgreementModel();
-
         mainTableView.setItems(agreementModel.getAgreementViewModels());
         mainTableView.getColumns().addAll(agreementIdColumn, objectIdColumn, clientIdColumn, agreementDateColumn,
                 agreementPriceColumn, agreementStatusColumn);
     }
 
     public void addClientTable(){
+        ClientModel clientModel = new ClientModel();
         mainTableView.getColumns().clear();
 
-        TableColumn<ClientViewModel, Integer> clientIdColumn = new TableColumn<>("client_id");
-        TableColumn<ClientViewModel, String> firstNameColumn = new TableColumn<>("first_name");
-        TableColumn<ClientViewModel, String> secondNameColumn = new TableColumn<>("second_name");
-        TableColumn<ClientViewModel, Long> contactNumColumn = new TableColumn<>("contact_num");
-        TableColumn<ClientViewModel, Integer> reqIdColumn = new TableColumn<>("req_id");
+        TableColumn<ClientViewModel, Integer> clientIdColumn = new TableColumn<>("ID клієнта");
+        TableColumn<ClientViewModel, String> firstNameColumn = new TableColumn<>("Ім'я");
+        TableColumn<ClientViewModel, String> secondNameColumn = new TableColumn<>("Прізвище ");
+        TableColumn<ClientViewModel, Long> contactNumColumn = new TableColumn<>("Номер телефону");
+        TableColumn<ClientViewModel, Integer> reqIdColumn = new TableColumn<>("ID вимоги");
 
         clientIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getClientId().getValue(),
                 cellData.getValue().getClientId()));
@@ -167,20 +174,18 @@ public class MainWindowController {
         reqIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqId().getValue(),
                 cellData.getValue().getReqId()));
 
-        ClientModel clientModel = new ClientModel();
-
         mainTableView.setItems(clientModel.getClientViewModels());
         mainTableView.getColumns().addAll(clientIdColumn, firstNameColumn, secondNameColumn, contactNumColumn, reqIdColumn);
     }
 
     public void addConsultationTable(){
+        ConsultationModel consultationModel = new ConsultationModel();
         mainTableView.getColumns().clear();
 
-        TableColumn<ConsultationViewModel, Integer> consIdColumn = new TableColumn<>("cons_id");
-        TableColumn<ConsultationViewModel, Integer> clientIdColumn = new TableColumn<>("client_id");
-        TableColumn<ConsultationViewModel, Timestamp> consDateColumn = new TableColumn<>("cons_date");
-        TableColumn<ConsultationViewModel, String> consStatusColumn = new TableColumn<>("cons_status");
-
+        TableColumn<ConsultationViewModel, Integer> consIdColumn = new TableColumn<>("ID консультації");
+        TableColumn<ConsultationViewModel, Integer> clientIdColumn = new TableColumn<>("ID клієнта");
+        TableColumn<ConsultationViewModel, Timestamp> consDateColumn = new TableColumn<>("Дата консультації");
+        TableColumn<ConsultationViewModel, String> consStatusColumn = new TableColumn<>("Статус консультації");
 
         consIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getConsId().getValue(),
                 cellData.getValue().getConsId()));
@@ -193,25 +198,22 @@ public class MainWindowController {
 
         consStatusColumn.setCellValueFactory(cellData -> cellData.getValue().getConsStatus());
 
-        ConsultationModel consultationModel = new ConsultationModel();
-
         mainTableView.setItems(consultationModel.getConsultationViewModels());
         mainTableView.getColumns().addAll(consIdColumn, clientIdColumn, consDateColumn, consStatusColumn);
 
     }
 
     public void addFacilityTable(){
+        FacilityModel facilityModel = new FacilityModel();
         mainTableView.getColumns().clear();
 
-        TableColumn<FacilityViewModel, Integer> facilityIdColumn = new TableColumn<>("facility_id");
-        TableColumn<FacilityViewModel, Integer> objectReferenceIdColumn = new TableColumn<>("object_reference_id");
-        TableColumn<FacilityViewModel, Integer> minBedroomsColumn = new TableColumn<>("min_bedrooms");
-        TableColumn<FacilityViewModel, Integer> minBathroomsColumn = new TableColumn<>("min_bathrooms");
-        TableColumn<FacilityViewModel, Boolean> garageColumn = new TableColumn<>("garage");
-        TableColumn<FacilityViewModel, Boolean> gardenColumn = new TableColumn<>("garden");
-        TableColumn<FacilityViewModel, Boolean> poolColumn = new TableColumn<>("pool");
-
-
+        TableColumn<FacilityViewModel, Integer> facilityIdColumn = new TableColumn<>("ID зручностей ");
+        TableColumn<FacilityViewModel, Integer> objectReferenceIdColumn = new TableColumn<>("ID об'єкту");
+        TableColumn<FacilityViewModel, Integer> minBedroomsColumn = new TableColumn<>("Спальні кімнати (min)");
+        TableColumn<FacilityViewModel, Integer> minBathroomsColumn = new TableColumn<>("Ванні кімнати (min)");
+        TableColumn<FacilityViewModel, Boolean> garageColumn = new TableColumn<>("Гараж");
+        TableColumn<FacilityViewModel, Boolean> gardenColumn = new TableColumn<>("Сад");
+        TableColumn<FacilityViewModel, Boolean> poolColumn = new TableColumn<>("Басейн");
 
         facilityIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getFacilityId().getValue(),
                 cellData.getValue().getFacilityId()));
@@ -234,10 +236,6 @@ public class MainWindowController {
         poolColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getPool().getValue(),
                 cellData.getValue().getPool()));
 
-
-
-       FacilityModel facilityModel = new FacilityModel();
-
         mainTableView.setItems(facilityModel.getFacilityViewModels());
         mainTableView.getColumns().addAll(facilityIdColumn, objectReferenceIdColumn, minBedroomsColumn, minBathroomsColumn,
                 garageColumn, gardenColumn, poolColumn);
@@ -245,19 +243,18 @@ public class MainWindowController {
     }
 
     public void addRequirementTable(){
+        RequirementModel requirementModel = new RequirementModel();
         mainTableView.getColumns().clear();
 
-        TableColumn<RequirementViewModel, Integer> reqIdColumn = new TableColumn<>("req_id");
-        TableColumn<RequirementViewModel, Integer> reqMinBedroomsColumn = new TableColumn<>("req_min_bedrooms");
-        TableColumn<RequirementViewModel, Integer> reqMinBathroomsColumn = new TableColumn<>("req_min_bathrooms");
-        TableColumn<RequirementViewModel, Double> reqMinimalAreaColumn = new TableColumn<>("req_minimal_area");
-        TableColumn<RequirementViewModel, BigDecimal> reqMaxPriceColumn = new TableColumn<>("req_max_price");
-        TableColumn<RequirementViewModel, String> reqStreetColumn = new TableColumn<>("req_street");
-        TableColumn<RequirementViewModel, Boolean> reqGarageColumn = new TableColumn<>("garage");
-        TableColumn<RequirementViewModel, Boolean> reqGardenColumn = new TableColumn<>("garden");
-        TableColumn<RequirementViewModel, Boolean> reqPoolColumn = new TableColumn<>("pool");
-
-
+        TableColumn<RequirementViewModel, Integer> reqIdColumn = new TableColumn<>("ID вимоги");
+        TableColumn<RequirementViewModel, Integer> reqMinBedroomsColumn = new TableColumn<>("Вимога кількості спален");
+        TableColumn<RequirementViewModel, Integer> reqMinBathroomsColumn = new TableColumn<>("Вимога кількості ванних ");
+        TableColumn<RequirementViewModel, Double> reqMinimalAreaColumn = new TableColumn<>("Мінімальна площа ");
+        TableColumn<RequirementViewModel, BigDecimal> reqMaxPriceColumn = new TableColumn<>("Максимальна ціна");
+        TableColumn<RequirementViewModel, String> reqStreetColumn = new TableColumn<>("Вулиця");
+        TableColumn<RequirementViewModel, Boolean> reqGarageColumn = new TableColumn<>("Гараж");
+        TableColumn<RequirementViewModel, Boolean> reqGardenColumn = new TableColumn<>("Сад");
+        TableColumn<RequirementViewModel, Boolean> reqPoolColumn = new TableColumn<>("Басейн");
 
         reqIdColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqId().getValue(),
                 cellData.getValue().getReqId()));
@@ -284,10 +281,6 @@ public class MainWindowController {
 
         reqPoolColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(() -> cellData.getValue().getReqPool().getValue(),
                 cellData.getValue().getReqPool()));
-
-
-
-       RequirementModel requirementModel = new RequirementModel();
 
         mainTableView.setItems(requirementModel.getRequirementViewModels());
         mainTableView.getColumns().addAll(reqIdColumn, reqMinBedroomsColumn, reqMinBathroomsColumn, reqMinimalAreaColumn,

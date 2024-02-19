@@ -14,7 +14,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 
-
 public class Agreement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -40,6 +39,4 @@ public class Agreement {
     @Basic
     @Column(name = "agreement_status", nullable = false, length = -1)
     private String agreementStatus;
-
-
 }

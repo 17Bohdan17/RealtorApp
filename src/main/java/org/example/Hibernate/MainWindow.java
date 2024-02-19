@@ -20,7 +20,7 @@ public class MainWindow extends Application {
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("RealtorApp");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/house.png")));
 
