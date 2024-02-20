@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Entity
 @Setter
@@ -30,7 +30,7 @@ public class Agreement {
 
     @Basic
     @Column(name = "agreement_date", nullable = false)
-    private Timestamp agreementDate;
+    private Date agreementDate;
 
     @Basic
     @Column(name = "agreement_price", nullable = false)

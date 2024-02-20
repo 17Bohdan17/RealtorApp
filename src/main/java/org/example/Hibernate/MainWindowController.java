@@ -25,6 +25,10 @@ public class MainWindowController {
 
     private double x, y;
 
+
+
+
+
     public void init(Stage stage) {
         setUpDraggableStage(stage);
         setUpCloseButton(stage);
@@ -75,10 +79,25 @@ public class MainWindowController {
         addRequirementTable();
     }
 
-    public void clickAddRecordButton (ActionEvent actionEvent) throws Exception {
+//    public void clickAddRecordButton (ActionEvent actionEvent) throws Exception {
+//        AddRecordWindow addRecordWindow = new AddRecordWindow();
+//        addRecordWindow.init();
+//    }
+
+    public void clickAddAgreementRecord(ActionEvent actionEvent) throws Exception{
         AddRecordWindow addRecordWindow = new AddRecordWindow();
+        addRecordWindow.addRecordStatus = 1;
+
+
+
+
         addRecordWindow.init();
+
     }
+
+
+
+
 
 
 

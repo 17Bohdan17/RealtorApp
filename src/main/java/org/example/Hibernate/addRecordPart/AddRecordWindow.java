@@ -9,9 +9,22 @@ import javafx.stage.StageStyle;
 
 
 public class AddRecordWindow {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddRecordWindow.fxml"));
+
+    FXMLLoader loader;
+    public int addRecordStatus;
 
     public void init() throws Exception{
+
+       switch (addRecordStatus){
+           case 1:
+                loader = new FXMLLoader(getClass().getResource("/recordFxml/AgreementRecord.fxml"));
+               break;
+
+
+
+
+       }
+
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
