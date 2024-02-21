@@ -1,4 +1,4 @@
-package org.example.TableView;
+package project.TableView;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
@@ -9,9 +9,11 @@ import lombok.Getter;
 
 public class ClientViewModel {
 
-    private final SimpleIntegerProperty clientId, reqId;
+    private final SimpleIntegerProperty clientId;
+    private final SimpleIntegerProperty reqId;
     private final SimpleLongProperty contactNum;
-    private final SimpleStringProperty firstName, secondName;
+    private final SimpleStringProperty firstName;
+    private final SimpleStringProperty secondName;
 
     public ClientViewModel(int clientId, String firstName, String secondName,
                            Long contactNum, int reqId) {
@@ -21,7 +23,6 @@ public class ClientViewModel {
         this.secondName = new SimpleStringProperty(secondName);
         this.contactNum = new SimpleLongProperty(contactNum);
         this.reqId = new SimpleIntegerProperty(reqId);
-
     }
 }
 

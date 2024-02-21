@@ -5,21 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a79d991-ceb4-48ec-8f00-615dc0f4af71" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/Client.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ObjectRecord.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/RequirementRecord.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entity/Agreement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/AgreementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TableView/AgreementViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AddRecordWindow.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Agreement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Consultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Consultation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Facilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Facilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Object.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Requirement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/AgreementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/AgreementModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/AgreementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/AgreementViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ClientModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ClientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ClientViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ConsultationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ConsultationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ConsultationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ConsultationViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/FacilityModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/FacilityModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/FacilityViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/FacilityViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ObjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ObjectModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ObjectViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ObjectViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/RequirementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/RequirementModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/RequirementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/RequirementViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/CRUDOperationWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainWindowStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/Client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ClientRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ObjectRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ObjectRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/RequirementRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/RequirementRecord.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +67,23 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="RealtorApp" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealtorApp" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealtorApp" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RealtorApp" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -108,7 +146,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Program Files (x86)/JavaFx/javafx-sdk-21.0.2/lib",
+    "last_opened_file_path": "I:/RealtorApp/RealtorApp",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -135,11 +173,11 @@
       <recent name="I:\RealtorApp\RealtorApp\src\main\java\org\example\Hibernate" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\RealtorApp\RealtorApp\src\main\java\project" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\recordFxml" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\java" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\java\org\example" />
-      <recent name="I:\RealtorApp\RealtorApp\src\main" />
     </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="org.example.Entity" />
@@ -147,25 +185,12 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Hibernate.Main" />
+      <option name="MAIN_CLASS_NAME" value="project.Hibernate.Main" />
       <module name="RealtorApp.main" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:/Program Files (x86)/JavaFx/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.AppUI.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Hibernate.MainWindow" />
-      <module name="RealtorApp.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.AppUI.*" />
+          <option name="PATTERN" value="Hibernate.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -175,6 +200,33 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="C:/Program Files (x86)/JavaFx/javafx-sdk-21.0.2/lib" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="project.Hibernate.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="project.Hibernate.Main" />
+      <module name="RealtorApp.main" />
+      <option name="WORKING_DIRECTORY" value="C:/Program Files (x86)/JavaFx/javafx-sdk-21.0.2/lib" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="project.Hibernate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="project.Hibernate.MainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="project.Hibernate.MainWindow" />
+      <module name="RealtorApp.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.AppUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -224,8 +276,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.MainWindow" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="Application.project.Hibernate.Main" />
+      <item itemvalue="Application.project.Hibernate.MainWindow" />
       <item itemvalue="Gradle.RealtorApp [build]" />
       <item itemvalue="Gradle.RealtorApp [run]" />
     </list>
@@ -233,8 +286,9 @@
       <list>
         <item itemvalue="Gradle.RealtorApp [run]" />
         <item itemvalue="Gradle.RealtorApp [build]" />
-        <item itemvalue="Application.MainWindow" />
+        <item itemvalue="Application.project.Hibernate.Main" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.project.Hibernate.MainWindow" />
       </list>
     </recent_temporary>
   </component>
@@ -260,7 +314,8 @@
       <workItem from="1707659360766" duration="45302000" />
       <workItem from="1707950821788" duration="35897000" />
       <workItem from="1708101273208" duration="1381000" />
-      <workItem from="1708348569768" duration="26254000" />
+      <workItem from="1708348569768" duration="27184000" />
+      <workItem from="1708524514952" duration="25970000" />
     </task>
     <servers />
   </component>

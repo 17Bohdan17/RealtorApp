@@ -1,4 +1,4 @@
-package org.example.Entity;
+package project.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,11 +21,11 @@ public class Agreement {
     private Integer agreementId;
 
     @Basic
-    @Column(name = "object_id", nullable = true)
+    @Column(name = "object_id")
     private Integer objectId;
 
     @Basic
-    @Column(name = "client_id", nullable = true)
+    @Column(name = "client_id")
     private Integer clientId;
 
     @Basic
@@ -37,6 +37,6 @@ public class Agreement {
     private Integer agreementPrice;
 
     @Basic
-    @Column(name = "agreement_status", nullable = false, length = -1)
+    @Column(name = "agreement_status", nullable = false)
     private String agreementStatus;
 }

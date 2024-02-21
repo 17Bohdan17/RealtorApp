@@ -1,4 +1,4 @@
-package org.example.Entity;
+package project.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,7 +31,7 @@ public class Client {
     private Long contactNum;
 
     @Basic
-    @Column(name = "req_id", nullable = true)
+    @Column(name = "req_id")
     private Integer reqId;
 
 

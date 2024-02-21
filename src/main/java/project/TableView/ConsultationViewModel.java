@@ -1,4 +1,4 @@
-package org.example.TableView;
+package project.TableView;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,17 +10,18 @@ import java.sql.Timestamp;
 @Getter
 
 public class ConsultationViewModel {
-    private final SimpleIntegerProperty consId, clientId;
+    private final SimpleIntegerProperty consId;
+    private final SimpleIntegerProperty clientId;
     private final SimpleObjectProperty<Timestamp> consDate;
     private final SimpleStringProperty consStatus;
 
-    public ConsultationViewModel(int consId, int clientId, Timestamp consDate, String consStatus) {
+    public ConsultationViewModel(int consId, int clientId, Timestamp consDate,
+                                 String consStatus) {
 
         this.consId = new SimpleIntegerProperty(consId);
         this.clientId = new SimpleIntegerProperty(clientId);
-        this.consDate = new SimpleObjectProperty<Timestamp>(consDate);
+        this.consDate = new SimpleObjectProperty<>(consDate);
         this.consStatus = new SimpleStringProperty(consStatus);
-
     }
 }
 

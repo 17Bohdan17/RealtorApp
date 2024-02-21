@@ -1,19 +1,19 @@
-package org.example.Hibernate;
+package project.Hibernate;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainWindow extends Application {
+    private static final String path = "/AppFx.fxml";
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AppFx.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
@@ -21,16 +21,11 @@ public class MainWindow extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("RealtorApp");
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/house.png")));
 
-        // Передача stage до контроллеру
         ((MainWindowController) loader.getController()).init(stage);
-
         stage.show();
     }
 
-    // Метод запуску додатку
     public void run() {
         launch();
     }

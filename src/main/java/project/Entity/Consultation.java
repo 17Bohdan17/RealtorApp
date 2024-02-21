@@ -1,4 +1,4 @@
-package org.example.Entity;
+package project.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,14 +19,17 @@ public class Consultation {
     @Id
     @Column(name = "cons_id", nullable = false)
     private Integer consId;
+
     @Basic
-    @Column(name = "client_id", nullable = true)
+    @Column(name = "client_id")
     private Integer clientId;
+
     @Basic
     @Column(name = "cons_date", nullable = false)
     private Timestamp consDate;
+
     @Basic
-    @Column(name = "cons_status", nullable = false, length = -1)
+    @Column(name = "cons_status", nullable = false)
     private String consStatus;
 
 }

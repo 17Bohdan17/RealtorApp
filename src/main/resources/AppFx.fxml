@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,13 +8,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@MainWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Hibernate.MainWindowController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@MainWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Hibernate.MainWindowController">
     <children>
         <Pane layoutX="22.0" layoutY="38.0" prefHeight="708.0" prefWidth="986.0" styleClass="mainPain">
             <children>
-            <TableView fx:id="mainTableView" editable="true" layoutX="342.0" layoutY="25.0" prefHeight="666.0" prefWidth="626.0" style="-fx-background-color: gray;" />
-            <MenuButton fx:id="addTableMenuBtn" layoutX="23.0" layoutY="25.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" text="Показати таблицю" textAlignment="CENTER">
+            <TableView fx:id="mainTableView" editable="true" layoutX="342.0" layoutY="25.0" prefHeight="666.0" prefWidth="626.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@MainWindowStyle.css" />
+            <MenuButton fx:id="addTableMenuBtn" layoutX="23.0" layoutY="25.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" styleClass="button" stylesheets="@MainWindowStyle.css" text="Показати таблицю" textAlignment="CENTER">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#clickButtonAddObjectTable" text="Об'єкти нерухомості" />
                 <MenuItem mnemonicParsing="false" onAction="#clickButtonAddAgreementTable" text="Угоди" />
@@ -24,17 +24,22 @@
                   <MenuItem mnemonicParsing="false" onAction="#clickButtonAddFacilityTable" text="Зручності" />
                   <MenuItem mnemonicParsing="false" onAction="#clickButtonAddRequirementTable" text="Вимоги" />
               </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </MenuButton>
-            <ButtonBar layoutX="23.0" layoutY="182.0" prefHeight="40.0" prefWidth="308.0" />
-            <MenuButton fx:id="addRecordMenu" layoutX="23.0" layoutY="74.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" text="Додати запис">
+            <MenuButton id="addRecord" fx:id="addRecordMenu" layoutX="23.0" layoutY="74.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" styleClass="selectButton" text="Додати запис">
               <items>
-                <MenuItem mnemonicParsing="false" text="Додати угоду" onAction="#clickAddAgreementRecord"/>
-                <MenuItem mnemonicParsing="false" text="Додати об'єкт нерухомості" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickAddObjectRecord" text="Додати об'єкт нерухомості" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickAddAgreementRecord" text="Додати угоду" />
                   <MenuItem mnemonicParsing="false" text="Додати клієнта" />
                   <MenuItem mnemonicParsing="false" text="Додати зручності" />
                   <MenuItem mnemonicParsing="false" text="Додати вимогу" />
                   <MenuItem mnemonicParsing="false" text="Додати консультацію" />
               </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </MenuButton>
             </children>
         </Pane>

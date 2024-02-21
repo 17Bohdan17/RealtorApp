@@ -1,4 +1,4 @@
-package org.example.Entity;
+package project.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,28 +19,26 @@ public class Facilities {
     private Integer facilityId;
 
     @Basic
-    @Column(name = "object_reference_id", nullable = true)
+    @Column(name = "object_reference_id")
     private Integer objectReferenceId;
 
     @Basic
-    @Column(name = "min_bedrooms", nullable = true)
+    @Column(name = "min_bedrooms")
     private Integer minBedrooms;
 
     @Basic
-    @Column(name = "min_bathrooms", nullable = true)
+    @Column(name = "min_bathrooms")
     private Integer minBathrooms;
 
     @Basic
-    @Column(name = "garage", nullable = true)
+    @Column(name = "garage")
     private Boolean garage;
 
     @Basic
-    @Column(name = "garden", nullable = true)
+    @Column(name = "garden")
     private Boolean garden;
 
     @Basic
-    @Column(name = "pool", nullable = true)
+    @Column(name = "pool")
     private Boolean pool;
-
-
 }

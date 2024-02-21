@@ -14,5 +14,19 @@
     -fx-opacity: 0.45;
 }
 
+.objectTextField {
+    -fx-background-radius: 28;
+    -fx-border-width: 3;
+    -fx-border-color: black;
+    -fx-border-radius: 28;
+}
+
+.objectButton {
+    -fx-background-radius: 28;
+    -fx-border-width: 3;
+    -fx-border-color: black;
+    -fx-border-radius: 28;
+}
+
 
 

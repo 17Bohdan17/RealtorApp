@@ -1,4 +1,4 @@
-package org.example.Entity;
+package project.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,11 +29,11 @@ public class Requirement {
     private Short reqMinBathrooms;
 
     @Basic
-    @Column(name = "req_minimal_area", nullable = false, precision = 0)
+    @Column(name = "req_minimal_area", nullable = false)
     private Double reqMinimalArea;
 
     @Basic
-    @Column(name = "req_max_price", nullable = false, precision = 0)
+    @Column(name = "req_max_price", nullable = false)
     private BigDecimal reqMaxPrice;
 
     @Basic

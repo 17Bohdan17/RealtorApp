@@ -1,4 +1,4 @@
-package org.example.Entity;
+package project.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,10 +31,10 @@ public class Object {
 
     @Basic
     @Column(name = "room_count", nullable = false)
-    private Integer roomCount;
+    private Short roomCount;
 
     @Basic
-    @Column(name = "area", nullable = false, precision = 0)
+    @Column(name = "area", nullable = false)
     private Double area;
 
     @Basic
@@ -42,7 +42,7 @@ public class Object {
     private BigDecimal price;
 
     @Basic
-    @Column(name = "status", nullable = false, length = -1)
+    @Column(name = "status", nullable = false)
     private String status;
 
 }

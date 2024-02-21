@@ -1,4 +1,4 @@
-package org.example.TableView;
+package project.TableView;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,14 +11,18 @@ import java.math.BigDecimal;
 @Getter
 
 public class ObjectViewModel {
-    private final SimpleIntegerProperty objectId, street_num, roomCount;
-    private final SimpleStringProperty street, status;
+    private final SimpleIntegerProperty objectId;
+    private final SimpleIntegerProperty street_num;
+    private final SimpleIntegerProperty roomCount;
+    private final SimpleStringProperty street;
+    private final SimpleStringProperty status;
     private final SimpleDoubleProperty area;
     private final SimpleObjectProperty<BigDecimal> price;
 
 
-    public ObjectViewModel(int objectId, String street, int street_num, Double area, BigDecimal price, String status,
-                           Integer roomCount) {
+    public ObjectViewModel(int objectId, String street, int street_num,
+                           Double area, BigDecimal price, String status,
+                           Short roomCount) {
         this.objectId = new SimpleIntegerProperty(objectId);
         this.street = new SimpleStringProperty(street);
         this.street_num = new SimpleIntegerProperty(street_num);
