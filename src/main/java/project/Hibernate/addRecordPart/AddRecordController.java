@@ -11,8 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.hibernate.Session;
-import project.Entity.Agreement;
 import project.Entity.Object;
+import project.Entity.*;
 import project.Hibernate.HibernateUtil;
 
 import java.math.BigDecimal;
@@ -52,36 +52,69 @@ public class AddRecordController {
     @FXML
     private ChoiceBox objectStatusChoiceBox;
 
+    @FXML
+    private TextField clientFirstNameTextField;
+    @FXML
+    private TextField clientSecondNameTextField;
+    @FXML
+    private TextField clientNumberTextField;
+    @FXML
+    private TextField clientIdRequirementTextField;
+
+    @FXML
+    private TextField consultationIdClientTextField;
+    @FXML
+    private DatePicker consultationDatePicker;
+    @FXML
+    private ChoiceBox consultationStatusChoiceBox;
+
+    @FXML
+    private TextField facilityIdObjectTextField;
+    @FXML
+    private TextField facilityMinBedroomsTextField;
+    @FXML
+    private TextField facilityMinBathroomsTextField;
+    @FXML
+    private ChoiceBox<Boolean> facilityGarageChoiceBox;
+    @FXML
+    private ChoiceBox<Boolean> facilityGardenChoiceBox;
+    @FXML
+    private ChoiceBox<Boolean> facilityPoolChoiceBox;
+
+    @FXML
+    private TextField requirementStreetTextField;
+    @FXML
+    private TextField requirementMaxPriceTextField;
+    @FXML
+    private TextField requirementMinAreaTextField;
+    @FXML
+    private TextField requirementMinBedroomsTextField;
+    @FXML
+    private TextField requirementMinBathroomsTextField;
+    @FXML
+    private ChoiceBox<Boolean> requirementGarageChoiceBox;
+    @FXML
+    private ChoiceBox<Boolean> requirementGardenChoiceBox;
+    @FXML
+    private ChoiceBox<Boolean> requirementPoolChoiceBox;
+
+    Session session;
     private double x;
     private double y;
 
     Agreement agreement = new Agreement();
     Object object = new Object();
+    Client client = new Client();
+    Consultation consultation = new Consultation();
+    Facilities facility = new Facilities();
+    Requirement requirement = new Requirement();
 
     public void init (Stage stage){
         setUpCloseButton(stage);
         setUpDraggableStage(stage);
         addRecordDoneLabel.setVisible(false);
-
-
-        try {
-            objectStatusChoiceBox.getItems().addAll(
-                    "FOR_SALE", "AVAILABLE", "UNDER_CONTRACT");
-        }
-        catch (NullPointerException ex){
-        }
-
-        try {
-            agreementStatusChoiceBox.getItems().addAll(
-                    "PENDING", "COMPLETED", "ACTIVE");
-        } catch (NullPointerException ex){
-        }
+        initChoiceBoxes();
     }
-
-
-
-
-
 
     private void setUpDraggableStage(Stage stage) {
         addRecordPane.setOnMousePressed(mouseEvent -> {
@@ -100,8 +133,6 @@ public class AddRecordController {
     }
 
 
-
-
     public void clickAddAgreementRecordButton()  {
         int objectId;
         int clientId;
@@ -109,9 +140,7 @@ public class AddRecordController {
         Date agreementDate;
         String agreementStatus;
 
-        addRecordDoneLabel.setVisible(true);
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        startTransaction();
 
         objectId = Integer.parseInt(idAgreementObjectTextField.getText());
         clientId = Integer.parseInt(idAgreementClientTextField.getText());
@@ -127,9 +156,9 @@ public class AddRecordController {
 
         session.persist(agreement);
         session.getTransaction().commit();
-        session.close();
-        HibernateUtil.close();
         labelClose();
+
+
 
         idAgreementObjectTextField.clear();
         idAgreementClientTextField.clear();
@@ -146,9 +175,7 @@ public class AddRecordController {
         String objectStatus;
         short objectRoomCount;
 
-        addRecordDoneLabel.setVisible(true);
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        startTransaction();
 
         objectStreet = objectStreetTextField.getText();
         objectNumber = Integer.parseInt(objectNumberTextField.getText());
@@ -166,8 +193,6 @@ public class AddRecordController {
 
         session.persist(object);
         session.getTransaction().commit();
-        session.close();
-        HibernateUtil.close();
         labelClose();
 
         objectStreetTextField.clear();
@@ -178,15 +203,199 @@ public class AddRecordController {
         objectRoomCountTextField.clear();
     }
 
+    public void clickAddClientRecordButton(){
+        String firstName;
+        String secondName;
+        long number;
+        int idRequirement;
+
+        startTransaction();
+
+        firstName = clientFirstNameTextField.getText();
+        secondName = clientSecondNameTextField.getText();
+        number = Long.parseLong(clientNumberTextField.getText());
+        idRequirement = Integer.parseInt(
+                clientIdRequirementTextField.getText());
+
+        client.setFirstName(firstName);
+        client.setSecondName(secondName);
+        client.setContactNum(number);
+        client.setReqId(idRequirement);
+
+        session.persist(client);
+        session.getTransaction().commit();
+        labelClose();
+
+        clientFirstNameTextField.clear();
+        clientSecondNameTextField.clear();
+        clientNumberTextField.clear();
+        clientIdRequirementTextField.clear();
+    }
+
+    public void clickAddConsultationRecordButton(){
+        int clientId;
+        Date consultationDate;
+        String consultationStatus;
+
+        startTransaction();
+
+        clientId = Integer.parseInt(consultationIdClientTextField.getText());
+        consultationDate = Date.valueOf(consultationDatePicker.getValue());
+        consultationStatus = (String) consultationStatusChoiceBox.getValue();
+
+        consultation.setClientId(clientId);
+        consultation.setConsDate(consultationDate);
+        consultation.setConsStatus(consultationStatus);
+
+        session.persist(consultation);
+        session.getTransaction().commit();
+        labelClose();
+
+        consultationIdClientTextField.clear();
+        consultationDatePicker.setValue(null);
+        consultationStatusChoiceBox.setValue(null);
+    }
+
+    public void clickAddFacilityRecordButton(){
+        int objectId;
+        short minBedrooms;
+        short minBathrooms;
+        boolean garage;
+        boolean garden;
+        boolean pool;
+
+        startTransaction();
+
+        objectId = Integer.parseInt(facilityIdObjectTextField.getText());
+        minBedrooms = Short.parseShort( facilityMinBedroomsTextField.getText());
+        minBathrooms = Short.parseShort(
+                facilityMinBathroomsTextField.getText());
+        garage = facilityGarageChoiceBox.getValue();
+        garden = facilityGardenChoiceBox.getValue();
+        pool = facilityPoolChoiceBox.getValue();
+
+        facility.setObjectReferenceId(objectId);
+        facility.setMinBedrooms(minBedrooms);
+        facility.setMinBathrooms(minBathrooms);
+        facility.setGarage(garage);
+        facility.setGarden(garden);
+        facility.setPool(pool);
+
+        session.persist(facility);
+        session.getTransaction().commit();
+        labelClose();
+
+        facilityIdObjectTextField.clear();
+        facilityMinBedroomsTextField.clear();
+        facilityMinBathroomsTextField.clear();
+        facilityGarageChoiceBox.setValue(null);
+        facilityGardenChoiceBox.setValue(null);
+        facilityPoolChoiceBox.setValue(null);
+    }
+
+    public void clickAddRequirementRecordButton(){
+        String street;
+        int maxPrice;
+        double minArea;
+        short minBedrooms;
+        short minBathrooms;
+        boolean garage;
+        boolean garden;
+        boolean pool;
+
+        startTransaction();
+
+        street = requirementStreetTextField.getText();
+        maxPrice = Integer.parseInt(requirementMaxPriceTextField.getText());
+        minArea = Double.parseDouble(requirementMinAreaTextField.getText());
+        minBedrooms = Short.parseShort(
+                requirementMinBedroomsTextField.getText());
+        minBathrooms = Short.parseShort(
+                requirementMinBathroomsTextField.getText());
+        garage = requirementGarageChoiceBox.getValue();
+        garden = requirementGardenChoiceBox.getValue();
+        pool = requirementPoolChoiceBox.getValue();
+
+        requirement.setReqStreet(street);
+        requirement.setReqMaxPrice(maxPrice);
+        requirement.setReqMinimalArea(minArea);
+        requirement.setReqMinBedrooms(minBedrooms);
+        requirement.setReqMinBathrooms(minBathrooms);
+        requirement.setReqGarage(garage);
+        requirement.setReqGarden(garden);
+        requirement.setReqPool(pool);
+
+        session.persist(requirement);
+        session.getTransaction().commit();
+        labelClose();
+
+        requirementStreetTextField.clear();
+        requirementMaxPriceTextField.clear();
+        requirementMinAreaTextField.clear();
+        requirementMinBedroomsTextField.clear();
+        requirementMinBathroomsTextField.clear();
+        requirementGarageChoiceBox.setValue(null);
+        requirementGardenChoiceBox.setValue(null);
+        requirementPoolChoiceBox.setValue(null);
+    }
+
     private void labelClose (){
         PauseTransition visiblePause = new PauseTransition(
                 Duration.seconds(3));
 
-        visiblePause.setOnFinished(event -> {
-            addRecordDoneLabel.setVisible(false);
-        });
+        visiblePause.setOnFinished(event ->
+                addRecordDoneLabel.setVisible(false));
         visiblePause.play();
     }
 
+    private void startTransaction(){
+        addRecordDoneLabel.setVisible(true);
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+    }
 
+    private void initChoiceBoxes(){
+        try {
+            objectStatusChoiceBox.getItems().addAll(
+                    "FOR_SALE", "AVAILABLE", "UNDER_CONTRACT");
+        }
+        catch (NullPointerException ignored){
+        }
+
+        try {
+            agreementStatusChoiceBox.getItems().addAll(
+                    "PENDING", "COMPLETED", "ACTIVE");
+        } catch (NullPointerException ignored){
+        }
+
+        try {
+            consultationStatusChoiceBox.getItems().addAll(
+                    "COMPLETED", "SCHEDULED");
+        } catch (NullPointerException ignored){
+        }
+
+        try {
+            facilityGarageChoiceBox.getItems().addAll(true, false);
+        } catch (NullPointerException ignored){}
+
+        try {
+            facilityGardenChoiceBox.getItems().addAll(true, false);
+        } catch (NullPointerException ignored){}
+
+        try {
+            facilityPoolChoiceBox.getItems().addAll(true, false);
+        } catch (NullPointerException ignored){}
+
+        try {
+            requirementGarageChoiceBox.getItems().addAll(true, false);
+        } catch (NullPointerException ignored){}
+
+        try {
+            requirementGardenChoiceBox.getItems().addAll(true, false);
+        } catch (NullPointerException ignored){}
+
+        try {
+            requirementPoolChoiceBox.getItems().addAll(true, false);
+        } catch (NullPointerException ignored){}
+    }
 }

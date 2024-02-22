@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Entity
 @Setter
@@ -26,10 +26,9 @@ public class Consultation {
 
     @Basic
     @Column(name = "cons_date", nullable = false)
-    private Timestamp consDate;
+    private Date consDate;
 
     @Basic
     @Column(name = "cons_status", nullable = false)
     private String consStatus;
-
 }

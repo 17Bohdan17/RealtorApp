@@ -24,11 +24,11 @@ public class Facilities {
 
     @Basic
     @Column(name = "min_bedrooms")
-    private Integer minBedrooms;
+    private Short minBedrooms;
 
     @Basic
     @Column(name = "min_bathrooms")
-    private Integer minBathrooms;
+    private Short minBathrooms;
 
     @Basic
     @Column(name = "garage")

@@ -5,17 +5,18 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+
 
 @Getter
 
 public class ConsultationViewModel {
     private final SimpleIntegerProperty consId;
     private final SimpleIntegerProperty clientId;
-    private final SimpleObjectProperty<Timestamp> consDate;
+    private final SimpleObjectProperty<Date> consDate;
     private final SimpleStringProperty consStatus;
 
-    public ConsultationViewModel(int consId, int clientId, Timestamp consDate,
+    public ConsultationViewModel(int consId, int clientId, Date consDate,
                                  String consStatus) {
 
         this.consId = new SimpleIntegerProperty(consId);

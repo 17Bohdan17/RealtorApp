@@ -14,7 +14,7 @@ public class AddRecordWindow {
 
     FXMLLoader loader;
     public int addRecordStatus;
-    
+
     public void init() throws IOException {
        switch (addRecordStatus){
            case 1:
@@ -27,6 +27,25 @@ public class AddRecordWindow {
                         .getResource("/recordFxml/AgreementRecord.fxml"));
                break;
 
+           case 3:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/ClientRecord.fxml"));
+               break;
+
+           case 4:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/ConsultationRecord.fxml"));
+               break;
+
+           case 5:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/FacilityRecord.fxml"));
+               break;
+
+           case 6:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/RequirementRecord.fxml"));
+               break;
 
            default:
                throw new IllegalStateException("Unexpected value: " +
@@ -41,6 +60,7 @@ public class AddRecordWindow {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.setResizable(false);
+
 
         ((AddRecordController)loader.getController()).init(stage);
         stage.show();

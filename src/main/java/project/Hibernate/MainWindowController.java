@@ -13,7 +13,6 @@ import project.TableView.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class MainWindowController {
@@ -31,7 +30,6 @@ public class MainWindowController {
 
     AddRecordWindow addRecordWindow = new AddRecordWindow();
     AddRecordController addRecordController = new AddRecordController();
-
 
     public void init(Stage stage) {
         setUpDraggableStage(stage);
@@ -75,8 +73,25 @@ public class MainWindowController {
 
     }
 
+    public void clickAddClientRecord() throws IOException {
+        addRecordWindow.addRecordStatus = 3;
+        addRecordWindow.init();
+    }
 
+    public void clickAddConsultationRecord() throws IOException {
+        addRecordWindow.addRecordStatus = 4;
+        addRecordWindow.init();
+    }
 
+    public void clickAddFacilityRecord() throws IOException {
+        addRecordWindow.addRecordStatus = 5;
+        addRecordWindow.init();
+    }
+
+    public void clickAddRequirementRecord() throws IOException {
+        addRecordWindow.addRecordStatus = 6;
+        addRecordWindow.init();
+    }
 
     public void clickButtonAddObjectTable() {
         ObjectModel objectModel = new ObjectModel();
@@ -223,7 +238,7 @@ public class MainWindowController {
                 new TableColumn<>("ID консультації");
         TableColumn<ConsultationViewModel, Integer> clientIdColumn =
                 new TableColumn<>("ID клієнта");
-        TableColumn<ConsultationViewModel, Timestamp> consDateColumn =
+        TableColumn<ConsultationViewModel, Date> consDateColumn =
                 new TableColumn<>("Дата консультації");
         TableColumn<ConsultationViewModel, String> consStatusColumn =
                 new TableColumn<>("Статус консультації");
@@ -256,9 +271,9 @@ public class MainWindowController {
                 new TableColumn<>("ID зручностей ");
         TableColumn<FacilityViewModel, Integer> objectReferenceIdColumn =
                 new TableColumn<>("ID об'єкту");
-        TableColumn<FacilityViewModel, Integer> minBedroomsColumn =
+        TableColumn<FacilityViewModel, Short> minBedroomsColumn =
                 new TableColumn<>("Спальні кімнати (min)");
-        TableColumn<FacilityViewModel, Integer> minBathroomsColumn =
+        TableColumn<FacilityViewModel, Short> minBathroomsColumn =
                 new TableColumn<>("Ванні кімнати (min)");
         TableColumn<FacilityViewModel, Boolean> garageColumn =
                 new TableColumn<>("Гараж");
@@ -317,7 +332,7 @@ public class MainWindowController {
                 new TableColumn<>("Вимога кількості ванних ");
         TableColumn<RequirementViewModel, Double> reqMinimalAreaColumn =
                 new TableColumn<>("Мінімальна площа ");
-        TableColumn<RequirementViewModel, BigDecimal> reqMaxPriceColumn =
+        TableColumn<RequirementViewModel, Integer> reqMaxPriceColumn =
                 new TableColumn<>("Максимальна ціна");
         TableColumn<RequirementViewModel, String> reqStreetColumn =
                 new TableColumn<>("Вулиця");

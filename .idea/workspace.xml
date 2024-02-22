@@ -6,37 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1a79d991-ceb4-48ec-8f00-615dc0f4af71" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Agreement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Consultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Consultation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Facilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Facilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Object.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entity/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Requirement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Hibernate/addRecordPart/AddRecordWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/AgreementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/AgreementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/AgreementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/AgreementViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ClientModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ClientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ClientViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ConsultationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ConsultationModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ConsultationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ConsultationViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/FacilityModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/FacilityModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/FacilityViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/FacilityViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ObjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ObjectModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/ObjectViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ObjectViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/RequirementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/RequirementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TableView/RequirementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/RequirementViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/Entity/Consultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Consultation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/Entity/Facilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Facilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/Entity/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Entity/Requirement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/TableView/ConsultationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/ConsultationViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/TableView/FacilityViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/FacilityViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/TableView/RequirementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/TableView/RequirementViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainWindowStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/Client.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ClientRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ClientRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ClientRecord.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ObjectRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ObjectRecord.fxml" afterDir="false" />
@@ -315,7 +296,7 @@
       <workItem from="1707950821788" duration="35897000" />
       <workItem from="1708101273208" duration="1381000" />
       <workItem from="1708348569768" duration="27184000" />
-      <workItem from="1708524514952" duration="25970000" />
+      <workItem from="1708524514952" duration="42535000" />
     </task>
     <servers />
   </component>

@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Entity
 @Setter
 @Getter
@@ -34,7 +32,7 @@ public class Requirement {
 
     @Basic
     @Column(name = "req_max_price", nullable = false)
-    private BigDecimal reqMaxPrice;
+    private Integer reqMaxPrice;
 
     @Basic
     @Column(name = "req_street", nullable = false, length = 30)
