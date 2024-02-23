@@ -33,10 +33,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#clickAddObjectRecord" text="Додати об'єкт нерухомості" />
                   <MenuItem mnemonicParsing="false" onAction="#clickAddAgreementRecord" text="Додати угоду" />
                   <MenuItem mnemonicParsing="false" onAction="#clickAddClientRecord" text="Додати клієнта" />
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddConsultationRecord" text="Додати консультацію" />
                   <MenuItem mnemonicParsing="false" onAction="#clickAddFacilityRecord" text="Додати зручності" />
                   <MenuItem mnemonicParsing="false" onAction="#clickAddRequirementRecord" text="Додати вимогу" />
-
+                  <MenuItem mnemonicParsing="false" onAction="#clickAddConsultationRecord" text="Додати консультацію" />
               </items>
                <font>
                   <Font size="14.0" />

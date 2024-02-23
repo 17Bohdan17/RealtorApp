@@ -7,7 +7,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import project.Hibernate.addRecordPart.AddRecordController;
 import project.Hibernate.addRecordPart.AddRecordWindow;
 import project.TableView.*;
 
@@ -29,7 +28,6 @@ public class MainWindowController {
     private double y;
 
     AddRecordWindow addRecordWindow = new AddRecordWindow();
-    AddRecordController addRecordController = new AddRecordController();
 
     public void init(Stage stage) {
         setUpDraggableStage(stage);

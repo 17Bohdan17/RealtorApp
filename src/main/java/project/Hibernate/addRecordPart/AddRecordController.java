@@ -2,10 +2,7 @@ package project.Hibernate.addRecordPart;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -97,10 +94,15 @@ public class AddRecordController {
     private ChoiceBox<Boolean> requirementGardenChoiceBox;
     @FXML
     private ChoiceBox<Boolean> requirementPoolChoiceBox;
+    @FXML
+    private TableView objectTable;
+
+
 
     Session session;
     private double x;
     private double y;
+
 
     Agreement agreement = new Agreement();
     Object object = new Object();
@@ -115,6 +117,7 @@ public class AddRecordController {
         addRecordDoneLabel.setVisible(false);
         initChoiceBoxes();
     }
+
 
     private void setUpDraggableStage(Stage stage) {
         addRecordPane.setOnMousePressed(mouseEvent -> {
@@ -158,14 +161,25 @@ public class AddRecordController {
         session.getTransaction().commit();
         labelClose();
 
-
-
         idAgreementObjectTextField.clear();
         idAgreementClientTextField.clear();
         addAgreementRecordDatePicker.setValue(null);
         idAgreementPriceTextField.clear();
         agreementStatusChoiceBox.setValue(null);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void clickAddObjectRecordButton (){
         String objectStreet;
@@ -397,5 +411,14 @@ public class AddRecordController {
         try {
             requirementPoolChoiceBox.getItems().addAll(true, false);
         } catch (NullPointerException ignored){}
+
+        Tooltip objectTooltip = new Tooltip(
+                "1.\"FOR_SALE\" - Об'єкт доступний тільки для продажу.\n" +
+                        "2.\"AVAILABLE\" - Об'єкт доступний для продажу" +
+                        " або оренди.\n"+
+                        "3.\"UNDER_CONTRACT\" - Об'єкт вже під контрактом.");
+        Tooltip.install(objectStatusChoiceBox, objectTooltip);
+
+
     }
 }

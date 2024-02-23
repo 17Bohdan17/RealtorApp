@@ -66,6 +66,8 @@ public class AddRecordWindow {
         stage.show();
 
     }
+
+
 }
 
 
