@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import project.Hibernate.AddRecordStatusEnum;
 
 import java.io.IOException;
 
@@ -13,43 +14,46 @@ import java.io.IOException;
 public class AddRecordWindow {
 
     FXMLLoader loader;
+    public AddRecordStatusEnum addRecordStatusEnum;
     public int addRecordStatus;
 
+
     public void init() throws IOException {
-       switch (addRecordStatus){
-           case 1:
+       switch (addRecordStatusEnum){
+           case ADD_OBJECT:
                loader = new FXMLLoader(getClass()
                        .getResource("/recordFxml/ObjectRecord.fxml"));
                break;
 
-           case 2:
+           case ADD_AGREEMENT:
                 loader = new FXMLLoader(getClass()
                         .getResource("/recordFxml/AgreementRecord.fxml"));
                break;
 
-           case 3:
+           case ADD_CLIENT:
                loader = new FXMLLoader(getClass()
                        .getResource("/recordFxml/ClientRecord.fxml"));
                break;
 
-           case 4:
+           case ADD_CONSULTATION:
                loader = new FXMLLoader(getClass()
                        .getResource("/recordFxml/ConsultationRecord.fxml"));
                break;
 
-           case 5:
+           case ADD_FACILITY:
                loader = new FXMLLoader(getClass()
                        .getResource("/recordFxml/FacilityRecord.fxml"));
                break;
 
-           case 6:
+           case ADD_REQUIREMENT:
                loader = new FXMLLoader(getClass()
                        .getResource("/recordFxml/RequirementRecord.fxml"));
                break;
 
+
            default:
                throw new IllegalStateException("Unexpected value: " +
-                       addRecordStatus);
+                       addRecordStatusEnum);
        }
 
         Parent root = loader.load();

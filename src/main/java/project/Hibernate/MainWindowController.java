@@ -30,12 +30,14 @@ public class MainWindowController {
     AddRecordWindow addRecordWindow = new AddRecordWindow();
 
     public void init(Stage stage) {
+
         setUpDraggableStage(stage);
         setUpCloseButton(stage);
         setUpMinimizeButton(stage);
         mainTableView.setColumnResizePolicy(
                 TableView.UNCONSTRAINED_RESIZE_POLICY);
         mainTableView.autosize();
+
 
     }
 
@@ -60,40 +62,66 @@ public class MainWindowController {
     }
 
     public void clickAddObjectRecord() throws IOException{
-        addRecordWindow.addRecordStatus = 1;
+        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_OBJECT;
         addRecordWindow.init();
 
     }
 
     public void clickAddAgreementRecord() throws IOException {
-        addRecordWindow.addRecordStatus = 2;
+        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_AGREEMENT;
         addRecordWindow.init();
 
     }
 
     public void clickAddClientRecord() throws IOException {
-        addRecordWindow.addRecordStatus = 3;
+        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_CLIENT;
         addRecordWindow.init();
     }
 
     public void clickAddConsultationRecord() throws IOException {
-        addRecordWindow.addRecordStatus = 4;
+        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_CONSULTATION;
         addRecordWindow.init();
     }
 
     public void clickAddFacilityRecord() throws IOException {
-        addRecordWindow.addRecordStatus = 5;
+        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_FACILITY;
         addRecordWindow.init();
     }
 
     public void clickAddRequirementRecord() throws IOException {
-        addRecordWindow.addRecordStatus = 6;
+        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_REQUIREMENT;
         addRecordWindow.init();
     }
 
     public void clickButtonAddObjectTable() {
+        initObjectTable(mainTableView);
+    }
+
+    public void clickButtonAddAgreementTable() {
+        initAgreementTable(mainTableView);
+    }
+
+    public void clickButtonAddClientTable() {
+        initClientTable(mainTableView);
+    }
+
+    public void clickButtonAddConsultationTable() {
+        initConsultationTable(mainTableView);
+    }
+
+    public void clickButtonAddFacilityTable() {
+        initFacilityTable(mainTableView);
+    }
+
+    public void clickButtonAddRequirementTable() {
+        initRequirementTable(mainTableView);
+    }
+
+
+    public void initObjectTable(TableView tableView){
         ObjectModel objectModel = new ObjectModel();
-        mainTableView.getColumns().clear();
+
+        tableView.getColumns().clear();
 
         TableColumn<ObjectViewModel, Integer> idColumn =
                 new TableColumn<>("ID об'єкту");
@@ -135,15 +163,15 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getRoomCount().getValue()));
 
-        mainTableView.setItems(objectModel.getObjectViewModels());
-        mainTableView.getColumns().addAll(idColumn, streetColumn,
+        tableView.setItems(objectModel.getObjectViewModels());
+        tableView.getColumns().addAll(idColumn, streetColumn,
                 streetNumColumn, areaColumn, priceColumn, statusColumn,
                 roomCountColumn);
     }
 
-    public void clickButtonAddAgreementTable() {
+    public void initAgreementTable(TableView tableView){
         AgreementModel agreementModel = new AgreementModel();
-        mainTableView.getColumns().clear();
+        tableView.getColumns().clear();
 
         TableColumn<AgreementViewModel, Integer> agreementIdColumn =
                 new TableColumn<>("ID угоди");
@@ -184,15 +212,15 @@ public class MainWindowController {
         agreementStatusColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getAgreementStatus());
 
-        mainTableView.setItems(agreementModel.getAgreementViewModels());
-        mainTableView.getColumns().addAll(agreementIdColumn, objectIdColumn,
+        tableView.setItems(agreementModel.getAgreementViewModels());
+        tableView.getColumns().addAll(agreementIdColumn, objectIdColumn,
                 clientIdColumn, agreementDateColumn, agreementPriceColumn,
                 agreementStatusColumn);
     }
 
-    public void clickButtonAddClientTable() {
+    public void initClientTable(TableView tableView){
         ClientModel clientModel = new ClientModel();
-        mainTableView.getColumns().clear();
+        tableView.getColumns().clear();
 
         TableColumn<ClientViewModel, Integer> clientIdColumn =
                 new TableColumn<>("ID клієнта");
@@ -223,14 +251,14 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getReqId().getValue()));
 
-        mainTableView.setItems(clientModel.getClientViewModels());
-        mainTableView.getColumns().addAll(clientIdColumn, firstNameColumn,
+        tableView.setItems(clientModel.getClientViewModels());
+        tableView.getColumns().addAll(clientIdColumn, firstNameColumn,
                 secondNameColumn, contactNumColumn, reqIdColumn);
     }
 
-    public void clickButtonAddConsultationTable() {
+    public void initConsultationTable(TableView tableView){
         ConsultationModel consultationModel = new ConsultationModel();
-        mainTableView.getColumns().clear();
+        tableView.getColumns().clear();
 
         TableColumn<ConsultationViewModel, Integer> consIdColumn =
                 new TableColumn<>("ID консультації");
@@ -256,14 +284,14 @@ public class MainWindowController {
         consStatusColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getConsStatus());
 
-        mainTableView.setItems(consultationModel.getConsultationViewModels());
-        mainTableView.getColumns().addAll(consIdColumn, clientIdColumn,
+        tableView.setItems(consultationModel.getConsultationViewModels());
+        tableView.getColumns().addAll(consIdColumn, clientIdColumn,
                 consDateColumn, consStatusColumn);
     }
 
-    public void clickButtonAddFacilityTable() {
+    public void initFacilityTable(TableView tableView){
         FacilityModel facilityModel = new FacilityModel();
-        mainTableView.getColumns().clear();
+        tableView.getColumns().clear();
 
         TableColumn<FacilityViewModel, Integer> facilityIdColumn =
                 new TableColumn<>("ID зручностей ");
@@ -311,16 +339,16 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getPool().getValue()));
 
-        mainTableView.setItems(facilityModel.getFacilityViewModels());
-        mainTableView.getColumns().addAll(facilityIdColumn,
+        tableView.setItems(facilityModel.getFacilityViewModels());
+        tableView.getColumns().addAll(facilityIdColumn,
                 objectReferenceIdColumn, minBedroomsColumn, minBathroomsColumn,
                 garageColumn, gardenColumn, poolColumn);
-
     }
 
-    public void clickButtonAddRequirementTable() {
+
+    public void initRequirementTable(TableView tableView){
         RequirementModel requirementModel = new RequirementModel();
-        mainTableView.getColumns().clear();
+        tableView.getColumns().clear();
 
         TableColumn<RequirementViewModel, Integer> reqIdColumn =
                 new TableColumn<>("ID вимоги");
@@ -380,11 +408,10 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getReqPool().getValue()));
 
-        mainTableView.setItems(requirementModel.getRequirementViewModels());
-        mainTableView.getColumns().addAll(reqIdColumn, reqMinBedroomsColumn,
+        tableView.setItems(requirementModel.getRequirementViewModels());
+        tableView.getColumns().addAll(reqIdColumn, reqMinBedroomsColumn,
                 reqMinBathroomsColumn, reqMinimalAreaColumn, reqMaxPriceColumn,
                 reqStreetColumn, reqGarageColumn, reqGardenColumn,
                 reqPoolColumn);
-
     }
 }

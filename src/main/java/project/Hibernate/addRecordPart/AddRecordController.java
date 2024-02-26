@@ -1,6 +1,7 @@
 package project.Hibernate.addRecordPart;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -11,6 +12,8 @@ import org.hibernate.Session;
 import project.Entity.Object;
 import project.Entity.*;
 import project.Hibernate.HibernateUtil;
+import project.Hibernate.MainWindowController;
+import project.TableView.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -26,7 +29,7 @@ public class AddRecordController {
     private Label addRecordDoneLabel;
 
     @FXML
-    private TextField  idAgreementObjectTextField;
+    private TextField idAgreementObjectTextField;
     @FXML
     private TextField idAgreementClientTextField;
     @FXML
@@ -94,15 +97,20 @@ public class AddRecordController {
     private ChoiceBox<Boolean> requirementGardenChoiceBox;
     @FXML
     private ChoiceBox<Boolean> requirementPoolChoiceBox;
-    @FXML
-    private TableView objectTable;
 
+    @FXML
+    private TableView agreementTableView;
+    @FXML
+    private TableView clientTableView;
+    @FXML
+    private TableView facilityTableView;
+    @FXML
+    private TableView consultationTableView;
 
 
     Session session;
     private double x;
     private double y;
-
 
     Agreement agreement = new Agreement();
     Object object = new Object();
@@ -110,14 +118,17 @@ public class AddRecordController {
     Consultation consultation = new Consultation();
     Facilities facility = new Facilities();
     Requirement requirement = new Requirement();
+    MainWindowController mainWindowController = new MainWindowController();
 
-    public void init (Stage stage){
+    public void init(Stage stage) {
         setUpCloseButton(stage);
         setUpDraggableStage(stage);
-        addRecordDoneLabel.setVisible(false);
         initChoiceBoxes();
-    }
 
+        if (addRecordDoneLabel != null) {
+            addRecordDoneLabel.setVisible(false);
+        }
+    }
 
     private void setUpDraggableStage(Stage stage) {
         addRecordPane.setOnMousePressed(mouseEvent -> {
@@ -135,53 +146,7 @@ public class AddRecordController {
         addRecordWindowCloseBtn.setOnMouseClicked(mouseEvent -> stage.close());
     }
 
-
-    public void clickAddAgreementRecordButton()  {
-        int objectId;
-        int clientId;
-        int  agreementPrice;
-        Date agreementDate;
-        String agreementStatus;
-
-        startTransaction();
-
-        objectId = Integer.parseInt(idAgreementObjectTextField.getText());
-        clientId = Integer.parseInt(idAgreementClientTextField.getText());
-        agreementDate = Date.valueOf(addAgreementRecordDatePicker.getValue());
-        agreementPrice = Integer.parseInt(idAgreementPriceTextField.getText());
-        agreementStatus = (String) agreementStatusChoiceBox.getValue();
-
-        agreement.setObjectId(objectId);
-        agreement.setClientId(clientId);
-        agreement.setAgreementDate(agreementDate);
-        agreement.setAgreementPrice(agreementPrice);
-        agreement.setAgreementStatus(agreementStatus);
-
-        session.persist(agreement);
-        session.getTransaction().commit();
-        labelClose();
-
-        idAgreementObjectTextField.clear();
-        idAgreementClientTextField.clear();
-        addAgreementRecordDatePicker.setValue(null);
-        idAgreementPriceTextField.clear();
-        agreementStatusChoiceBox.setValue(null);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void clickAddObjectRecordButton (){
+    public void clickAddObjectRecordButton() {
         String objectStreet;
         int objectNumber;
         double objectArea;
@@ -217,6 +182,82 @@ public class AddRecordController {
         objectRoomCountTextField.clear();
     }
 
+
+    public void clickAddAgreementRecordButton() {
+        System.out.println(idAgreementObjectTextField);
+        int objectId;
+        int clientId;
+        int agreementPrice;
+        Date agreementDate;
+        String agreementStatus;
+
+        startTransaction();
+
+        objectId = Integer.parseInt(idAgreementObjectTextField.getText());
+        clientId = Integer.parseInt(idAgreementClientTextField.getText());
+        agreementDate = Date.valueOf(addAgreementRecordDatePicker.getValue());
+        agreementPrice = Integer.parseInt(idAgreementPriceTextField.getText());
+        agreementStatus = (String) agreementStatusChoiceBox.getValue();
+
+        agreement.setObjectId(objectId);
+        agreement.setClientId(clientId);
+        agreement.setAgreementDate(agreementDate);
+        agreement.setAgreementPrice(agreementPrice);
+        agreement.setAgreementStatus(agreementStatus);
+
+        session.persist(agreement);
+        session.getTransaction().commit();
+        labelClose();
+
+        idAgreementObjectTextField.clear();
+        idAgreementClientTextField.clear();
+        addAgreementRecordDatePicker.setValue(null);
+        idAgreementPriceTextField.clear();
+        agreementStatusChoiceBox.setValue(null);
+
+    }
+
+
+    public void clickOpenObjectTableInAgreementButton() {
+        agreementTableView.getColumns().clear();
+        mainWindowController.initObjectTable(agreementTableView);
+        initObjectTableInAgreementSelectId();
+    }
+
+
+    public void initObjectTableInAgreementSelectId() {
+        agreementTableView.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2){
+                ObjectViewModel selectedObject =
+                        (ObjectViewModel) agreementTableView
+                                .getSelectionModel().getSelectedItem();
+                SimpleIntegerProperty objectId = selectedObject.getObjectId();
+                String parseObjectId = String.valueOf(objectId.get());
+                idAgreementObjectTextField.setText(parseObjectId);
+            }
+        });
+    }
+
+    public void clickOpenClientTableInAgreementButton() {
+        agreementTableView.getColumns().clear();
+        mainWindowController.initClientTable(agreementTableView);
+        initClientTableInAgreementSelectId();
+    }
+
+
+    public void initClientTableInAgreementSelectId() {
+        agreementTableView.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2){
+                ClientViewModel selectedClient =
+                        (ClientViewModel) agreementTableView
+                                .getSelectionModel().getSelectedItem();
+                SimpleIntegerProperty clientId = selectedClient.getClientId();
+                String parseClientId = String.valueOf(clientId.get());
+                idAgreementClientTextField.setText(parseClientId);
+            }
+        });
+    }
+
     public void clickAddClientRecordButton(){
         String firstName;
         String secondName;
@@ -246,6 +287,28 @@ public class AddRecordController {
         clientIdRequirementTextField.clear();
     }
 
+    public void clickOpenRequirementInClientTableButton() {
+        clientTableView.getColumns().clear();
+        mainWindowController.initRequirementTable(clientTableView);
+        initRequirementTableInClientSelectId();
+    }
+
+
+    public void initRequirementTableInClientSelectId() {
+        clientTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                RequirementViewModel selectedRequirement =
+                        (RequirementViewModel) clientTableView
+                                .getSelectionModel().getSelectedItem();
+                SimpleIntegerProperty reqId = selectedRequirement.getReqId();
+                String parseReqId = String.valueOf(reqId.get());
+                clientIdRequirementTextField.setText(parseReqId);
+            }
+        });
+    }
+
+
+
     public void clickAddConsultationRecordButton(){
         int clientId;
         Date consultationDate;
@@ -268,6 +331,26 @@ public class AddRecordController {
         consultationIdClientTextField.clear();
         consultationDatePicker.setValue(null);
         consultationStatusChoiceBox.setValue(null);
+    }
+
+    public void clickOpenClientInConsultationTableButton() {
+        consultationTableView.getColumns().clear();
+        mainWindowController.initClientTable(consultationTableView);
+        initClientTableInConsultationSelectId();
+    }
+
+
+    public void initClientTableInConsultationSelectId() {
+        consultationTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                ClientViewModel selectedClient =
+                        (ClientViewModel) consultationTableView
+                                .getSelectionModel().getSelectedItem();
+                SimpleIntegerProperty clientId = selectedClient.getClientId();
+                String parseClientId = String.valueOf(clientId.get());
+                consultationIdClientTextField.setText(parseClientId);
+            }
+        });
     }
 
     public void clickAddFacilityRecordButton(){
@@ -305,6 +388,27 @@ public class AddRecordController {
         facilityGarageChoiceBox.setValue(null);
         facilityGardenChoiceBox.setValue(null);
         facilityPoolChoiceBox.setValue(null);
+    }
+
+    public void clickOpenObjectInFacilityTableButton() {
+        facilityTableView.getColumns().clear();
+        mainWindowController.initFacilityTable(facilityTableView);
+        initObjectTableInFacilitySelectId();
+    }
+
+
+    public void initObjectTableInFacilitySelectId() {
+        facilityTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                FacilityViewModel selectedObject =
+                        (FacilityViewModel) facilityTableView
+                                .getSelectionModel().getSelectedItem();
+                SimpleIntegerProperty objectId =
+                        selectedObject.getObjectReferenceId();
+                String parseObjectId = String.valueOf(objectId.get());
+                facilityIdObjectTextField.setText(parseObjectId);
+            }
+        });
     }
 
     public void clickAddRequirementRecordButton(){
@@ -352,6 +456,16 @@ public class AddRecordController {
         requirementGardenChoiceBox.setValue(null);
         requirementPoolChoiceBox.setValue(null);
     }
+
+
+
+
+
+
+
+
+
+
 
     private void labelClose (){
         PauseTransition visiblePause = new PauseTransition(
@@ -413,12 +527,37 @@ public class AddRecordController {
         } catch (NullPointerException ignored){}
 
         Tooltip objectTooltip = new Tooltip(
-                "1.\"FOR_SALE\" - Об'єкт доступний тільки для продажу.\n" +
-                        "2.\"AVAILABLE\" - Об'єкт доступний для продажу" +
+                "1.\"FOR_SALE\" - об'єкт доступний тільки для продажу.\n" +
+                        "2.\"AVAILABLE\" - об'єкт доступний для продажу" +
                         " або оренди.\n"+
-                        "3.\"UNDER_CONTRACT\" - Об'єкт вже під контрактом.");
-        Tooltip.install(objectStatusChoiceBox, objectTooltip);
+                        "3.\"UNDER_CONTRACT\" - об'єкт вже під контрактом.");
 
+        Tooltip agreementTooltip = new Tooltip(
+                "1. \"PENDING\" - в очікуванні\n" +
+                "2. \"COMPLETED\" - завершено\n" +
+                "3. \"ACTIVE\" - активний"
+        );
+
+        Tooltip booleanTooltip = new Tooltip(
+                "true - в наявності, \n" +
+                        "false - Немає"
+        );
+
+        Tooltip consultationTooltip = new Tooltip(
+                "1. COMPLETED - завершено, \n" +
+                        "2. SCHEDULED - заплановано"
+        );
+
+
+        Tooltip.install(objectStatusChoiceBox, objectTooltip);
+        Tooltip.install(agreementStatusChoiceBox, agreementTooltip);
+        Tooltip.install(consultationStatusChoiceBox, consultationTooltip);
+        Tooltip.install (requirementGarageChoiceBox, booleanTooltip);
+        Tooltip.install (requirementGardenChoiceBox, booleanTooltip);
+        Tooltip.install (requirementPoolChoiceBox, booleanTooltip);
+        Tooltip.install (facilityGarageChoiceBox, booleanTooltip);
+        Tooltip.install (facilityGardenChoiceBox, booleanTooltip);
+        Tooltip.install (facilityPoolChoiceBox, booleanTooltip);
 
     }
 }

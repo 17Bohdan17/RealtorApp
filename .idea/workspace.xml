@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a79d991-ceb4-48ec-8f00-615dc0f4af71" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/AddRecordStatusEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/addRecordPart/AddRecordWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/AgreementRecord.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/CRUDOperationWindowStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ClientRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ClientRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/ConsultationRecord.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recordFxml/FacilityRecord.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +71,7 @@
         <option value="CSS File" />
         <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -101,42 +104,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build RealtorApp.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [:MainWindow.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [run].executor&quot;: &quot;Run&quot;,
-    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;b3a9a044-25c3-4c94-8e8a-43eeb10db0cd&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;I:/RealtorApp/RealtorApp&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17773438&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.32699168&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "Gradle.Build RealtorApp.executor": "Run",
+    "Gradle.RealtorApp [:Main.main()].executor": "Run",
+    "Gradle.RealtorApp [:MainWindow.main()].executor": "Run",
+    "Gradle.RealtorApp [build].executor": "Run",
+    "Gradle.RealtorApp [run].executor": "Run",
+    "JPA.DatabaseSchemaImportDialog": "b3a9a044-25c3-4c94-8e8a-43eeb10db0cd",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "I:/RealtorApp/RealtorApp",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17773438",
+    "project.structure.side.proportion": "0.32699168",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources" />
@@ -287,12 +290,36 @@
       <workItem from="1708101273208" duration="1381000" />
       <workItem from="1708348569768" duration="27184000" />
       <workItem from="1708524514952" duration="46078000" />
-      <workItem from="1708680781588" duration="9842000" />
+      <workItem from="1708680781588" duration="11741000" />
+      <workItem from="1708871972263" duration="1166000" />
+      <workItem from="1708940190415" duration="25701000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

@@ -1,0 +1,6 @@
+package project.Hibernate;
+
+public enum AddRecordStatusEnum {
+    ADD_OBJECT, ADD_CLIENT, ADD_FACILITY, ADD_REQUIREMENT, ADD_CONSULTATION, ADD_AGREEMENT, OPEN_OBJECT_TABLE
+
+}
