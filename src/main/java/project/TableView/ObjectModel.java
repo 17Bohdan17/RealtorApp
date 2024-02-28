@@ -56,7 +56,8 @@ public class ObjectModel {
                 object.getArea(),
                 object.getPrice(),
                 object.getStatus(),
-                object.getRoomCount());
+                object.getRoomCount(),
+                object.getObject());
     }
 
     public void close() {

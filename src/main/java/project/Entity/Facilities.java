@@ -41,4 +41,8 @@ public class Facilities {
     @Basic
     @Column(name = "pool")
     private Boolean pool;
+
+    public Facilities getFacility() {
+        return this;
+    }
 }

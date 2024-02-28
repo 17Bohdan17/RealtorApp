@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
+import project.Entity.Object;
 
 import java.math.BigDecimal;
 
@@ -18,11 +19,13 @@ public class ObjectViewModel {
     private final SimpleStringProperty status;
     private final SimpleDoubleProperty area;
     private final SimpleObjectProperty<BigDecimal> price;
+    private final Object originalObject;
+
 
 
     public ObjectViewModel(int objectId, String street, int street_num,
                            Double area, BigDecimal price, String status,
-                           Short roomCount) {
+                           Short roomCount, Object originalObject) {
         this.objectId = new SimpleIntegerProperty(objectId);
         this.street = new SimpleStringProperty(street);
         this.street_num = new SimpleIntegerProperty(street_num);
@@ -30,6 +33,7 @@ public class ObjectViewModel {
         this.price = new SimpleObjectProperty<BigDecimal>(price);
         this.status = new SimpleStringProperty(status);
         this.roomCount = new SimpleIntegerProperty(roomCount);
+        this.originalObject = originalObject;
     }
 }
 

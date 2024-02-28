@@ -61,7 +61,8 @@ public class RequirementModel {
                 requirement.getReqStreet(),
                 requirement.getReqGarage(),
                 requirement.getReqGarden(),
-                requirement.getReqPool());
+                requirement.getReqPool(),
+                requirement.getRequirement());
     }
 
     public void close() {

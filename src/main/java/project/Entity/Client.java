@@ -34,6 +34,7 @@ public class Client {
     @Column(name = "req_id")
     private Integer reqId;
 
-
-
+    public Client getClient() {
+        return this;
+    }
 }

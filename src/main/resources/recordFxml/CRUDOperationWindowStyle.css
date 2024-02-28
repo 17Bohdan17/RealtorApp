@@ -37,22 +37,6 @@
     -fx-background-color: #f0f0f0; /* колір фону заголовків стовпців */
 }
 
-
-.table-view .table-cell {
-    -fx-alignment: center; /* вирівнювання тексту по центру в заголовках та комірках */
-    -fx-font-size: 14px; /* розмір шрифту тексту в заголовках та комірках */
-}
-
-.table-view {
-    -fx-control-inner-background: #ffffff; /* колір фону таблиці */
-    -fx-border-color: #cccccc; /* колір межі таблиці */
-}
-
-.table-view .column-header-background {
-    -fx-background-color: #f0f0f0; /* колір фону заголовків стовпців */
-}
-
-
 .table-view .table-cell {
     -fx-alignment: center; /* вирівнювання тексту по центру в заголовках та комірках */
     -fx-font-size: 14px; /* розмір шрифту тексту в заголовках та комірках */
@@ -61,11 +45,6 @@
 .table-view .column-header {
     -fx-font-size: 14px;
 }
-
-.table-view .table-row-cell:odd {
-    -fx-background-color: #f5f5f5; /* колір фону непарних рядків таблиці */
-}
-
 
 .table-view .table-row-cell:odd {
     -fx-background-color: #f5f5f5; /* колір фону непарних рядків таблиці */

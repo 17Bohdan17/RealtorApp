@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
+import project.Entity.Requirement;
 
 
 @Getter
@@ -18,12 +19,13 @@ public class RequirementViewModel {
     private final SimpleBooleanProperty reqGarage;
     private final SimpleBooleanProperty reqGarden;
     private final SimpleBooleanProperty reqPool;
+    private final Requirement originalRequirement;
 
     public RequirementViewModel(int reqId, int reqMinBedrooms,
                                 int reqMinBathrooms, double reqMinimalArea,
                                 Integer reqMaxPrice, String reqStreet,
                                 boolean reqGarage, boolean reqGarden,
-                                boolean reqPool) {
+                                boolean reqPool, Requirement originalRequirement) {
 
         this.reqId = new SimpleIntegerProperty(reqId);
         this.reqMinBedrooms = new SimpleIntegerProperty(reqMinBedrooms);
@@ -34,7 +36,7 @@ public class RequirementViewModel {
         this.reqGarage = new SimpleBooleanProperty(reqGarage);
         this.reqGarden = new SimpleBooleanProperty(reqGarden);
         this.reqPool = new SimpleBooleanProperty(reqPool);
-
+        this.originalRequirement = originalRequirement;
     }
 }
 

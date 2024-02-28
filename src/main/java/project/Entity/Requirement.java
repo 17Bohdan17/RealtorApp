@@ -50,5 +50,7 @@ public class Requirement {
     @Column(name = "req_pool", nullable = false)
     private Boolean reqPool;
 
-
+    public Requirement getRequirement() {
+        return this;
+    }
 }

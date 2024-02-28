@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -30,17 +31,31 @@
             </MenuButton>
             <MenuButton id="addRecord" fx:id="addRecordMenu" layoutX="23.0" layoutY="74.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" styleClass="selectButton" text="Додати запис">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddObjectRecord" text="Додати об'єкт нерухомості" />
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddAgreementRecord" text="Додати угоду" />
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddClientRecord" text="Додати клієнта" />
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddFacilityRecord" text="Додати зручності" />
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddRequirementRecord" text="Додати вимогу" />
-                  <MenuItem mnemonicParsing="false" onAction="#clickAddConsultationRecord" text="Додати консультацію" />
+                  <MenuItem mnemonicParsing="false" onAction="#addObjectRecord" text="Додати об'єкт нерухомості" />
+                  <MenuItem mnemonicParsing="false" onAction="#addAgreementRecord" text="Додати угоду" />
+                  <MenuItem mnemonicParsing="false" onAction="#addClientRecord" text="Додати клієнта" />
+                  <MenuItem mnemonicParsing="false" onAction="#addFacilityRecord" text="Додати зручності" />
+                  <MenuItem mnemonicParsing="false" onAction="#addRequirementRecord" text="Додати вимогу" />
+                  <MenuItem mnemonicParsing="false" onAction="#addConsultationRecord" text="Додати консультацію" />
               </items>
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
+            <MenuButton id="updateRecord" fx:id="updateRecordMenu" layoutX="23.0" layoutY="126.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" styleClass="selectButton" text="Редагувати запис">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#updateObjectRecord" text="Редагувати об'єкт нерухомості" />
+                  <MenuItem mnemonicParsing="false" onAction="#updateAgreementRecord" text="Редагувати угоду" />
+                  <MenuItem mnemonicParsing="false" onAction="#updateClientRecord" text="Редагувати клієнта" />
+                  <MenuItem mnemonicParsing="false" onAction="#updateFacilityRecord" text="Редагувати зручності" />
+                  <MenuItem mnemonicParsing="false" onAction="#updateRequirementRecord" text="Редагувати вимогу" />
+                  <MenuItem mnemonicParsing="false" onAction="#updateConsultationRecord" text="Редагувати консультацію" />
+               </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MenuButton>
+            <Button fx:id="deleteButton" layoutX="22.0" layoutY="179.0" mnemonicParsing="false" onAction="#clickDeleteRecordButton" prefHeight="38.0" prefWidth="308.0" text="Видалити запис" />
             </children>
         </Pane>
         <Pane fx:id="titlePane" layoutX="25.0" layoutY="2.0" prefHeight="32.0" prefWidth="977.0">

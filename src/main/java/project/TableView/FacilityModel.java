@@ -56,7 +56,8 @@ public class FacilityModel {
                 facilities.getMinBathrooms(),
                 facilities.getGarage(),
                 facilities.getGarden(),
-                facilities.getPool());
+                facilities.getPool(),
+                facilities.getFacility());
     }
 
     public void close() {

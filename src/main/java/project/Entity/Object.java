@@ -45,4 +45,8 @@ public class Object {
     @Column(name = "status", nullable = false)
     private String status;
 
+    public Object getObject() {
+        return this;
+    }
+
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@CRUDOperationWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Hibernate.addRecordPart.AddRecordController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@CRUDOperationWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Hibernate.RecordPart.RecordController">
     <children>
         <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28;" styleClass="mainPain">
             <children>

@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import lombok.Getter;
+import project.Entity.Facilities;
 
 
 @Getter
@@ -15,10 +16,11 @@ public class FacilityViewModel {
     private final SimpleBooleanProperty garage;
     private final SimpleBooleanProperty garden;
     private final SimpleBooleanProperty pool;
+    private final Facilities originalFacility;
 
     public FacilityViewModel(int facilityId, int objectReferenceId,
                              short minBedrooms, short minBathrooms,
-                             boolean garage, boolean garden, boolean pool) {
+                             boolean garage, boolean garden, boolean pool, Facilities originalFacility) {
 
         this.facilityId = new SimpleIntegerProperty(facilityId);
         this.objectReferenceId = new SimpleIntegerProperty(objectReferenceId);
@@ -27,6 +29,7 @@ public class FacilityViewModel {
         this.garage = new SimpleBooleanProperty(garage);
         this.garden = new SimpleBooleanProperty(garden);
         this.pool = new SimpleBooleanProperty(pool);
+        this.originalFacility = originalFacility;
     }
 }
 

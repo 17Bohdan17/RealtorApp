@@ -58,7 +58,8 @@ public class AgreementModel {
                 agreement.getClientId(),
                 agreement.getAgreementPrice(),
                 agreement.getAgreementDate(),
-                agreement.getAgreementStatus());
+                agreement.getAgreementStatus(),
+                agreement.getAgreement());
     }
 
     public void close() {

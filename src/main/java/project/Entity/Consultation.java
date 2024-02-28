@@ -31,4 +31,8 @@ public class Consultation {
     @Basic
     @Column(name = "cons_status", nullable = false)
     private String consStatus;
+
+    public Consultation getConsultation() {
+        return this;
+    }
 }

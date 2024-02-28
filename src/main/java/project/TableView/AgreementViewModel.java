@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
+import project.Entity.Agreement;
 
 import java.sql.Date;
 
@@ -17,11 +18,12 @@ public class AgreementViewModel {
     private final SimpleObjectProperty<Date> agreementDate;
     private final SimpleStringProperty agreementStatus;
     private final SimpleIntegerProperty agreementPrice;
+    private final Agreement originalAgreement;
 
 
     public AgreementViewModel(int agreementId, int objectId, int clientId,
                               int agreementPrice, Date agreementDate,
-                              String agreementStatus) {
+                              String agreementStatus, Agreement originalAgreement) {
 
         this.agreementId = new SimpleIntegerProperty(agreementId);
         this.objectId = new SimpleIntegerProperty(objectId);
@@ -29,6 +31,7 @@ public class AgreementViewModel {
         this.agreementPrice = new SimpleIntegerProperty(agreementPrice);
         this.agreementStatus = new SimpleStringProperty(agreementStatus);
         this.agreementDate = new SimpleObjectProperty<>(agreementDate);
+        this.originalAgreement = originalAgreement;
     }
 }
 

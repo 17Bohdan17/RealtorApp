@@ -53,7 +53,8 @@ public class ClientModel {
                 client.getFirstName(),
                 client.getSecondName(),
                 client.getContactNum(),
-                client.getReqId());
+                client.getReqId(),
+                client.getClient());
     }
 
     public void close() {

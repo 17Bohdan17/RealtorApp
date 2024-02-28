@@ -21,7 +21,7 @@
                                 <Image url="@../img/house.png" />
                             </image>
                         </ImageView>
-                        <Label layoutX="47.0" layoutY="12.0" style="-fx-text-fill: white;" text="Додати клієнта" />
+                        <Label layoutX="47.0" layoutY="12.0" style="-fx-text-fill: white;" text="Редагувати клієнта" />
                         <ImageView fx:id="addRecordWindowCloseBtn" fitHeight="16.0" fitWidth="16.0" layoutX="792.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../img/close.png" />
@@ -44,7 +44,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </TextField>
-                <Button fx:id="addClientButton" layoutX="21.0" layoutY="410.0" mnemonicParsing="false" onAction="#clickAddClientRecordButton" prefHeight="40.0" prefWidth="208.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="Додати клієнта">
+                <Button fx:id="saveClientButton" layoutX="21.0" layoutY="410.0" mnemonicParsing="false" onAction="#clickUpdateClientRecordButton" prefHeight="40.0" prefWidth="208.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="Зберегти зміни">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -54,18 +54,18 @@
                         <Font name="System Bold Italic" size="23.0" />
                     </font>
                 </Label>
-            <TextField fx:id="clientIdRequirementTextField" alignment="CENTER" layoutX="25.0" layoutY="211.0" prefHeight="40.0" prefWidth="200.0" promptText="ID вимоги" style="-fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;">
+            <TextField fx:id="clientIdRequirementTextField" alignment="CENTER" layoutX="25.0" layoutY="211.0" prefHeight="40.0" prefWidth="240.0" promptText="ID вимоги" style="-fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </TextField>
-            <Button fx:id="openRequirementTableButton" layoutX="225.0" layoutY="211.0" mnemonicParsing="false" onAction="#clickOpenRequirementInClientTableButton" prefHeight="40.0" prefWidth="41.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="...">
+            <Button fx:id="openClientTableButton" layoutX="21.0" layoutY="364.0" mnemonicParsing="false" onAction="#clickOpenClientTableForUpdate" prefHeight="40.0" prefWidth="208.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="Відобразити таблицю ">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             </children>
         </Pane>
-      <TableView fx:id="clientTableView" editable="true" layoutX="269.0" layoutY="51.0" prefHeight="406.0" prefWidth="537.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../MainWindowStyle.css" />
+      <TableView fx:id="updateTableView" editable="true" layoutX="269.0" layoutY="51.0" prefHeight="406.0" prefWidth="537.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../MainWindowStyle.css" />
     </children>
 </AnchorPane>

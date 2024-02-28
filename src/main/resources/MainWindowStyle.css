@@ -37,6 +37,10 @@
     -fx-label-padding: 3px 87px;
 }
 
+.selectButton#updateRecord {
+    -fx-label-padding: 3px 76px;
+}
+
 
 .button:hover {
     -fx-background-color: #f2f2f2;

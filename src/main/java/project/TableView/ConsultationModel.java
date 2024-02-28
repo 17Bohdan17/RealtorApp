@@ -56,7 +56,8 @@ public class ConsultationModel {
                 consultation.getConsId(),
                 consultation.getClientId(),
                 consultation.getConsDate(),
-                consultation.getConsStatus());
+                consultation.getConsStatus(),
+                consultation.getConsultation());
     }
 
     public void close() {

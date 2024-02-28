@@ -1,4 +1,4 @@
-package project.Hibernate.addRecordPart;
+package project.Hibernate.RecordPart;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -6,20 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import project.Hibernate.AddRecordStatusEnum;
+import project.Hibernate.RecordStatusEnum;
 
 import java.io.IOException;
 
 
-public class AddRecordWindow {
+public class RecordWindow {
 
     FXMLLoader loader;
-    public AddRecordStatusEnum addRecordStatusEnum;
+    public RecordStatusEnum recordStatusEnum;
     public int addRecordStatus;
 
 
     public void init() throws IOException {
-       switch (addRecordStatusEnum){
+       switch (recordStatusEnum){
            case ADD_OBJECT:
                loader = new FXMLLoader(getClass()
                        .getResource("/recordFxml/ObjectRecord.fxml"));
@@ -50,10 +50,39 @@ public class AddRecordWindow {
                        .getResource("/recordFxml/RequirementRecord.fxml"));
                break;
 
+           case UPDATE_OBJECT:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/UpdateObjectRecord.fxml"));
+               break;
+
+           case UPDATE_AGREEMENT:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/UpdateAgreementRecord.fxml"));
+               break;
+
+           case UPDATE_CLIENT:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/UpdateClientRecord.fxml"));
+               break;
+
+           case UPDATE_CONSULTATION:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/UpdateConsultationRecord.fxml"));
+               break;
+
+           case UPDATE_FACILITY:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/UpdateFacilityRecord.fxml"));
+               break;
+
+           case UPDATE_REQUIREMENT:
+               loader = new FXMLLoader(getClass()
+                       .getResource("/recordFxml/UpdateRequirementRecord.fxml"));
+               break;
 
            default:
                throw new IllegalStateException("Unexpected value: " +
-                       addRecordStatusEnum);
+                       recordStatusEnum);
        }
 
         Parent root = loader.load();
@@ -65,13 +94,10 @@ public class AddRecordWindow {
         stage.setScene(scene);
         stage.setResizable(false);
 
-
-        ((AddRecordController)loader.getController()).init(stage);
+        ((RecordController)loader.getController()).init(stage);
         stage.show();
 
     }
-
-
 }
 
 

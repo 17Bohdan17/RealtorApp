@@ -39,4 +39,8 @@ public class Agreement {
     @Basic
     @Column(name = "agreement_status", nullable = false)
     private String agreementStatus;
+
+    public Agreement getAgreement() {
+        return this;
+    }
 }

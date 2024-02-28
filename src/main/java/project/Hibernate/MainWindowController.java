@@ -7,7 +7,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import project.Hibernate.addRecordPart.AddRecordWindow;
+import org.hibernate.Session;
+import project.Entity.*;
+import project.Entity.Object;
+import project.Hibernate.RecordPart.RecordWindow;
+import project.Hibernate.RecordPart.TableEnum;
 import project.TableView.*;
 
 import java.io.IOException;
@@ -27,7 +31,9 @@ public class MainWindowController {
     private double x;
     private double y;
 
-    AddRecordWindow addRecordWindow = new AddRecordWindow();
+    RecordWindow recordWindow = new RecordWindow();
+
+    TableEnum tableEnum;
 
     public void init(Stage stage) {
 
@@ -61,37 +67,69 @@ public class MainWindowController {
         btnMinimize.setOnMouseClicked(mouseEvent -> stage.setIconified(true));
     }
 
-    public void clickAddObjectRecord() throws IOException{
-        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_OBJECT;
-        addRecordWindow.init();
+    public void addObjectRecord() throws IOException{
+        recordWindow.recordStatusEnum = RecordStatusEnum.ADD_OBJECT;
+        recordWindow.init();
+    }
+
+    public void updateObjectRecord() throws IOException{
+        recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_OBJECT;
+        recordWindow.init();
+    }
+
+
+    public void addAgreementRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.ADD_AGREEMENT;
+        recordWindow.init();
 
     }
 
-    public void clickAddAgreementRecord() throws IOException {
-        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_AGREEMENT;
-        addRecordWindow.init();
+    public void updateAgreementRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_AGREEMENT;
+        recordWindow.init();
 
     }
 
-    public void clickAddClientRecord() throws IOException {
-        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_CLIENT;
-        addRecordWindow.init();
+    public void addClientRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.ADD_CLIENT;
+        recordWindow.init();
     }
 
-    public void clickAddConsultationRecord() throws IOException {
-        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_CONSULTATION;
-        addRecordWindow.init();
+    public void updateClientRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_CLIENT;
+        recordWindow.init();
     }
 
-    public void clickAddFacilityRecord() throws IOException {
-        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_FACILITY;
-        addRecordWindow.init();
+    public void addConsultationRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.ADD_CONSULTATION;
+        recordWindow.init();
     }
 
-    public void clickAddRequirementRecord() throws IOException {
-        addRecordWindow.addRecordStatusEnum = AddRecordStatusEnum.ADD_REQUIREMENT;
-        addRecordWindow.init();
+    public void updateConsultationRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_CONSULTATION;
+        recordWindow.init();
     }
+
+    public void addFacilityRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.ADD_FACILITY;
+        recordWindow.init();
+    }
+
+    public void updateFacilityRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_FACILITY;
+        recordWindow.init();
+    }
+
+    public void addRequirementRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.ADD_REQUIREMENT;
+        recordWindow.init();
+    }
+
+    public void updateRequirementRecord() throws IOException {
+        recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_REQUIREMENT;
+        recordWindow.init();
+    }
+
 
     public void clickButtonAddObjectTable() {
         initObjectTable(mainTableView);
@@ -117,9 +155,114 @@ public class MainWindowController {
         initRequirementTable(mainTableView);
     }
 
+    public void clickDeleteRecordButton (){
+        deleteSelectedRecord(mainTableView);
+    }
+
+
+    public void deleteSelectedRecord(TableView<?> tableView) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        switch (tableEnum){
+            case OBJECT:
+                ObjectViewModel selectedObject = (ObjectViewModel)
+                        tableView.getSelectionModel().getSelectedItem();
+
+                Object object = selectedObject.getOriginalObject();
+
+
+                session.beginTransaction();
+                session.delete(object);
+                session.getTransaction().commit();
+                session.close();
+
+                tableView.getItems().remove(selectedObject);
+                break;
+
+            case AGREEMENT:
+                AgreementViewModel selectedAgreement = (AgreementViewModel)
+                        tableView.getSelectionModel().getSelectedItem();
+
+                Agreement agreement = selectedAgreement.getOriginalAgreement();
+                session.beginTransaction();
+                session.delete(agreement);
+                session.getTransaction().commit();
+                session.close();
+
+                tableView.getItems().remove(selectedAgreement);
+                break;
+
+            case CLIENT:
+                ClientViewModel selectedClient = (ClientViewModel)
+                        tableView.getSelectionModel().getSelectedItem();
+
+                Client client = selectedClient.getOriginalClient();
+                session.beginTransaction();
+                session.delete(client);
+                session.getTransaction().commit();
+                session.close();
+
+                tableView.getItems().remove(selectedClient);
+                break;
+
+            case REQUIREMENT:
+                RequirementViewModel selectedRequirement = (RequirementViewModel)
+                        tableView.getSelectionModel().getSelectedItem();
+
+                Requirement requirement = selectedRequirement.getOriginalRequirement();
+                session.beginTransaction();
+                session.delete(requirement);
+                session.getTransaction().commit();
+                session.close();
+
+                tableView.getItems().remove(selectedRequirement);
+                break;
+
+            case FACILITY:
+                FacilityViewModel selectedFacility = (FacilityViewModel)
+                        tableView.getSelectionModel().getSelectedItem();
+
+                Facilities facility = selectedFacility.getOriginalFacility();
+                session.beginTransaction();
+                session.delete(facility);
+                session.getTransaction().commit();
+                session.close();
+
+                tableView.getItems().remove(selectedFacility);
+                break;
+
+            case CONSULTATION:
+                ConsultationViewModel selectedConsultation = (ConsultationViewModel)
+                        tableView.getSelectionModel().getSelectedItem();
+
+                Consultation consultation = selectedConsultation.getOriginalConsultation();
+                session.beginTransaction();
+                session.delete(consultation);
+                session.getTransaction().commit();
+                session.close();
+
+                tableView.getItems().remove(selectedConsultation);
+                break;
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void initObjectTable(TableView tableView){
         ObjectModel objectModel = new ObjectModel();
+        tableEnum = TableEnum.OBJECT;
 
         tableView.getColumns().clear();
 
@@ -172,6 +315,7 @@ public class MainWindowController {
     public void initAgreementTable(TableView tableView){
         AgreementModel agreementModel = new AgreementModel();
         tableView.getColumns().clear();
+        tableEnum = TableEnum.AGREEMENT;
 
         TableColumn<AgreementViewModel, Integer> agreementIdColumn =
                 new TableColumn<>("ID угоди");
@@ -221,6 +365,7 @@ public class MainWindowController {
     public void initClientTable(TableView tableView){
         ClientModel clientModel = new ClientModel();
         tableView.getColumns().clear();
+        tableEnum = TableEnum.CLIENT;
 
         TableColumn<ClientViewModel, Integer> clientIdColumn =
                 new TableColumn<>("ID клієнта");
@@ -259,6 +404,7 @@ public class MainWindowController {
     public void initConsultationTable(TableView tableView){
         ConsultationModel consultationModel = new ConsultationModel();
         tableView.getColumns().clear();
+        tableEnum = TableEnum.CONSULTATION;
 
         TableColumn<ConsultationViewModel, Integer> consIdColumn =
                 new TableColumn<>("ID консультації");
@@ -292,6 +438,7 @@ public class MainWindowController {
     public void initFacilityTable(TableView tableView){
         FacilityModel facilityModel = new FacilityModel();
         tableView.getColumns().clear();
+        tableEnum = TableEnum.FACILITY;
 
         TableColumn<FacilityViewModel, Integer> facilityIdColumn =
                 new TableColumn<>("ID зручностей ");
@@ -349,6 +496,7 @@ public class MainWindowController {
     public void initRequirementTable(TableView tableView){
         RequirementModel requirementModel = new RequirementModel();
         tableView.getColumns().clear();
+        tableEnum = TableEnum.REQUIREMENT;
 
         TableColumn<RequirementViewModel, Integer> reqIdColumn =
                 new TableColumn<>("ID вимоги");
@@ -414,4 +562,6 @@ public class MainWindowController {
                 reqStreetColumn, reqGarageColumn, reqGardenColumn,
                 reqPoolColumn);
     }
+
+
 }
