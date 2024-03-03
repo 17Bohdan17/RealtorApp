@@ -8,8 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.hibernate.Session;
-import project.Entity.*;
 import project.Entity.Object;
+import project.Entity.*;
 import project.Hibernate.RecordPart.RecordWindow;
 import project.Hibernate.RecordPart.TableEnum;
 import project.TableView.*;
@@ -17,6 +17,7 @@ import project.TableView.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
+
 
 public class MainWindowController {
     @FXML
@@ -43,7 +44,6 @@ public class MainWindowController {
         mainTableView.setColumnResizePolicy(
                 TableView.UNCONSTRAINED_RESIZE_POLICY);
         mainTableView.autosize();
-
 
     }
 
@@ -207,10 +207,12 @@ public class MainWindowController {
                 break;
 
             case REQUIREMENT:
-                RequirementViewModel selectedRequirement = (RequirementViewModel)
+                RequirementViewModel selectedRequirement =
+                        (RequirementViewModel)
                         tableView.getSelectionModel().getSelectedItem();
 
-                Requirement requirement = selectedRequirement.getOriginalRequirement();
+                Requirement requirement =
+                        selectedRequirement.getOriginalRequirement();
                 session.beginTransaction();
                 session.delete(requirement);
                 session.getTransaction().commit();
@@ -233,10 +235,12 @@ public class MainWindowController {
                 break;
 
             case CONSULTATION:
-                ConsultationViewModel selectedConsultation = (ConsultationViewModel)
+                ConsultationViewModel selectedConsultation =
+                        (ConsultationViewModel)
                         tableView.getSelectionModel().getSelectedItem();
 
-                Consultation consultation = selectedConsultation.getOriginalConsultation();
+                Consultation consultation =
+                        selectedConsultation.getOriginalConsultation();
                 session.beginTransaction();
                 session.delete(consultation);
                 session.getTransaction().commit();
@@ -247,17 +251,6 @@ public class MainWindowController {
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void initObjectTable(TableView tableView){
@@ -562,6 +555,18 @@ public class MainWindowController {
                 reqStreetColumn, reqGarageColumn, reqGardenColumn,
                 reqPoolColumn);
     }
+
+
+
+
+
+
+
+
+ 
+
+
+
 
 
 }

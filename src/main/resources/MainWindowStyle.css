@@ -98,6 +98,14 @@
     -fx-background-color: darkviolet; /* колір фону вибраних рядків таблиці */
 }
 
+.text-field {
+    -fx-border-radius: 28;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-background-radius: 28;
+    -fx-alignment: center;
+}
+
 
 
 
