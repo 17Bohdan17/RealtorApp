@@ -58,7 +58,9 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
     implementation 'org.controlsfx:controlsfx:11.2.0'
-    implementation 'com.itextpdf:itext7-core:7.2.0'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+    implementation 'com.itextpdf:itext7-core:7.1.15'
+
 
 
 

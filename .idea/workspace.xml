@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a79d991-ceb4-48ec-8f00-615dc0f4af71" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/search icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/Hibernate/RecordPart/RecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/Hibernate/RecordPart/RecordController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AppFx.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainWindowStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainWindowStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,48 +101,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build RealtorApp.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [:MainWindow.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RealtorApp [run].executor&quot;: &quot;Run&quot;,
-    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;b3a9a044-25c3-4c94-8e8a-43eeb10db0cd&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;I:/RealtorApp/RealtorApp/src/main/resources/img&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17773438&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.32699168&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "Gradle.Build RealtorApp.executor": "Run",
+    "Gradle.RealtorApp [:Main.main()].executor": "Run",
+    "Gradle.RealtorApp [:MainWindow.main()].executor": "Run",
+    "Gradle.RealtorApp [build].executor": "Run",
+    "Gradle.RealtorApp [run].executor": "Run",
+    "JPA.DatabaseSchemaImportDialog": "b3a9a044-25c3-4c94-8e8a-43eeb10db0cd",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "I:/RealtorApp/RealtorApp/src/main/resources",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17773438",
+    "project.structure.side.proportion": "0.32699168",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\RealtorApp\RealtorApp\src\main\resources" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\img" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\recordFxml" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\updateRecordFxml" />
-      <recent name="I:\RealtorApp\RealtorApp\src\main\resources" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\java\org\example\Hibernate" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -297,6 +294,7 @@
       <workItem from="1709045116731" duration="30127000" />
       <workItem from="1709220123544" duration="8430000" />
       <workItem from="1709362119995" duration="6243000" />
+      <workItem from="1709446071958" duration="23449000" />
     </task>
     <servers />
   </component>

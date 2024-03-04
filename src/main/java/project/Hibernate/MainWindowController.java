@@ -7,6 +7,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.hibernate.Session;
 import project.Entity.Object;
 import project.Entity.*;
@@ -14,6 +18,7 @@ import project.Hibernate.RecordPart.RecordWindow;
 import project.Hibernate.RecordPart.TableEnum;
 import project.TableView.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -41,9 +46,8 @@ public class MainWindowController {
         setUpDraggableStage(stage);
         setUpCloseButton(stage);
         setUpMinimizeButton(stage);
-        mainTableView.setColumnResizePolicy(
-                TableView.UNCONSTRAINED_RESIZE_POLICY);
-        mainTableView.autosize();
+
+
 
     }
 
@@ -67,12 +71,12 @@ public class MainWindowController {
         btnMinimize.setOnMouseClicked(mouseEvent -> stage.setIconified(true));
     }
 
-    public void addObjectRecord() throws IOException{
+    public void addObjectRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_OBJECT;
         recordWindow.init();
     }
 
-    public void updateObjectRecord() throws IOException{
+    public void updateObjectRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_OBJECT;
         recordWindow.init();
     }
@@ -155,7 +159,7 @@ public class MainWindowController {
         initRequirementTable(mainTableView);
     }
 
-    public void clickDeleteRecordButton (){
+    public void clickDeleteRecordButton() {
         deleteSelectedRecord(mainTableView);
     }
 
@@ -164,7 +168,7 @@ public class MainWindowController {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        switch (tableEnum){
+        switch (tableEnum) {
             case OBJECT:
                 ObjectViewModel selectedObject = (ObjectViewModel)
                         tableView.getSelectionModel().getSelectedItem();
@@ -209,7 +213,7 @@ public class MainWindowController {
             case REQUIREMENT:
                 RequirementViewModel selectedRequirement =
                         (RequirementViewModel)
-                        tableView.getSelectionModel().getSelectedItem();
+                                tableView.getSelectionModel().getSelectedItem();
 
                 Requirement requirement =
                         selectedRequirement.getOriginalRequirement();
@@ -237,7 +241,7 @@ public class MainWindowController {
             case CONSULTATION:
                 ConsultationViewModel selectedConsultation =
                         (ConsultationViewModel)
-                        tableView.getSelectionModel().getSelectedItem();
+                                tableView.getSelectionModel().getSelectedItem();
 
                 Consultation consultation =
                         selectedConsultation.getOriginalConsultation();
@@ -253,18 +257,18 @@ public class MainWindowController {
     }
 
 
-    public void initObjectTable(TableView tableView){
+    public void initObjectTable(TableView tableView) {
         ObjectModel objectModel = new ObjectModel();
         tableEnum = TableEnum.OBJECT;
 
         tableView.getColumns().clear();
 
         TableColumn<ObjectViewModel, Integer> idColumn =
-                new TableColumn<>("ID об'єкту");
+                new TableColumn<>("ID");
         TableColumn<ObjectViewModel, String> streetColumn =
                 new TableColumn<>("Вулиця");
         TableColumn<ObjectViewModel, Integer> streetNumColumn =
-                new TableColumn<>("Номер будинку");
+                new TableColumn<>("№");
         TableColumn<ObjectViewModel, Double> areaColumn =
                 new TableColumn<>("Площа");
         TableColumn<ObjectViewModel, BigDecimal> priceColumn =
@@ -272,7 +276,15 @@ public class MainWindowController {
         TableColumn<ObjectViewModel, String> statusColumn =
                 new TableColumn<>("Статус");
         TableColumn<ObjectViewModel, Integer> roomCountColumn =
-                new TableColumn<>("Кількість кімнат");
+                new TableColumn<>("К-сть кімнат");
+
+        idColumn.setPrefWidth(30);
+        streetColumn.setPrefWidth(130);
+        streetNumColumn.setPrefWidth(40);
+        areaColumn.setPrefWidth(60);
+        priceColumn.setPrefWidth(80);
+        statusColumn.setPrefWidth(140);
+        roomCountColumn.setPrefWidth(90);
 
         idColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(
                 () -> cellData.getValue().getObjectId().getValue()));
@@ -305,7 +317,85 @@ public class MainWindowController {
                 roomCountColumn);
     }
 
-    public void initAgreementTable(TableView tableView){
+
+    
+    public void createPdfFromTableView(TableView<ObjectViewModel> tableView) {
+        try {
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream contentStream =
+                    new PDPageContentStream(document, page);
+            contentStream.setFont(PDType0Font.load(
+                    document, new File(
+                            "C:/Windows/Fonts/arial.ttf")), 12);
+
+            float cellHeight = 20;
+            float tableStartX = 20;
+            float tableStartY = 750;
+            int rowCount = 0;
+
+            for (int row = 0; row < tableView.getItems().size(); row++) {
+                rowCount++;
+                if (rowCount > 36) {
+                    contentStream.close();
+                    page = new PDPage();
+                    document.addPage(page);
+                    contentStream = new PDPageContentStream(document, page);
+                    contentStream.setFont(PDType0Font.load(
+                            document, new File(
+                                    "C:/Windows/Fonts/arial.ttf")), 12);
+                    tableStartX = 20;
+                    tableStartY = 750;
+                    rowCount = 0;
+                }
+                for (int col = 0; col < tableView.getColumns().size(); col++) {
+                    TableColumn<ObjectViewModel, ?> column =
+                            tableView.getColumns().get(col);
+                    java.lang.Object cellData = column.getCellData(row);
+                    String cellValue =
+                            cellData != null ? cellData.toString() : "";
+
+                    // Выводим текст в ячейку
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(
+                            tableStartX + 5, tableStartY - (
+                                    row % 36 * cellHeight) - 10);
+                    contentStream.showText(cellValue);
+                    contentStream.endText();
+
+
+                    contentStream.addRect(
+                            tableStartX - 3, tableStartY - (
+                                    row % 36 * cellHeight) - 15,
+                            (float) column.getWidth(), cellHeight);
+                    contentStream.stroke();
+
+                    tableStartX += (float) column.getWidth();
+                }
+
+                tableStartX = 20;
+                tableStartY -= cellHeight - 20;
+            }
+
+            contentStream.close();
+
+            document.save("table_view_data.pdf");
+            document.close();
+            System.out.println("PDF created successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+    public void initAgreementTable(TableView tableView) {
         AgreementModel agreementModel = new AgreementModel();
         tableView.getColumns().clear();
         tableEnum = TableEnum.AGREEMENT;
@@ -355,7 +445,7 @@ public class MainWindowController {
                 agreementStatusColumn);
     }
 
-    public void initClientTable(TableView tableView){
+    public void initClientTable(TableView tableView) {
         ClientModel clientModel = new ClientModel();
         tableView.getColumns().clear();
         tableEnum = TableEnum.CLIENT;
@@ -394,7 +484,7 @@ public class MainWindowController {
                 secondNameColumn, contactNumColumn, reqIdColumn);
     }
 
-    public void initConsultationTable(TableView tableView){
+    public void initConsultationTable(TableView tableView) {
         ConsultationModel consultationModel = new ConsultationModel();
         tableView.getColumns().clear();
         tableEnum = TableEnum.CONSULTATION;
@@ -428,7 +518,7 @@ public class MainWindowController {
                 consDateColumn, consStatusColumn);
     }
 
-    public void initFacilityTable(TableView tableView){
+    public void initFacilityTable(TableView tableView) {
         FacilityModel facilityModel = new FacilityModel();
         tableView.getColumns().clear();
         tableEnum = TableEnum.FACILITY;
@@ -486,7 +576,7 @@ public class MainWindowController {
     }
 
 
-    public void initRequirementTable(TableView tableView){
+    public void initRequirementTable(TableView tableView) {
         RequirementModel requirementModel = new RequirementModel();
         tableView.getColumns().clear();
         tableEnum = TableEnum.REQUIREMENT;
@@ -557,6 +647,54 @@ public class MainWindowController {
     }
 
 
+    public void createPDFObjectTable (){
+        initObjectTable(mainTableView);
+        createPdfFromTableView(mainTableView);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -569,4 +707,4 @@ public class MainWindowController {
 
 
 
-}
+
