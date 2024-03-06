@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/SecondaryWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RealtorApp.controller.RecordController">
+   <children>
+      <Pane prefHeight="542.0" prefWidth="831.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28;" styleClass="mainPain">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="19.0" layoutY="261.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="85.0" />
+            <Pane fx:id="addRecordPane" prefHeight="40.0" prefWidth="831.0" style="-fx-background-color: darkblue; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28;">
+               <children>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/main_icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="47.0" layoutY="12.0" style="-fx-text-fill: white;" text="Додати угоду" />
+                  <ImageView fx:id="addRecordWindowCloseBtn" fitHeight="16.0" fitWidth="16.0" layoutX="801.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/close_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <TextField fx:id="idAgreementObjectTextField" alignment="CENTER" layoutX="22.0" layoutY="63.0" prefHeight="40.0" prefWidth="213.0" promptText="ID об'єкта нерухомості" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="idAgreementClientTextField" alignment="CENTER" layoutX="19.0" layoutY="113.0" prefHeight="40.0" prefWidth="213.0" promptText="ID клієнта" style="-fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="idAgreementPriceTextField" alignment="CENTER" layoutX="17.0" layoutY="213.0" prefHeight="40.0" prefWidth="248.0" promptText="Ціна укладання угоди" style="-fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="addAgreementButton" layoutX="14.0" layoutY="480.0" mnemonicParsing="false" onAction="#clickAddAgreementRecordButton" prefHeight="40.0" prefWidth="213.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="Додати угоду">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <DatePicker fx:id="addAgreementRecordDatePicker" layoutX="17.0" layoutY="162.0" prefHeight="40.0" prefWidth="248.0" promptText="Дата укладання угоди" style="-fx-border-color: black; -fx-border-width: 3;" />
+            <Label fx:id="addRecordDoneLabel" alignment="CENTER" layoutX="235.0" layoutY="483.0" text="✅" textFill="#0af01d">
+               <font>
+                  <Font name="System Bold Italic" size="23.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="agreementStatusChoiceBox" layoutX="107.0" layoutY="261.0" prefHeight="40.0" prefWidth="158.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
+            <Label layoutX="28.0" layoutY="273.0" prefHeight="17.0" prefWidth="73.0" style="-fx-text-fill: gray;" text="Статус угоди">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font></Label>
+            <Button fx:id="openObjectTableButton" layoutX="236.0" layoutY="65.0" mnemonicParsing="false" onAction="#clickOpenObjectTableInAgreementButton" prefHeight="36.0" prefWidth="16.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="...">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="openClientTableButton" layoutX="236.0" layoutY="115.0" mnemonicParsing="false" onAction="#clickOpenClientTableInAgreementButton" prefHeight="36.0" prefWidth="16.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="...">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <TableView fx:id="agreementTableView" editable="true" layoutX="271.0" layoutY="55.0" prefHeight="471.0" prefWidth="544.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

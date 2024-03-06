@@ -8,9 +8,34 @@
         <language minSize="74" name="Java" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="InstantiationOfUtilityClass" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JpaQlInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="RawUseOfParameterizedType" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ThrowablePrintStackTrace" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="RealtorApp" />
+          <option value="RealtorApp" />
+          <option value="RealtorApp" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="com.itextpdf:itextpdf:5.5.13.2" />
+          <option value="org.jetbrains.kotlin:kotlin-stdlib:1.5.21" />
+          <option value="org.postgresql:postgresql:42.7.1" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+        </list>
+      </option>
+    </inspection_tool>
   </profile>
 </component>

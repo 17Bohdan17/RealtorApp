@@ -11,13 +11,13 @@
     <property name="connection.username">postgres</property>
     <property name="connection.password">admin</property>
 
-    <mapping class="project.Entity.Agreement"/>
-    <mapping class="project.Entity.Client"/>
-    <mapping class="project.Entity.Consultation"/>
-    <mapping class="project.Entity.Object"/>
-    <mapping class="project.Entity.Requirement"/>
-    <mapping class="project.Entity.Facilities"/>
-    <mapping class="project.Entity.Facilities"/>
+    <mapping class="RealtorApp.model.entity.Agreement"/>
+    <mapping class="RealtorApp.model.entity.Client"/>
+    <mapping class="RealtorApp.model.entity.Consultation"/>
+    <mapping class="RealtorApp.model.entity.Object"/>
+    <mapping class="RealtorApp.model.entity.Requirement"/>
+    <mapping class="RealtorApp.model.entity.Facilities"/>
+    <mapping class="RealtorApp.model.entity.Facilities"/>
 
 
 
