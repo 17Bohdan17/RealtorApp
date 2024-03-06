@@ -5,6 +5,7 @@ import RealtorApp.enums.TableEnum;
 import RealtorApp.model.entity.*;
 import RealtorApp.model.entity.Object;
 import RealtorApp.model.modelView.*;
+import RealtorApp.util.StageManager;
 import RealtorApp.util.hibernate.HibernateUtil;
 import RealtorApp.util.PdfGenerator;
 import RealtorApp.view.RecordWindow;
@@ -36,37 +37,19 @@ public class MainWindowController {
     private double y;
 
     RecordWindow recordWindow = new RecordWindow();
+    StageManager stageManager = new StageManager();
     TableEnum tableEnum;
 
     public void init(Stage stage) {
-        setUpDraggableStage(stage); // Налаштування можливості перетягування вікна
-        setUpCloseButton(stage); // Налаштування кнопки закриття вікна
-        setUpMinimizeButton(stage); // Налаштування кнопки згортання вікна
+
+        stageManager.setUpDraggableStage(stage, titlePane);
+        stageManager.setUpCloseButton(stage, btnClose);
+        stageManager.setUpMinimizeButton(stage, btnMinimize);
         mainTableView.setColumnResizePolicy( // Встановлення політики розміщення стовпців таблиці
                 TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         mainTableView.autosize(); // Автоматичне налаштування розміру стовпців таблиці
     }
 
-
-    private void setUpDraggableStage(Stage stage) {
-        titlePane.setOnMousePressed(mouseEvent -> {
-            x = mouseEvent.getSceneX();
-            y = mouseEvent.getSceneY();
-        });
-
-        titlePane.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - x);
-            stage.setY(mouseEvent.getScreenY() - y);
-        });
-    }
-
-    private void setUpCloseButton(Stage stage) {
-        btnClose.setOnMouseClicked(mouseEvent -> stage.close());
-    }
-
-    private void setUpMinimizeButton(Stage stage) {
-        btnMinimize.setOnMouseClicked(mouseEvent -> stage.setIconified(true));
-    }
 
     public void addObjectRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_OBJECT;

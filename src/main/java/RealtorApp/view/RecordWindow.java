@@ -1,6 +1,6 @@
 package RealtorApp.view;
 
-import RealtorApp.controller.RecordController;
+import RealtorApp.controller.SecondaryWindowController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -95,7 +95,7 @@ public class RecordWindow {
         stage.setScene(scene);
         stage.setResizable(false);
 
-        ((RecordController)loader.getController()).init(stage);
+        ((SecondaryWindowController)loader.getController()).init(stage);
         stage.show();
 
     }

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/SecondaryWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RealtorApp.controller.RecordController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/SecondaryWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RealtorApp.controller.SecondaryWindowController">
     <children>
         <Pane prefHeight="492.0" prefWidth="798.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28;" styleClass="mainPain">
             <children>

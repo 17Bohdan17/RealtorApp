@@ -20,7 +20,7 @@ import java.sql.Date;
 import java.util.Arrays;
 
 
-public class RecordController {
+public class SecondaryWindowController {
 
     @FXML
     private Pane addRecordPane;
