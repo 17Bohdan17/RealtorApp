@@ -1,9 +1,21 @@
+/*
+ * SecondaryWindowController
+ *
+ * Version: 1.0
+ * Author: Чирков Богдан
+ *
+ * Description: Контролер для додатковиго вікна програми RealtorApp. Відповідає за обробку подій та
+ *              ініціалізацію відображення додаткових таблиць об'єктів нерухомості, угод, клієнтів, консультацій,
+ *              умов та зручностей, а також редагування та додавання записів.
+ */
+
 package RealtorApp.controller;
 
-import RealtorApp.model.entity.*;
 import RealtorApp.model.entity.Object;
+import RealtorApp.model.entity.*;
 import RealtorApp.model.modelView.*;
 import RealtorApp.util.ChoiceBoxInitializer;
+import RealtorApp.util.StageManager;
 import RealtorApp.util.hibernate.HibernateUtil;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.*;
@@ -22,13 +34,24 @@ import java.util.Arrays;
 
 public class SecondaryWindowController {
 
+    Session session;
+    Agreement agreement = new Agreement();
+    Object object = new Object();
+    Client client = new Client();
+    Consultation consultation = new Consultation();
+    Facilities facility = new Facilities();
+    Requirement requirement = new Requirement();
+    MainWindowController mainWindowController = new MainWindowController();
+    StageManager stageManager = new StageManager();
+
     @FXML
     private Pane addRecordPane;
     @FXML
     private ImageView addRecordWindowCloseBtn;
     @FXML
     private Label addRecordDoneLabel;
-
+    @FXML
+    private Label warningLabel;
     @FXML
     private TextField idAgreementObjectTextField;
     @FXML
@@ -39,7 +62,6 @@ public class SecondaryWindowController {
     private DatePicker addAgreementRecordDatePicker;
     @FXML
     private ChoiceBox agreementStatusChoiceBox;
-
     @FXML
     private TextField objectStreetTextField;
     @FXML
@@ -52,7 +74,6 @@ public class SecondaryWindowController {
     private TextField objectRoomCountTextField;
     @FXML
     private ChoiceBox objectStatusChoiceBox;
-
     @FXML
     private TextField clientFirstNameTextField;
     @FXML
@@ -61,14 +82,12 @@ public class SecondaryWindowController {
     private TextField clientNumberTextField;
     @FXML
     private TextField clientIdRequirementTextField;
-
     @FXML
     private TextField consultationIdClientTextField;
     @FXML
     private DatePicker consultationDatePicker;
     @FXML
     private ChoiceBox consultationStatusChoiceBox;
-
     @FXML
     private TextField facilityIdObjectTextField;
     @FXML
@@ -81,7 +100,6 @@ public class SecondaryWindowController {
     private ChoiceBox<Boolean> facilityGardenChoiceBox;
     @FXML
     private ChoiceBox<Boolean> facilityPoolChoiceBox;
-
     @FXML
     private TextField requirementStreetTextField;
     @FXML
@@ -98,7 +116,6 @@ public class SecondaryWindowController {
     private ChoiceBox<Boolean> requirementGardenChoiceBox;
     @FXML
     private ChoiceBox<Boolean> requirementPoolChoiceBox;
-
     @FXML
     private TableView agreementTableView;
     @FXML
@@ -107,135 +124,110 @@ public class SecondaryWindowController {
     private TableView facilityTableView;
     @FXML
     private TableView consultationTableView;
-
     @FXML
     private TableView updateTableView;
 
 
-    Session session;
-    private double x;
-    private double y;
-
-    Agreement agreement = new Agreement();
-    Object object = new Object();
-    Client client = new Client();
-    Consultation consultation = new Consultation();
-    Facilities facility = new Facilities();
-    Requirement requirement = new Requirement();
-    MainWindowController mainWindowController = new MainWindowController();
-
-    private void setUpDraggableStage(Stage stage) {
-        addRecordPane.setOnMousePressed(mouseEvent -> {
-            x = mouseEvent.getSceneX();
-            y = mouseEvent.getSceneY();
-        });
-
-        addRecordPane.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - x);
-            stage.setY(mouseEvent.getScreenY() - y);
-        });
-    }
-
-    private void setUpCloseButton(Stage stage) {
-        addRecordWindowCloseBtn.setOnMouseClicked(mouseEvent -> stage.close());
-    }
-
+    /**
+     * Ініціалізує вікно додавання запису.
+     * Встановлює функціональність перетягування вікна та закриття вікна.
+     * Приховує мітку для підтвердження додавання запису та мітку попередження.
+     *
+     * @param stage Сцена, яку потрібно ініціалізувати
+     */
     public void init(Stage stage) {
-        setUpCloseButton(stage);
-        setUpDraggableStage(stage);
+        stageManager.setUpDraggableStage(stage, addRecordPane);
+        stageManager.setUpCloseButton(stage, addRecordWindowCloseBtn);
         initializeChoiceBox();
 
         if (addRecordDoneLabel != null) {
             addRecordDoneLabel.setVisible(false);
         }
+
+        if (warningLabel != null) {
+            warningLabel.setVisible(false);
+        }
     }
 
-
+    /**
+     * Обробляє натискання кнопки для додавання запису про об'єкт.
+     * Виконує перевірку та збереження введених даних про об'єкт у базі даних.
+     * При успішному збереженні відображає мітку підтвердження додавання запису,
+     * інакше відображає мітку попередження.
+     */
     public void clickAddObjectRecordButton() {
-        String objectStreet;
-        int objectNumber;
-        double objectArea;
-        int objectPrice;
-        String objectStatus;
-        short objectRoomCount;
+        try {
+            // Оголошення змінних для збереження введених даних про об'єкт
+            String objectStreet;
+            int objectNumber;
+            double objectArea;
+            int objectPrice;
+            String objectStatus;
+            short objectRoomCount;
 
-        startTransaction();
+            // Початок транзакції для збереження даних
+            startTransaction();
 
-        objectStreet = objectStreetTextField.getText();
-        objectNumber = Integer.parseInt(objectNumberTextField.getText());
-        objectArea = Double.parseDouble(objectAreaTextField.getText());
-        objectPrice = Integer.parseInt(objectPriceTextField.getText());
-        objectStatus = (String) objectStatusChoiceBox.getValue();
-        objectRoomCount = Short.parseShort(objectRoomCountTextField.getText());
+            // Отримання введених даних з текстових полів та вибраних значень
+            objectStreet = objectStreetTextField.getText();
+            objectNumber = Integer.parseInt(objectNumberTextField.getText());
+            objectArea = Double.parseDouble(objectAreaTextField.getText());
+            objectPrice = Integer.parseInt(objectPriceTextField.getText());
+            objectStatus = (String) objectStatusChoiceBox.getValue();
+            objectRoomCount =
+                    Short.parseShort(objectRoomCountTextField.getText());
 
-        object.setStreet(objectStreet);
-        object.setStreetNum(objectNumber);
-        object.setArea(objectArea);
-        object.setPrice(BigDecimal.valueOf(objectPrice));
-        object.setStatus(objectStatus);
-        object.setRoomCount(objectRoomCount);
+            // Збереження введених даних у об'єкті класу Object
+            object.setStreet(objectStreet);
+            object.setStreetNum(objectNumber);
+            object.setArea(objectArea);
+            object.setPrice(BigDecimal.valueOf(objectPrice));
+            object.setStatus(objectStatus);
+            object.setRoomCount(objectRoomCount);
 
-        session.persist(object);
-        session.getTransaction().commit();
-        labelClose();
+            // Збереження об'єкта у базі даних та завершення транзакції
+            session.persist(object);
+            session.getTransaction().commit();
 
-        objectStreetTextField.clear();
-        objectNumberTextField.clear();
-        objectAreaTextField.clear();
-        objectPriceTextField.clear();
-        objectStatusChoiceBox.setValue(null);
-        objectRoomCountTextField.clear();
+            // Відображення мітки підтвердження додавання запису
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+
+            // Очищення полів введення даних
+            objectStreetTextField.clear();
+            objectNumberTextField.clear();
+            objectAreaTextField.clear();
+            objectPriceTextField.clear();
+            objectStatusChoiceBox.setValue(null);
+            objectRoomCountTextField.clear();
+        } catch (NullPointerException | NumberFormatException e) {
+            // Відображення мітки попередження у разі помилки введення даних
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
-
-    public void clickAddAgreementRecordButton() {
-        System.out.println(idAgreementObjectTextField);
-        int objectId;
-        int clientId;
-        int agreementPrice;
-        Date agreementDate;
-        String agreementStatus;
-
-        startTransaction();
-
-        objectId = Integer.parseInt(idAgreementObjectTextField.getText());
-        clientId = Integer.parseInt(idAgreementClientTextField.getText());
-        agreementDate = Date.valueOf(addAgreementRecordDatePicker.getValue());
-        agreementPrice = Integer.parseInt(idAgreementPriceTextField.getText());
-        agreementStatus = (String) agreementStatusChoiceBox.getValue();
-
-        agreement.setObjectId(objectId);
-        agreement.setClientId(clientId);
-        agreement.setAgreementDate(agreementDate);
-        agreement.setAgreementPrice(agreementPrice);
-        agreement.setAgreementStatus(agreementStatus);
-
-        session.persist(agreement);
-        session.getTransaction().commit();
-        labelClose();
-
-        idAgreementObjectTextField.clear();
-        idAgreementClientTextField.clear();
-        addAgreementRecordDatePicker.setValue(null);
-        idAgreementPriceTextField.clear();
-        agreementStatusChoiceBox.setValue(null);
-
-    }
-
-
+    /**
+     * Обробляє натискання кнопки для відкриття таблиці об'єктів у формі угоди.
+     */
     public void clickOpenObjectTableInAgreementButton() {
         agreementTableView.getColumns().clear();
         mainWindowController.initObjectTable(agreementTableView);
         initObjectTableInAgreementSelectId();
     }
 
-
+    /**
+     * Ініціалізує обробник подвійного натискання.
+     */
     public void initObjectTableInAgreementSelectId() {
+        // Подвійне натискання на таблицю
         agreementTableView.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 2){
+            if (event.getClickCount() == 2) {
+                // Отримання об'єкта
                 ObjectViewModel selectedObject =
                         (ObjectViewModel) agreementTableView
                                 .getSelectionModel().getSelectedItem();
+                // Отримання ідентифікатора
                 SimpleIntegerProperty objectId = selectedObject.getObjectId();
                 String parseObjectId = String.valueOf(objectId.get());
                 idAgreementObjectTextField.setText(parseObjectId);
@@ -243,122 +235,252 @@ public class SecondaryWindowController {
         });
     }
 
+    /**
+     * Обробляє натискання кнопки для додавання запису про угоду.
+     * Виконує перевірку та збереження введених даних про угоду у базі даних.
+     * При успішному збереженні відображає мітку підтвердження додавання запису,
+     * інакше відображає мітку попередження.
+     */
+    public void clickAddAgreementRecordButton() {
+        String objectIdText;
+        String clientIdText;
+        Date agreementDate;
+        String agreementPriceText;
+        String agreementStatus;
+
+        try {
+            // Отримання введених даних з текстових полів та вибраних значень
+            objectIdText = idAgreementObjectTextField.getText().trim();
+            clientIdText = idAgreementClientTextField.getText().trim();
+            agreementDate = Date.valueOf(addAgreementRecordDatePicker.getValue());
+            agreementPriceText = idAgreementPriceTextField.getText().trim();
+            agreementStatus = (String) agreementStatusChoiceBox.getValue();
+
+            // Перетворення рядкових значень у числа
+            int objectId = Integer.parseInt(objectIdText);
+            int clientId = Integer.parseInt(clientIdText);
+            int agreementPrice = Integer.parseInt(agreementPriceText);
+
+            // Початок транзакції для збереження даних
+            startTransaction();
+
+            // Збереження введених даних у об'єкті класу Agreement
+            agreement.setObjectId(objectId);
+            agreement.setClientId(clientId);
+            agreement.setAgreementDate(agreementDate);
+            agreement.setAgreementPrice(agreementPrice);
+            agreement.setAgreementStatus(agreementStatus);
+
+            // Збереження об'єкта у базі даних та завершення транзакції
+            session.persist(agreement);
+            session.getTransaction().commit();
+
+            // Відображення мітки підтвердження додавання запису
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+
+            // Очищення полів введення даних
+            idAgreementObjectTextField.clear();
+            idAgreementClientTextField.clear();
+            addAgreementRecordDatePicker.setValue(null);
+            idAgreementPriceTextField.clear();
+            agreementStatusChoiceBox.setValue(null);
+
+        } catch (NullPointerException e) {
+            // Відображення мітки попередження у разі помилки введення даних
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
+    }
+
+    /**
+     * Відкриває таблицю клієнтів у контексті угоди.
+     */
     public void clickOpenClientTableInAgreementButton() {
+        // Очищення колонок таблиці
         agreementTableView.getColumns().clear();
+        // Ініціалізація таблиці клієнтів у контексті угоди
         mainWindowController.initClientTable(agreementTableView);
+        // Ініціалізація обробника вибору ідентифікатора клієнта у контексті угоди
         initClientTableInAgreementSelectId();
     }
 
-
+    /**
+     * Ініціалізує обробник вибору ідентифікатора клієнта у контексті угоди.
+     */
     public void initClientTableInAgreementSelectId() {
+        // Встановлення обробника подвійного натискання на таблицю
         agreementTableView.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 2){
-                ClientViewModel selectedClient =
-                        (ClientViewModel) agreementTableView
-                                .getSelectionModel().getSelectedItem();
+            if (event.getClickCount() == 2) { // Перевірка кількості натискань
+                // Отримання вибраного клієнта
+                ClientViewModel selectedClient = (ClientViewModel) agreementTableView.getSelectionModel().getSelectedItem();
+                // Отримання ідентифікатора клієнта
                 SimpleIntegerProperty clientId = selectedClient.getClientId();
+                // Перетворення ідентифікатора в рядок
                 String parseClientId = String.valueOf(clientId.get());
+                // Встановлення ідентифікатора клієнта в відповідне поле введення
                 idAgreementClientTextField.setText(parseClientId);
             }
         });
     }
 
-    public void clickAddClientRecordButton(){
+    /**
+     * Додає запис клієнта.
+     */
+    public void clickAddClientRecordButton() {
         String firstName;
         String secondName;
         long number;
         int idRequirement;
 
-        startTransaction();
+        try {
+            startTransaction();
+            // Отримання даних з полів введення
+            firstName = clientFirstNameTextField.getText();
+            secondName = clientSecondNameTextField.getText();
+            number = Long.parseLong(clientNumberTextField.getText());
+            idRequirement =
+                    Integer.parseInt(clientIdRequirementTextField.getText());
 
-        firstName = clientFirstNameTextField.getText();
-        secondName = clientSecondNameTextField.getText();
-        number = Long.parseLong(clientNumberTextField.getText());
-        idRequirement = Integer.parseInt(
-                clientIdRequirementTextField.getText());
+            // Заповнення об'єкта клієнта
+            client.setFirstName(firstName);
+            client.setSecondName(secondName);
+            client.setContactNum(number);
+            client.setReqId(idRequirement);
 
-        client.setFirstName(firstName);
-        client.setSecondName(secondName);
-        client.setContactNum(number);
-        client.setReqId(idRequirement);
+            // Збереження клієнта в базі даних
+            session.persist(client);
+            session.getTransaction().commit();
 
-        session.persist(client);
-        session.getTransaction().commit();
-        labelClose();
+            // Показ успішного повідомлення
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
 
-        clientFirstNameTextField.clear();
-        clientSecondNameTextField.clear();
-        clientNumberTextField.clear();
-        clientIdRequirementTextField.clear();
+            // Очищення полів введення
+            clientFirstNameTextField.clear();
+            clientSecondNameTextField.clear();
+            clientNumberTextField.clear();
+            clientIdRequirementTextField.clear();
+        } catch (NullPointerException | NumberFormatException e) {
+            // Показ помилки у випадку недійсних або відсутніх даних
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+
+    /**
+     * Відкриває таблицю вимог у контексті клієнта.
+     */
     public void clickOpenRequirementInClientTableButton() {
+        // Очищення колонок таблиці
         clientTableView.getColumns().clear();
+        // Ініціалізація таблиці вимог у контексті клієнта
         mainWindowController.initRequirementTable(clientTableView);
+        // Ініціалізація обробника вибору ідентифікатора вимоги у контексті клієнта
         initRequirementTableInClientSelectId();
     }
 
-
+    /**
+     * Ініціалізує обробник вибору ідентифікатора вимоги у контексті клієнта.
+     */
     public void initRequirementTableInClientSelectId() {
+        // Встановлення обробника подвійного натискання на таблицю
         clientTableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
+            if (event.getClickCount() == 2) { // Перевірка кількості натискань
+                // Отримання вибраної вимоги
                 RequirementViewModel selectedRequirement =
                         (RequirementViewModel) clientTableView
                                 .getSelectionModel().getSelectedItem();
+                // Отримання ідентифікатора вимоги
                 SimpleIntegerProperty reqId = selectedRequirement.getReqId();
+                // Перетворення ідентифікатора в рядок
                 String parseReqId = String.valueOf(reqId.get());
+                // Встановлення ідентифікатора вимоги в відповідне поле введення
                 clientIdRequirementTextField.setText(parseReqId);
             }
         });
     }
 
-
-
-    public void clickAddConsultationRecordButton(){
+    /**
+     * Додає запис консультації.
+     */
+    public void clickAddConsultationRecordButton() {
         int clientId;
         Date consultationDate;
         String consultationStatus;
 
-        startTransaction();
+        try {
+            // Початок транзакції
+            startTransaction();
 
-        clientId = Integer.parseInt(consultationIdClientTextField.getText());
-        consultationDate = Date.valueOf(consultationDatePicker.getValue());
-        consultationStatus = (String) consultationStatusChoiceBox.getValue();
+            // Отримання та парсинг даних про клієнта, дати та статусу консультації
+            clientId = Integer.parseInt(consultationIdClientTextField.getText());
+            consultationDate = Date.valueOf(consultationDatePicker.getValue());
+            consultationStatus = (String) consultationStatusChoiceBox.getValue();
 
-        consultation.setClientId(clientId);
-        consultation.setConsDate(consultationDate);
-        consultation.setConsStatus(consultationStatus);
+            // Встановлення отриманих даних для запису консультації
+            consultation.setClientId(clientId);
+            consultation.setConsDate(consultationDate);
+            consultation.setConsStatus(consultationStatus);
 
-        session.persist(consultation);
-        session.getTransaction().commit();
-        labelClose();
+            // Збереження запису консультації у базі даних
+            session.persist(consultation);
+            session.getTransaction().commit();
 
-        consultationIdClientTextField.clear();
-        consultationDatePicker.setValue(null);
-        consultationStatusChoiceBox.setValue(null);
+            // Відображення мітки успішного додавання запису
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+
+            // Очищення полів введення
+            consultationIdClientTextField.clear();
+            consultationDatePicker.setValue(null);
+            consultationStatusChoiceBox.setValue(null);
+        } catch (NullPointerException | NumberFormatException e) {
+            // Відображення мітки з попередженням
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+    /**
+     * Відкриває таблицю клієнтів у контексті консультацій.
+     */
     public void clickOpenClientInConsultationTableButton() {
+        // Очищення колонок таблиці
         consultationTableView.getColumns().clear();
+        // Ініціалізація таблиці клієнтів у контексті консультацій
         mainWindowController.initClientTable(consultationTableView);
+        // Ініціалізація обробника вибору ідентифікатора клієнта у контексті консультацій
         initClientTableInConsultationSelectId();
     }
 
-
+    /**
+     * Ініціалізує обробник вибору ідентифікатора клієнта у контексті консультацій.
+     */
     public void initClientTableInConsultationSelectId() {
+        // Встановлення обробника подвійного натискання на таблицю
         consultationTableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
+            if (event.getClickCount() == 2) { // Перевірка кількості натискань
+                // Отримання вибраного клієнта
                 ClientViewModel selectedClient =
                         (ClientViewModel) consultationTableView
                                 .getSelectionModel().getSelectedItem();
+                // Отримання ідентифікатора клієнта
                 SimpleIntegerProperty clientId = selectedClient.getClientId();
+                // Перетворення ідентифікатора в рядок
                 String parseClientId = String.valueOf(clientId.get());
+                // Встановлення ідентифікатора клієнта в відповідне поле введення
                 consultationIdClientTextField.setText(parseClientId);
             }
         });
     }
 
-    public void clickAddFacilityRecordButton(){
+
+    /**
+     * Додає запис про об'єкт нерухомості.
+     */
+    public void clickAddFacilityRecordButton() {
         int objectId;
         short minBedrooms;
         short minBathrooms;
@@ -366,57 +488,90 @@ public class SecondaryWindowController {
         boolean garden;
         boolean pool;
 
-        startTransaction();
+        try {
+            // Початок транзакції
+            startTransaction();
 
-        objectId = Integer.parseInt(facilityIdObjectTextField.getText());
-        minBedrooms = Short.parseShort( facilityMinBedroomsTextField.getText());
-        minBathrooms = Short.parseShort(
-                facilityMinBathroomsTextField.getText());
-        garage = facilityGarageChoiceBox.getValue();
-        garden = facilityGardenChoiceBox.getValue();
-        pool = facilityPoolChoiceBox.getValue();
+            // Отримання та парсинг даних про об'єкт нерухомості
+            objectId = Integer.parseInt(facilityIdObjectTextField.getText());
+            minBedrooms =
+                    Short.parseShort(facilityMinBedroomsTextField.getText());
+            minBathrooms =
+                    Short.parseShort(facilityMinBathroomsTextField.getText());
+            garage = facilityGarageChoiceBox.getValue();
+            garden = facilityGardenChoiceBox.getValue();
+            pool = facilityPoolChoiceBox.getValue();
 
-        facility.setObjectReferenceId(objectId);
-        facility.setMinBedrooms(minBedrooms);
-        facility.setMinBathrooms(minBathrooms);
-        facility.setGarage(garage);
-        facility.setGarden(garden);
-        facility.setPool(pool);
+            // Встановлення отриманих даних для запису про об'єкт нерухомості
+            facility.setObjectReferenceId(objectId);
+            facility.setMinBedrooms(minBedrooms);
+            facility.setMinBathrooms(minBathrooms);
+            facility.setGarage(garage);
+            facility.setGarden(garden);
+            facility.setPool(pool);
 
-        session.persist(facility);
-        session.getTransaction().commit();
-        labelClose();
+            // Збереження запису про об'єкт нерухомості у базі даних
+            session.persist(facility);
+            session.getTransaction().commit();
 
-        facilityIdObjectTextField.clear();
-        facilityMinBedroomsTextField.clear();
-        facilityMinBathroomsTextField.clear();
-        facilityGarageChoiceBox.setValue(null);
-        facilityGardenChoiceBox.setValue(null);
-        facilityPoolChoiceBox.setValue(null);
+            // Відображення мітки з попередженням
+            warningLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+
+            // Очищення полів введення
+            facilityIdObjectTextField.clear();
+            facilityMinBedroomsTextField.clear();
+            facilityMinBathroomsTextField.clear();
+            facilityGarageChoiceBox.setValue(null);
+            facilityGardenChoiceBox.setValue(null);
+            facilityPoolChoiceBox.setValue(null);
+
+        } catch (NullPointerException | NumberFormatException e) {
+            // Відображення мітки з попередженням
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+    /**
+     * Відкриває таблицю об'єктів нерухомості.
+     */
     public void clickOpenObjectInFacilityTableButton() {
+        // Очищення колонок таблиці
         facilityTableView.getColumns().clear();
+        // Ініціалізація таблиці об'єктів нерухомості
         mainWindowController.initFacilityTable(facilityTableView);
+        // Ініціалізація обробника вибору ідентифікатора об'єкта нерухомості
         initObjectTableInFacilitySelectId();
     }
 
-
+    /**
+     * Ініціалізує обробник вибору ідентифікатора об'єкта нерухомості.
+     */
     public void initObjectTableInFacilitySelectId() {
+        // Встановлення обробника подвійного натискання на таблицю
         facilityTableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
+            if (event.getClickCount() == 2) { // Перевірка кількості натискань
+                // Отримання вибраного об'єкта нерухомості
                 FacilityViewModel selectedObject =
                         (FacilityViewModel) facilityTableView
                                 .getSelectionModel().getSelectedItem();
+                // Отримання ідентифікатора об'єкта нерухомості
                 SimpleIntegerProperty objectId =
                         selectedObject.getObjectReferenceId();
+                // Перетворення ідентифікатора в рядок
                 String parseObjectId = String.valueOf(objectId.get());
+                // Встановлення ідентифікатора об'єкта нерухомості в відповідне поле введення
                 facilityIdObjectTextField.setText(parseObjectId);
             }
         });
     }
 
-    public void clickAddRequirementRecordButton(){
+
+    /**
+     * Додає запис про вимогу.
+     */
+    public void clickAddRequirementRecordButton() {
         String street;
         int maxPrice;
         double minArea;
@@ -426,57 +581,83 @@ public class SecondaryWindowController {
         boolean garden;
         boolean pool;
 
-        startTransaction();
+        try {
+            // Початок транзакції
+            startTransaction();
 
-        street = requirementStreetTextField.getText();
-        maxPrice = Integer.parseInt(requirementMaxPriceTextField.getText());
-        minArea = Double.parseDouble(requirementMinAreaTextField.getText());
-        minBedrooms = Short.parseShort(
-                requirementMinBedroomsTextField.getText());
-        minBathrooms = Short.parseShort(
-                requirementMinBathroomsTextField.getText());
-        garage = requirementGarageChoiceBox.getValue();
-        garden = requirementGardenChoiceBox.getValue();
-        pool = requirementPoolChoiceBox.getValue();
+            // Отримання та парсинг даних про вимогу
+            street = requirementStreetTextField.getText();
+            maxPrice =
+                    Integer.parseInt(requirementMaxPriceTextField.getText());
+            minArea =
+                    Double.parseDouble(requirementMinAreaTextField.getText());
+            minBedrooms =
+                    Short.parseShort(requirementMinBedroomsTextField.getText());
+            minBathrooms =
+                    Short.parseShort(requirementMinBathroomsTextField.getText());
+            garage = requirementGarageChoiceBox.getValue();
+            garden = requirementGardenChoiceBox.getValue();
+            pool = requirementPoolChoiceBox.getValue();
 
-        requirement.setReqStreet(street);
-        requirement.setReqMaxPrice(maxPrice);
-        requirement.setReqMinimalArea(minArea);
-        requirement.setReqMinBedrooms(minBedrooms);
-        requirement.setReqMinBathrooms(minBathrooms);
-        requirement.setReqGarage(garage);
-        requirement.setReqGarden(garden);
-        requirement.setReqPool(pool);
+            // Встановлення отриманих даних для запису про вимогу
+            requirement.setReqStreet(street);
+            requirement.setReqMaxPrice(maxPrice);
+            requirement.setReqMinimalArea(minArea);
+            requirement.setReqMinBedrooms(minBedrooms);
+            requirement.setReqMinBathrooms(minBathrooms);
+            requirement.setReqGarage(garage);
+            requirement.setReqGarden(garden);
+            requirement.setReqPool(pool);
 
-        session.persist(requirement);
-        session.getTransaction().commit();
-        labelClose();
+            // Збереження запису про вимогу у базі даних
+            session.persist(requirement);
+            session.getTransaction().commit();
 
-        requirementStreetTextField.clear();
-        requirementMaxPriceTextField.clear();
-        requirementMinAreaTextField.clear();
-        requirementMinBedroomsTextField.clear();
-        requirementMinBathroomsTextField.clear();
-        requirementGarageChoiceBox.setValue(null);
-        requirementGardenChoiceBox.setValue(null);
-        requirementPoolChoiceBox.setValue(null);
+            // Відображення мітки з попередженням
+            warningLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+
+            // Очищення полів введення
+            requirementStreetTextField.clear();
+            requirementMaxPriceTextField.clear();
+            requirementMinAreaTextField.clear();
+            requirementMinBedroomsTextField.clear();
+            requirementMinBathroomsTextField.clear();
+            requirementGarageChoiceBox.setValue(null);
+            requirementGardenChoiceBox.setValue(null);
+            requirementPoolChoiceBox.setValue(null);
+        } catch (NullPointerException | NumberFormatException e) {
+            // Відображення мітки з попередженням
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
-    private void labelClose (){
+    /**
+     * Закриває мітку після певного періоду часу.
+     *
+     * @param label Мітка, яку треба закрити.
+     */
+    private void labelClose(Label label) {
         PauseTransition visiblePause = new PauseTransition(
                 Duration.seconds(3));
 
         visiblePause.setOnFinished(event ->
-                addRecordDoneLabel.setVisible(false));
+                label.setVisible(false));
         visiblePause.play();
     }
 
-    private void startTransaction(){
-        addRecordDoneLabel.setVisible(true);
+    /**
+     * Розпочинає транзакцію для роботи з базою даних.
+     */
+    private void startTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
     }
 
+    /**
+     * Ініціалізує вміст випадаючих списків з вказаними значеннями і поясненнями.
+     */
     private void initializeChoiceBox() {
         ChoiceBoxInitializer.initializeChoiceBox(objectStatusChoiceBox,
                 Arrays.asList("FOR_SALE", "AVAILABLE", "UNDER_CONTRACT"),
@@ -529,21 +710,35 @@ public class SecondaryWindowController {
     }
 
 
+    /**
+     * Відкриває таблицю об'єктів для оновлення.
+     */
     public void clickOpenObjectTableForUpdate() {
+        // Очищає колонки у таблиці оновлення
         updateTableView.getColumns().clear();
+        // Ініціалізує таблицю об'єктів через головний контролер
         mainWindowController.initObjectTable(updateTableView);
+        // Викликає метод для обробки подвійного натискання на елемент таблиці
         clickObjectTableItem();
     }
 
+    /**
+     * Обробляє подвійне натискання на об'єкт у таблиці для оновлення.
+     */
     public void clickObjectTableItem() {
+        // Встановлює обробник подвійного натискання на таблицю
         updateTableView.setOnMouseClicked(event -> {
+            // Перевіряє, чи подвійний клік
             if (event.getClickCount() == 2) {
-               ObjectViewModel selectedObject =
+                // Отримує вибраний об'єкт з таблиці
+                ObjectViewModel selectedObject =
                         (ObjectViewModel) updateTableView
                                 .getSelectionModel().getSelectedItem();
 
+                // Зберігає оригінальний об'єкт для оновлення
                 object = selectedObject.getOriginalObject();
 
+                // Отримує властивості об'єкта для відображення у відповідних полях
                 SimpleStringProperty street =
                         selectedObject.getStreet();
                 SimpleIntegerProperty streetNum =
@@ -557,6 +752,7 @@ public class SecondaryWindowController {
                 SimpleIntegerProperty roomCount =
                         selectedObject.getRoomCount();
 
+                // Встановлює значення відповідних полів на формі
                 objectStreetTextField.setText(String.valueOf(street.get()));
                 objectNumberTextField.setText(String.valueOf(streetNum.get()));
                 objectAreaTextField.setText(String.valueOf(area.get()));
@@ -568,37 +764,62 @@ public class SecondaryWindowController {
         });
     }
 
+    /**
+     * Оновлює запис про об'єкт.
+     */
     public void clickUpdateObjectRecordButton() {
-        object.setStreet(objectStreetTextField.getText());
-        object.setStreetNum(Integer.parseInt(objectNumberTextField.getText()));
-        object.setArea(Double.parseDouble(objectAreaTextField.getText()));
-        object.setPrice(BigDecimal.valueOf(Integer.parseInt(
-                objectPriceTextField.getText())));
-        object.setStatus((String) objectStatusChoiceBox.getValue());
-        object.setRoomCount(Short.parseShort(
-                objectRoomCountTextField.getText()));
+        try {
+            // Оновлює властивості об'єкта
+            object.setStreet(objectStreetTextField.getText());
+            object.setStreetNum(Integer.parseInt(objectNumberTextField.getText()));
+            object.setArea(Double.parseDouble(objectAreaTextField.getText()));
+            object.setPrice(BigDecimal.valueOf(Integer.parseInt(
+                    objectPriceTextField.getText())));
+            object.setStatus((String) objectStatusChoiceBox.getValue());
+            object.setRoomCount(Short.parseShort(
+                    objectRoomCountTextField.getText()));
 
+            // Починає транзакцію та оновлює об'єкт у базі даних
             startTransaction();
             session.update(object);
             session.getTransaction().commit();
-            labelClose();
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+        } catch (NullPointerException | NumberFormatException e) {
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+    /**
+     * Відкриває таблицю угод для оновлення.
+     */
     public void clickOpenAgreementTableForUpdate() {
+        // Очищає колонки у таблиці оновлення
         updateTableView.getColumns().clear();
+        // Ініціалізує таблицю угод через головний контролер
         mainWindowController.initAgreementTable(updateTableView);
+        // Викликає метод для обробки подвійного натискання на елемент таблиці
         clickAgreementTableItem();
     }
 
+    /**
+     * Обробляє подвійне натискання на угоду у таблиці для оновлення.
+     */
     public void clickAgreementTableItem() {
+        // Встановлює обробник подвійного натискання на таблицю
         updateTableView.setOnMouseClicked(event -> {
+            // Перевіряє, чи подвійний клік
             if (event.getClickCount() == 2) {
+                // Отримує вибрану угоду з таблиці
                 AgreementViewModel selectedAgreement =
                         (AgreementViewModel) updateTableView
                                 .getSelectionModel().getSelectedItem();
 
+                // Зберігає оригінальну угоду для оновлення
                 agreement = selectedAgreement.getOriginalAgreement();
 
+                // Отримує властивості угоди для відображення у відповідних полях
                 SimpleIntegerProperty objectId =
                         selectedAgreement.getObjectId();
                 SimpleIntegerProperty clientId =
@@ -610,6 +831,7 @@ public class SecondaryWindowController {
                 SimpleStringProperty status =
                         selectedAgreement.getAgreementStatus();
 
+                // Встановлює значення відповідних полів на формі
                 idAgreementObjectTextField.setText(
                         String.valueOf(objectId.get()));
                 idAgreementClientTextField.setText(
@@ -624,39 +846,65 @@ public class SecondaryWindowController {
         });
     }
 
+    /**
+     * Оновлює запис про угоду.
+     */
     public void clickUpdateAgreementRecordButton() {
-        agreement.setObjectId(Integer.valueOf(
-                idAgreementObjectTextField.getText()));
-        agreement.setClientId(Integer.valueOf(
-                idAgreementClientTextField.getText()));
-        agreement.setAgreementDate(Date.valueOf(
-                addAgreementRecordDatePicker.getValue()));
-        agreement.setAgreementPrice(Integer.valueOf(
-                idAgreementPriceTextField.getText()));
-        agreement.setAgreementStatus(
-                (String) agreementStatusChoiceBox.getValue());
+        try {
+            // Оновлює властивості угоди
+            agreement.setObjectId(Integer.valueOf(
+                    idAgreementObjectTextField.getText()));
+            agreement.setClientId(Integer.valueOf(
+                    idAgreementClientTextField.getText()));
+            agreement.setAgreementDate(Date.valueOf(
+                    addAgreementRecordDatePicker.getValue()));
+            agreement.setAgreementPrice(Integer.valueOf(
+                    idAgreementPriceTextField.getText()));
+            agreement.setAgreementStatus(
+                    (String) agreementStatusChoiceBox.getValue());
 
-        startTransaction();
-        session.update(agreement);
-        session.getTransaction().commit();
-        labelClose();
+            // Починає транзакцію та оновлює угоду у базі даних
+            startTransaction();
+            session.update(agreement);
+            session.getTransaction().commit();
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+        } catch (NullPointerException | NumberFormatException e) {
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+
+    /**
+     * Відкриває таблицю клієнтів для оновлення.
+     */
     public void clickOpenClientTableForUpdate() {
+        // Очищає колонки у таблиці оновлення
         updateTableView.getColumns().clear();
+        // Ініціалізує таблицю клієнтів через головний контролер
         mainWindowController.initClientTable(updateTableView);
+        // Викликає метод для обробки подвійного натискання на елемент таблиці
         clickClientTableItem();
     }
 
+    /**
+     * Обробляє подвійне натискання на клієнта у таблиці для оновлення.
+     */
     public void clickClientTableItem() {
+        // Встановлює обробник подвійного натискання на таблицю
         updateTableView.setOnMouseClicked(event -> {
+            // Перевіряє, чи подвійний клік
             if (event.getClickCount() == 2) {
+                // Отримує вибраного клієнта з таблиці
                 ClientViewModel selectedClient =
                         (ClientViewModel) updateTableView
                                 .getSelectionModel().getSelectedItem();
 
+                // Зберігає оригінального клієнта для оновлення
                 client = selectedClient.getOriginalClient();
 
+                // Отримує властивості клієнта для відображення у відповідних полях
                 SimpleStringProperty name =
                         selectedClient.getFirstName();
                 SimpleStringProperty surname =
@@ -666,44 +914,70 @@ public class SecondaryWindowController {
                 SimpleIntegerProperty reqId =
                         selectedClient.getReqId();
 
+                // Встановлює значення відповідних полів на формі
                 clientFirstNameTextField.setText(name.get());
                 clientSecondNameTextField.setText(surname.get());
                 clientNumberTextField.setText(String.valueOf(phoneNum.get()));
                 clientIdRequirementTextField.setText(
                         String.valueOf(reqId.get()));
-
             }
         });
     }
 
+    /**
+     * Оновлює запис про клієнта.
+     */
     public void clickUpdateClientRecordButton() {
-        client.setFirstName(clientFirstNameTextField.getText());
-        client.setSecondName(clientSecondNameTextField.getText());
-        client.setContactNum(Long.valueOf(clientNumberTextField.getText()));
-        client.setReqId(Integer.valueOf(
-                clientIdRequirementTextField.getText()));
+        try {
+            // Оновлює властивості клієнта
+            client.setFirstName(clientFirstNameTextField.getText());
+            client.setSecondName(clientSecondNameTextField.getText());
+            client.setContactNum(Long.valueOf(clientNumberTextField.getText()));
+            client.setReqId(Integer.valueOf(
+                    clientIdRequirementTextField.getText()));
 
-        startTransaction();
-        session.update(client);
-        session.getTransaction().commit();
-        labelClose();
+            // Починає транзакцію та оновлює клієнта у базі даних
+            startTransaction();
+            session.update(client);
+            session.getTransaction().commit();
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+        } catch (NullPointerException | NumberFormatException e) {
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+
+    /**
+     * Відкриває таблицю об'єктів для оновлення.
+     */
     public void clickOpenFacilityTableForUpdate() {
+        // Очищає колонки у таблиці оновлення
         updateTableView.getColumns().clear();
+        // Ініціалізує таблицю об'єктів через головний контролер
         mainWindowController.initFacilityTable(updateTableView);
+        // Викликає метод для обробки подвійного натискання на елемент таблиці
         clickFacilityTableItem();
     }
 
+    /**
+     * Обробляє подвійне натискання на об'єкт у таблиці для оновлення.
+     */
     public void clickFacilityTableItem() {
+        // Встановлює обробник подвійного натискання на таблицю
         updateTableView.setOnMouseClicked(event -> {
+            // Перевіряє, чи подвійний клік
             if (event.getClickCount() == 2) {
+                // Отримує вибраний об'єкт з таблиці
                 FacilityViewModel selectedFacility =
                         (FacilityViewModel) updateTableView
                                 .getSelectionModel().getSelectedItem();
 
+                // Зберігає оригінальний об'єкт для оновлення
                 facility = selectedFacility.getOriginalFacility();
 
+                // Отримує властивості об'єкта для відображення у відповідних полях
                 SimpleIntegerProperty objectId =
                         selectedFacility.getObjectReferenceId();
                 SimpleObjectProperty<Short> bedroomsNum =
@@ -717,6 +991,7 @@ public class SecondaryWindowController {
                 SimpleBooleanProperty pool =
                         selectedFacility.getPool();
 
+                // Встановлює значення відповідних полів на формі
                 facilityIdObjectTextField.setText(
                         String.valueOf(objectId.get()));
                 facilityMinBedroomsTextField.setText(
@@ -730,45 +1005,65 @@ public class SecondaryWindowController {
         });
     }
 
+    /**
+     * Оновлює запис про об'єкт.
+     */
     public void clickUpdateFacilityRecordButton() {
+        try {
+            // Оновлює властивості об'єкта
+            facility.setObjectReferenceId(
+                    Integer.valueOf(facilityIdObjectTextField.getText()));
+            facility.setMinBedrooms(
+                    Short.valueOf(facilityMinBedroomsTextField.getText()));
+            facility.setMinBathrooms(
+                    Short.valueOf(facilityMinBathroomsTextField.getText()));
+            facility.setGarage(facilityGarageChoiceBox.getValue());
+            facility.setGarden(facilityGardenChoiceBox.getValue());
+            facility.setPool(facilityPoolChoiceBox.getValue());
 
-        facility.setObjectReferenceId(
-                Integer.valueOf(facilityIdObjectTextField.getText()));
-        facility.setMinBedrooms(
-                Short.valueOf(facilityMinBedroomsTextField.getText()));
-        facility.setMinBathrooms(
-                Short.valueOf(facilityMinBathroomsTextField.getText()));
-        facility.setGarage(facilityGarageChoiceBox.getValue());
-        facility.setGarden(facilityGardenChoiceBox.getValue());
-        facility.setPool(facilityPoolChoiceBox.getValue());
-
-        startTransaction();
-        session.update(facility);
-        session.getTransaction().commit();
-        labelClose();
+            // Починає транзакцію та оновлює об'єкт у базі даних
+            startTransaction();
+            session.update(facility);
+            session.getTransaction().commit();
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+        } catch (NullPointerException | NumberFormatException e) {
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
 
 
-
-
-
-
+    /**
+     * Відкриває таблицю вимог для оновлення.
+     */
     public void clickOpenRequirementTableForUpdate() {
+        // Очищає колонки у таблиці оновлення
         updateTableView.getColumns().clear();
+        // Ініціалізує таблицю вимог через головний контролер
         mainWindowController.initRequirementTable(updateTableView);
+        // Викликає метод для обробки подвійного натискання на елемент таблиці
         clickRequirementTableItem();
     }
 
+    /**
+     * Обробляє подвійне натискання на вимогу у таблиці для оновлення.
+     */
     public void clickRequirementTableItem() {
+        // Встановлює обробник подвійного натискання на таблицю
         updateTableView.setOnMouseClicked(event -> {
+            // Перевіряє, чи подвійний клік
             if (event.getClickCount() == 2) {
+                // Отримує вибрану вимогу з таблиці
                 RequirementViewModel selectedRequirement =
                         (RequirementViewModel) updateTableView
                                 .getSelectionModel().getSelectedItem();
 
+                // Зберігає оригінальну вимогу для оновлення
                 requirement = selectedRequirement.getOriginalRequirement();
 
+                // Отримує властивості вимоги для відображення у відповідних полях
                 SimpleStringProperty reqStreet =
                         selectedRequirement.getReqStreet();
                 SimpleIntegerProperty reqMaxPrice =
@@ -786,6 +1081,7 @@ public class SecondaryWindowController {
                 SimpleBooleanProperty reqPool =
                         selectedRequirement.getReqPool();
 
+                // Встановлює значення відповідних полів на формі
                 requirementStreetTextField.setText(reqStreet.get());
                 requirementMaxPriceTextField.setText(
                         String.valueOf(reqMaxPrice.get()));
@@ -802,42 +1098,67 @@ public class SecondaryWindowController {
         });
     }
 
+    /**
+     * Оновлює запис про вимогу.
+     */
     public void clickUpdateRequirementRecordButton() {
+        try {
+            // Оновлює властивості вимоги
+            requirement.setReqStreet(requirementStreetTextField.getText());
+            requirement.setReqMaxPrice(
+                    Integer.valueOf(requirementMaxPriceTextField.getText()));
+            requirement.setReqMinimalArea(
+                    Double.valueOf(requirementMinAreaTextField.getText()));
+            requirement.setReqMinBedrooms(
+                    Short.valueOf(requirementMinBedroomsTextField.getText()));
+            requirement.setReqMinBathrooms(
+                    Short.valueOf(requirementMinBathroomsTextField.getText()));
+            requirement.setReqGarage(requirementGarageChoiceBox.getValue());
+            requirement.setReqGarden(requirementGardenChoiceBox.getValue());
+            requirement.setReqPool(requirementPoolChoiceBox.getValue());
 
-        requirement.setReqStreet(requirementStreetTextField.getText());
-        requirement.setReqMaxPrice(
-                Integer.valueOf(requirementMaxPriceTextField.getText()));
-        requirement.setReqMinimalArea(
-                Double.valueOf(requirementMinAreaTextField.getText()));
-        requirement.setReqMinBedrooms(
-                Short.valueOf(requirementMinBedroomsTextField.getText()));
-        requirement.setReqMinBathrooms(
-                Short.valueOf(requirementMinBathroomsTextField.getText()));
-        requirement.setReqGarage(requirementGarageChoiceBox.getValue());
-        requirement.setReqGarden(requirementGardenChoiceBox.getValue());
-        requirement.setReqPool(requirementPoolChoiceBox.getValue());
-
-        startTransaction();
-        session.update(requirement);
-        session.getTransaction().commit();
-        labelClose();
+            // Починає транзакцію та оновлює вимогу у базі даних
+            startTransaction();
+            session.update(requirement);
+            session.getTransaction().commit();
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+        } catch (NullPointerException | NumberFormatException e) {
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 
+
+    /**
+     * Відкриває таблицю консультацій для оновлення.
+     */
     public void clickOpenConsultationTableForUpdate() {
+        // Очищає колонки у таблиці оновлення
         updateTableView.getColumns().clear();
+        // Ініціалізує таблицю консультацій через головний контролер
         mainWindowController.initConsultationTable(updateTableView);
+        // Викликає метод для обробки подвійного натискання на елемент таблиці
         clickConsultationTableItem();
     }
 
+    /**
+     * Обробляє подвійне натискання на консультацію у таблиці для оновлення.
+     */
     public void clickConsultationTableItem() {
+        // Встановлює обробник подвійного натискання на таблицю
         updateTableView.setOnMouseClicked(event -> {
+            // Перевіряє, чи подвійний клік
             if (event.getClickCount() == 2) {
+                // Отримує вибрану консультацію з таблиці
                 ConsultationViewModel selectedConsultation =
                         (ConsultationViewModel) updateTableView
                                 .getSelectionModel().getSelectedItem();
 
+                // Зберігає оригінальну консультацію для оновлення
                 consultation = selectedConsultation.getOriginalConsultation();
 
+                // Отримує властивості консультації для відображення у відповідних полях
                 SimpleIntegerProperty clientId =
                         selectedConsultation.getClientId();
                 SimpleObjectProperty<Date> date =
@@ -845,27 +1166,37 @@ public class SecondaryWindowController {
                 SimpleStringProperty status =
                         selectedConsultation.getConsStatus();
 
+                // Встановлює значення відповідних полів на формі
                 consultationIdClientTextField.setText(
                         String.valueOf(clientId.get()));
                 consultationDatePicker.setValue(date.get().toLocalDate());
                 consultationStatusChoiceBox.setValue(status.get());
-
             }
         });
     }
 
+    /**
+     * Оновлює запис про консультацію.
+     */
     public void clickUpdateConsultationRecordButton() {
+        try {
+            // Оновлює властивості консультації
+            consultation.setClientId(
+                    Integer.valueOf(consultationIdClientTextField.getText()));
+            consultation.setConsDate(
+                    Date.valueOf(consultationDatePicker.getValue()));
+            consultation.setConsStatus(
+                    (String) consultationStatusChoiceBox.getValue());
 
-        consultation.setClientId(
-                Integer.valueOf(consultationIdClientTextField.getText()));
-        consultation.setConsDate(
-                Date.valueOf(consultationDatePicker.getValue()));
-        consultation.setConsStatus(
-                (String) consultationStatusChoiceBox.getValue());
-
-        startTransaction();
-        session.update(consultation);
-        session.getTransaction().commit();
-        labelClose();
+            // Починає транзакцію та оновлює консультацію у базі даних
+            startTransaction();
+            session.update(consultation);
+            session.getTransaction().commit();
+            addRecordDoneLabel.setVisible(true);
+            labelClose(addRecordDoneLabel);
+        } catch (NullPointerException | NumberFormatException e) {
+            warningLabel.setVisible(true);
+            labelClose(warningLabel);
+        }
     }
 }

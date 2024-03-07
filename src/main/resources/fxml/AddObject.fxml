@@ -68,6 +68,7 @@
             <ChoiceBox fx:id="objectStatusChoiceBox" layoutX="155.0" layoutY="201.0" prefHeight="40.0" prefWidth="202.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="52.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
             <Label layoutX="62.0" layoutY="213.0" prefHeight="17.0" prefWidth="103.0" style="-fx-text-fill: gray;" text="Статус об'єкту" />
+            <Label fx:id="warningLabel" layoutX="54.0" layoutY="250.0" prefHeight="34.0" prefWidth="485.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Будь ласка, заповніть всі поля!" textAlignment="CENTER" textFill="#ff0707" />
             </children>
         </Pane>
     </children>

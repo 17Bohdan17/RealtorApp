@@ -10,6 +10,7 @@
     </inspection_tool>
     <inspection_tool class="InstantiationOfUtilityClass" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JpaQlInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="LossyEncoding" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="RawUseOfParameterizedType" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ThrowablePrintStackTrace" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -20,6 +21,7 @@
           <option value="RealtorApp" />
           <option value="RealtorApp" />
           <option value="RealtorApp" />
+          <option value="RealtorApp" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -27,10 +29,12 @@
           <option value="com.itextpdf:itextpdf:5.5.13.2" />
           <option value="org.jetbrains.kotlin:kotlin-stdlib:1.5.21" />
           <option value="org.postgresql:postgresql:42.7.1" />
+          <option value="log4j:log4j:1.2.17" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />

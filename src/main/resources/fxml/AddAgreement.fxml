@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/SecondaryWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RealtorApp.controller.SecondaryWindowController">
    <children>
-      <Pane prefHeight="542.0" prefWidth="831.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28;" styleClass="mainPain">
+      <Pane prefHeight="542.0" prefWidth="831.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28; -fx-border-color: black;" styleClass="mainPain">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="19.0" layoutY="261.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="85.0" />
             <Pane fx:id="addRecordPane" prefHeight="40.0" prefWidth="831.0" style="-fx-background-color: darkblue; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 28;">
@@ -75,6 +75,7 @@
                </font>
             </Button>
             <TableView fx:id="agreementTableView" editable="true" layoutX="271.0" layoutY="55.0" prefHeight="471.0" prefWidth="544.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />
+            <Label fx:id="warningLabel" layoutX="40.0" layoutY="311.0" prefHeight="34.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Будь ласка, заповніть всі поля!" textAlignment="CENTER" textFill="#ff0707" />
          </children>
       </Pane>
    </children>

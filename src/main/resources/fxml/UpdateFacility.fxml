@@ -31,7 +31,7 @@
                         </ImageView>
                     </children>
                 </Pane>
-                <TextField fx:id="facilityIdObjectTextField" alignment="CENTER" layoutX="58.0" layoutY="63.0" prefHeight="40.0" prefWidth="248.0" promptText="ID об'єкту" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
+                <TextField fx:id="facilityIdObjectTextField" alignment="CENTER" layoutX="39.0" layoutY="64.0" prefHeight="40.0" prefWidth="248.0" promptText="ID об'єкту" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
@@ -46,31 +46,32 @@
                         <Font name="System Bold Italic" size="23.0" />
                     </font>
                 </Label>
-                <ChoiceBox fx:id="facilityGarageChoiceBox" layoutX="160.0" layoutY="219.0" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
-            <TextField fx:id="facilityMinBedroomsTextField" alignment="CENTER" layoutX="58.0" layoutY="113.0" prefHeight="40.0" prefWidth="248.0" promptText="Мінімальна к-сть спален" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
+                <ChoiceBox fx:id="facilityGarageChoiceBox" layoutX="141.0" layoutY="220.0" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
+            <TextField fx:id="facilityMinBedroomsTextField" alignment="CENTER" layoutX="39.0" layoutY="114.0" prefHeight="40.0" prefWidth="248.0" promptText="Мінімальна к-сть спален" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="facilityMinBathroomsTextField" alignment="CENTER" layoutX="58.0" layoutY="160.0" prefHeight="40.0" prefWidth="248.0" promptText="Мінімальна к-сть ванних" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
+            <TextField fx:id="facilityMinBathroomsTextField" alignment="CENTER" layoutX="39.0" layoutY="161.0" prefHeight="40.0" prefWidth="248.0" promptText="Мінімальна к-сть ванних" style="-fx-border-color: black; -fx-border-radius: 28; -fx-border-width: 3; -fx-background-radius: 28;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </TextField>
-            <ChoiceBox fx:id="facilityGardenChoiceBox" layoutX="160.0" layoutY="269.0" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
-            <ChoiceBox fx:id="facilityPoolChoiceBox" layoutX="160.0" layoutY="316.0" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="58.0" layoutY="219.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
-            <Label layoutX="86.0" layoutY="231.0" prefHeight="17.0" prefWidth="41.0" style="-fx-text-fill: gray;" text="Гараж" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="58.0" layoutY="269.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
-            <Label layoutX="95.0" layoutY="281.0" prefHeight="17.0" prefWidth="23.0" style="-fx-text-fill: gray;" text="Сад" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="58.0" layoutY="316.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
-            <Label layoutX="86.0" layoutY="328.0" prefHeight="17.0" prefWidth="41.0" style="-fx-text-fill: gray;" text="Басейн" />
+            <ChoiceBox fx:id="facilityGardenChoiceBox" layoutX="141.0" layoutY="270.0" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
+            <ChoiceBox fx:id="facilityPoolChoiceBox" layoutX="141.0" layoutY="317.0" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="39.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
+            <Label layoutX="67.0" layoutY="232.0" prefHeight="17.0" prefWidth="41.0" style="-fx-text-fill: gray;" text="Гараж" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="39.0" layoutY="270.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
+            <Label layoutX="76.0" layoutY="282.0" prefHeight="17.0" prefWidth="23.0" style="-fx-text-fill: gray;" text="Сад" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="39.0" layoutY="317.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
+            <Label layoutX="67.0" layoutY="329.0" prefHeight="17.0" prefWidth="41.0" style="-fx-text-fill: gray;" text="Басейн" />
             <TableView fx:id="updateTableView" editable="true" layoutX="337.0" layoutY="52.0" prefHeight="474.0" prefWidth="527.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />
-            <Button fx:id="openFacilityTableButton" layoutX="32.0" layoutY="437.0" mnemonicParsing="false" onAction="#clickOpenFacilityTableForUpdate" prefHeight="40.0" prefWidth="263.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="Відобразити таблицю">
+            <Button fx:id="openFacilityTableButton" layoutX="32.0" layoutY="438.0" mnemonicParsing="false" onAction="#clickOpenFacilityTableForUpdate" prefHeight="40.0" prefWidth="263.0" style="-fx-border-radius: 28; -fx-background-radius: 28; -fx-border-color: black; -fx-border-width: 3;" text="Відобразити таблицю">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
+            <Label fx:id="warningLabel" layoutX="37.0" layoutY="368.0" prefHeight="34.0" prefWidth="254.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Будь ласка, заповніть всі поля!" textAlignment="CENTER" textFill="#ff0707" />
             </children>
         </Pane>
     </children>

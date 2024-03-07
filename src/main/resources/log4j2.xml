@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Конфигурація для зберігання логів у файлі з обмеженим кількістю бекапів -->
+        <RollingFile name="AllFileAppender" fileName="logs/realtorApp.log"
+                     filePattern="logs/realtorApp-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- Обмеження кількості бекапів -->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Конфігурація кореневого логгера -->
+        <Root level="trace">
+            <AppenderRef ref="AllFileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

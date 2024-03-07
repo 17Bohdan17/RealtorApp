@@ -1,3 +1,15 @@
+/*
+ * ClientModel
+ *
+ * Version: 1.0
+ * Author: Чирков Богдан
+ *
+ * Description: Клас, що представляє модель клієнта в програмі RealtorApp.
+ *              Він відповідає за отримання даних з бази даних про клієнтів, конвертацію
+ *              їх у відповідні об'єкти моделі та збереження у колекції для подальшого
+ *              використання у програмі.
+ */
+
 package RealtorApp.model.modelView;
 
 import javafx.collections.FXCollections;
@@ -14,20 +26,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClientModel {
+    // Логер для ведення журналу подій
     private static final Logger logger =
             Logger.getLogger(ClientModel.class.getName());
 
+    // Список моделей представлення клієнтів
     @Getter
     private final ObservableList<ClientViewModel> clientViewModels =
             FXCollections.observableArrayList();
 
+    // Фабрика сеансів Hibernate
     private final SessionFactory sessionFactory;
 
+    // Конструктор класу ClientModel, який налаштовує фабрику сеансів та отримує дані з бази даних
     public ClientModel() {
         sessionFactory = new Configuration().configure().buildSessionFactory();
         fetchDataFromDatabase();
     }
 
+    // Метод для отримання даних з бази даних про клієнтів
     private void fetchDataFromDatabase() {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -47,6 +64,7 @@ public class ClientModel {
         }
     }
 
+    // Метод для конвертації об'єкту клієнта в модель представлення клієнта
     private ClientViewModel convertToClientViewModel(Client client) {
         return new ClientViewModel(
                 client.getClientId(),
@@ -55,11 +73,5 @@ public class ClientModel {
                 client.getContactNum(),
                 client.getReqId(),
                 client.getClient());
-    }
-
-    public void close() {
-        if (sessionFactory != null) {
-            sessionFactory.close();
-        }
     }
 }

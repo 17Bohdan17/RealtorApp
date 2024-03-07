@@ -60,6 +60,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <Label fx:id="warningLabel" layoutX="56.0" layoutY="272.0" prefHeight="34.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Будь ласка, заповніть всі поля!" textAlignment="CENTER" textFill="#ff0707" />
             </children>
         </Pane>
       <TableView fx:id="consultationTableView" editable="true" layoutX="293.0" layoutY="54.0" prefHeight="410.0" prefWidth="424.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />

@@ -46,7 +46,7 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <Button fx:id="openObjectTableForUpdateButton" layoutX="17.0" layoutY="367.0" mnemonicParsing="false" onAction="#clickOpenObjectTableForUpdate" prefHeight="48.0" prefWidth="264.0" styleClass="objectButton" text="Відобразити таблицю об'єктів ">
+                <Button fx:id="openObjectTableForUpdateButton" layoutX="17.0" layoutY="385.0" mnemonicParsing="false" onAction="#clickOpenObjectTableForUpdate" prefHeight="40.0" prefWidth="264.0" styleClass="objectButton" text="Відобразити таблицю об'єктів ">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -69,12 +69,13 @@
             <ChoiceBox fx:id="objectStatusChoiceBox" layoutX="130.0" layoutY="253.0" prefHeight="40.0" prefWidth="146.0" style="-fx-background-radius: 28; -fx-border-radius: 28; -fx-border-color: black; -fx-border-width: 3;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="17.0" layoutY="252.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: white;" width="97.0" />
             <Label layoutX="27.0" layoutY="264.0" prefHeight="17.0" prefWidth="103.0" style="-fx-text-fill: gray;" text="Статус об'єкту" />
-            <Button fx:id="saveUpdateObjectButton" layoutX="17.0" layoutY="425.0" mnemonicParsing="false" onAction="#clickUpdateObjectRecordButton" prefHeight="48.0" prefWidth="264.0" styleClass="objectButton" text="Зберегти зміни">
+            <Button fx:id="saveUpdateObjectButton" layoutX="17.0" layoutY="433.0" mnemonicParsing="false" onAction="#clickUpdateObjectRecordButton" prefHeight="40.0" prefWidth="264.0" styleClass="objectButton" text="Зберегти зміни">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <TableView fx:id="updateTableView" editable="true" layoutX="314.0" layoutY="60.0" prefHeight="414.0" prefWidth="472.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />
+            <Label fx:id="warningLabel" layoutX="17.0" layoutY="346.0" prefHeight="34.0" prefWidth="264.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Будь ласка, заповніть всі поля!" textAlignment="CENTER" textFill="#ff0707" />
             </children>
         </Pane>
     </children>

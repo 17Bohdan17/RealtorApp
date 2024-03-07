@@ -1,8 +1,19 @@
+/*
+ * Генератор PDF
+ *
+ * Версія: 1.0
+ * Автор: Чирков Богдан
+ *
+ * Опис: Клас для генерації PDF-документів з даних TableView у JavaFX.
+ *       Надає можливість збереження таблиці у вигляді PDF-файлу та відображення попередження, якщо таблиця порожня.
+ */
+
 package RealtorApp.util;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
@@ -14,31 +25,60 @@ import java.io.IOException;
 
 public class PdfGenerator {
 
+    // Шлях до шрифту Arial
     private static final String FONT_PATH = "c:/windows/fonts/arial.ttf";
+    // Колір фону для шапки таблиці
     private static final BaseColor HEADER_BACKGROUND_COLOR = new BaseColor(0, 142, 240);
+    // Колір фону для парних рядків тіла таблиці
     private static final BaseColor BODY_EVEN_ROW_COLOR = new BaseColor(220, 220, 220);
+    // Колір фону для непарних рядків тіла таблиці
     private static final BaseColor BODY_ODD_ROW_COLOR = BaseColor.WHITE;
+    // Розмір шрифту
     private static final int FONT_SIZE = 12;
 
-    public <T> void generatePdfFromTableViewWithDialog(TableView<T> tableView) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialFileName("table_data.pdf");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
-        File file = fileChooser.showSaveDialog(null);
-        if (file != null) {
-            String filePath = file.getAbsolutePath();
-            generatePdfFromTableView(tableView, filePath);
+    /**
+     * Генерує PDF-документ з даних TableView та відображає діалогове вікно для вибору місця збереження файлу.
+     *
+     * @param tableView TableView, дані якої будуть включені до PDF
+     * @param label      Label, яка відображатиме попередження, якщо таблиця порожня
+     */
+    public <T> void generatePdfFromTableViewWithDialog(TableView<T> tableView, Label label) {
+        if (!tableView.getItems().isEmpty()) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName("table_data.pdf");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                String filePath = file.getAbsolutePath();
+                generatePdfFromTableView(tableView, filePath);
+            }
+        } else {
+            showWarning(label);
         }
     }
 
+    /**
+     * Показує попередження на Label.
+     *
+     * @param label Label, на якому відображується попередження
+     */
+    public void showWarning(Label label){
+        label.setVisible(true);
+    }
 
+    /**
+     * Генерує PDF-документ з даних TableView та зберігає його за вказаним шляхом.
+     *
+     * @param tableView TableView, дані якої будуть включені до PDF
+     * @param filePath   Шлях, за яким буде збережено PDF-файл
+     */
     public <T> void generatePdfFromTableView(TableView<T> tableView, String filePath) {
         Document document = new Document(PageSize.A4);
 
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
 
-            // Устанавливаем события для шапки страницы
+            // Устанавлюємо події для шапки сторінки
             PdfPageEventHelper eventHelper = new PdfPageEventHelper() {
                 @Override
                 public void onStartPage(PdfWriter writer, Document document) {
@@ -67,17 +107,17 @@ public class PdfGenerator {
             PdfPTable pdfTable = new PdfPTable(tableView.getColumns().size());
             pdfTable.setWidthPercentage(100);
 
-            // Добавляем шрифт Arial для кириллицы
+            // Додаємо шрифт Arial для кирилиці
             BaseFont baseFont = BaseFont.createFont(FONT_PATH, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font font = new Font(baseFont, FONT_SIZE, Font.NORMAL);
 
-            // Вычисляем ширину каждой колонки в процентах от ширины страницы
+            // Визначаємо ширину кожної колонки у відсотках від ширини сторінки
             float[] columnWidths = calculateColumnWidths(tableView, document);
 
-            // Устанавливаем ширину каждой колонки
+            // Встановлюємо ширину кожної колонки
             pdfTable.setWidths(columnWidths);
 
-            // Добавляем данные таблицы
+            // Додаємо дані таблиці
             ObservableList<T> tableData = tableView.getItems();
             for (int i = 0; i < tableData.size(); i++) {
                 T rowData = tableData.get(i);
@@ -86,7 +126,7 @@ public class PdfGenerator {
                     String cellValue = (cellData == null) ? "" : cellData.toString();
                     PdfPCell bodyCell = new PdfPCell(new Phrase(cellValue, font));
                     bodyCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    // Чередуем цвета строк
+                    // Перемикаємо кольори рядків
                     bodyCell.setBackgroundColor((i % 2 == 0) ? BODY_EVEN_ROW_COLOR : BODY_ODD_ROW_COLOR);
                     pdfTable.addCell(bodyCell);
                 }
@@ -94,17 +134,15 @@ public class PdfGenerator {
 
             document.add(pdfTable);
             document.close();
-            System.out.println("PDF file is created successfully!");
         } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    // Метод для создания шапки таблицы на основе названий колонок
+    // Метод для створення шапки таблиці на основі назв колонок
     @SneakyThrows
     private <T> PdfPTable createHeaderTable(ObservableList<TableColumn<T, ?>> columns,
-                                        TableView<T> tableView, Document document) throws DocumentException {
+                                            TableView<T> tableView, Document document) throws DocumentException {
         BaseFont baseFont = BaseFont.createFont(FONT_PATH, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         PdfPTable table = new PdfPTable(columns.size());
         float[] columnWidths = calculateColumnWidths(tableView, document);
@@ -118,7 +156,7 @@ public class PdfGenerator {
         return table;
     }
 
-    // Метод для вычисления ширины каждой колонки в процентах от ширины страницы
+    // Метод для обчислення ширини кожної колонки у відсотках від ширини сторінки
     private<T> float[] calculateColumnWidths(TableView<T> tableView, Document document) {
         float totalWidth = PageSize.A4.getWidth() - document.leftMargin() - document.rightMargin();
         float[] columnWidths = new float[tableView.getColumns().size()];

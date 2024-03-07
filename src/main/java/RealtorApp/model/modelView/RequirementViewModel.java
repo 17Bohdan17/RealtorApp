@@ -1,3 +1,13 @@
+/*
+ * RequirementViewModel
+ *
+ * Version: 1.0
+ * Author: Чирков Богдан
+ *
+ * Description: Клас, що представляє модель відображення вимог в програмі RealtorApp.
+ *              Використовується для відображення даних про вимоги у таблиці або іншому візуальному елементі.
+ */
+
 package RealtorApp.model.modelView;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -7,9 +17,9 @@ import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 import RealtorApp.model.entity.Requirement;
 
-
 @Getter
 public class RequirementViewModel {
+    // Прості властивості для відображення даних про вимогу
     private final SimpleIntegerProperty reqId;
     private final SimpleIntegerProperty reqMinBedrooms;
     private final SimpleIntegerProperty reqMinBathrooms;
@@ -21,12 +31,14 @@ public class RequirementViewModel {
     private final SimpleBooleanProperty reqPool;
     private final Requirement originalRequirement;
 
+    // Конструктор класу RequirementViewModel
     public RequirementViewModel(int reqId, int reqMinBedrooms,
                                 int reqMinBathrooms, double reqMinimalArea,
                                 Integer reqMaxPrice, String reqStreet,
                                 boolean reqGarage, boolean reqGarden,
-                                boolean reqPool, Requirement originalRequirement) {
-
+                                boolean reqPool,
+                                Requirement originalRequirement) {
+        // Ініціалізація простих властивостей
         this.reqId = new SimpleIntegerProperty(reqId);
         this.reqMinBedrooms = new SimpleIntegerProperty(reqMinBedrooms);
         this.reqMinBathrooms = new SimpleIntegerProperty(reqMinBathrooms);
@@ -39,4 +51,3 @@ public class RequirementViewModel {
         this.originalRequirement = originalRequirement;
     }
 }
-

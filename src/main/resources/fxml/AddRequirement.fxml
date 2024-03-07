@@ -74,6 +74,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </TextField>
+            <Label fx:id="warningLabel" layoutX="64.0" layoutY="255.0" prefHeight="34.0" prefWidth="476.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Будь ласка, заповніть всі поля!" textAlignment="CENTER" textFill="#ff0707" />
             </children>
         </Pane>
     </children>

@@ -1,150 +1,255 @@
+
+/*
+ * MainWindowController
+ *
+ * Version: 1.0
+ * Author: Чирков Богдан
+ *
+ * Description: Контролер для головного вікна програми RealtorApp. Відповідає за обробку подій та
+ *              ініціалізацію відображення таблиць об'єктів нерухомості, угод, клієнтів, консультацій,
+ *              умов та зручностей, а також за відображення, та видалення записів у цих таблицях.
+ */
+
 package RealtorApp.controller;
 
 import RealtorApp.enums.RecordStatusEnum;
 import RealtorApp.enums.TableEnum;
-import RealtorApp.model.entity.*;
 import RealtorApp.model.entity.Object;
+import RealtorApp.model.entity.*;
 import RealtorApp.model.modelView.*;
+import RealtorApp.util.PdfGenerator;
 import RealtorApp.util.StageManager;
 import RealtorApp.util.hibernate.HibernateUtil;
-import RealtorApp.util.PdfGenerator;
 import RealtorApp.view.RecordWindow;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.hibernate.Session;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 public class MainWindowController {
+    RecordWindow recordWindow = new RecordWindow();
+    StageManager stageManager = new StageManager();
+    TableEnum    tableEnum;
     @FXML
-    private Pane titlePane;
+    private Pane      titlePane;
     @FXML
     private ImageView btnClose;
     @FXML
     private ImageView btnMinimize;
     @FXML
     private TableView mainTableView;
+    @FXML
+    private Label     warningLabel;
 
     private double x;
     private double y;
 
-    RecordWindow recordWindow = new RecordWindow();
-    StageManager stageManager = new StageManager();
-    TableEnum tableEnum;
 
+    /**
+    Ініціалізація головного вікна додатку
+     */
     public void init(Stage stage) {
-
-        stageManager.setUpDraggableStage(stage, titlePane);
-        stageManager.setUpCloseButton(stage, btnClose);
-        stageManager.setUpMinimizeButton(stage, btnMinimize);
-        mainTableView.setColumnResizePolicy( // Встановлення політики розміщення стовпців таблиці
-                TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
-        mainTableView.autosize(); // Автоматичне налаштування розміру стовпців таблиці
+            stageManager.setUpDraggableStage(stage, titlePane);
+            stageManager.setUpCloseButton(stage, btnClose);
+            stageManager.setUpMinimizeButton(stage, btnMinimize);
+            mainTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+            mainTableView.autosize();
+            warningLabel.setVisible(false);
     }
 
 
+    /**
+     * Додає запис про об'єкт нерухомості.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void addObjectRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_OBJECT;
         recordWindow.init();
     }
 
+    /**
+     * Додає запис про угоду.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void addAgreementRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_AGREEMENT;
         recordWindow.init();
-
     }
 
+    /**
+     * Додає запис про клієнта.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void addClientRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_CLIENT;
         recordWindow.init();
     }
 
+    /**
+     * Додає запис про консультацію.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void addConsultationRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_CONSULTATION;
         recordWindow.init();
     }
 
+    /**
+     * Додає запис про зручності.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void addFacilityRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_FACILITY;
         recordWindow.init();
     }
 
+    /**
+     * Додає запис про вимогу.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void addRequirementRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.ADD_REQUIREMENT;
         recordWindow.init();
     }
 
+
+    /**
+     * Оновлює запис про об'єкт.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void updateObjectRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_OBJECT;
         recordWindow.init();
     }
 
+    /**
+     * Оновлює запис про угоду.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void updateAgreementRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_AGREEMENT;
         recordWindow.init();
-
     }
 
+    /**
+     * Оновлює запис про клієнта.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void updateClientRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_CLIENT;
         recordWindow.init();
     }
 
+    /**
+     * Оновлює запис про консультацію.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void updateConsultationRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_CONSULTATION;
         recordWindow.init();
     }
 
+    /**
+     * Оновлює запис про обладнання.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void updateFacilityRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_FACILITY;
         recordWindow.init();
     }
 
+    /**
+     * Оновлює запис про вимогу.
+     *
+     * @throws IOException виникає, якщо виникає проблема при ініціалізації вікна запису
+     */
     public void updateRequirementRecord() throws IOException {
         recordWindow.recordStatusEnum = RecordStatusEnum.UPDATE_REQUIREMENT;
         recordWindow.init();
     }
 
+
+    /**
+     * Обробляє натискання кнопки для додавання таблиці об'єктів.
+     */
     public void clickButtonAddObjectTable() {
         initObjectTable(mainTableView);
     }
 
+    /**
+     * Обробляє натискання кнопки для додавання таблиці угод.
+     */
     public void clickButtonAddAgreementTable() {
         initAgreementTable(mainTableView);
     }
 
+    /**
+     * Обробляє натискання кнопки для додавання таблиці клієнтів.
+     */
     public void clickButtonAddClientTable() {
         initClientTable(mainTableView);
     }
 
+    /**
+     * Обробляє натискання кнопки для додавання таблиці консультацій.
+     */
     public void clickButtonAddConsultationTable() {
         initConsultationTable(mainTableView);
     }
 
+    /**
+     * Обробляє натискання кнопки для додавання таблиці обладнання.
+     */
     public void clickButtonAddFacilityTable() {
         initFacilityTable(mainTableView);
     }
 
+    /**
+     * Обробляє натискання кнопки для додавання таблиці вимог.
+     */
     public void clickButtonAddRequirementTable() {
         initRequirementTable(mainTableView);
     }
 
+    /**
+     * Обробляє натискання кнопки для видалення обраного запису з таблиці.
+     */
     public void clickDeleteRecordButton() {
         deleteSelectedRecord(mainTableView);
     }
 
-
+    /**
+     * Видаляє вибраний запис з таблиці з обробкою винятків.
+     *
+     * @param tableView таблиця, з якої видаляється запис
+     */
     public void deleteSelectedRecord(TableView<?> tableView) {
+        // Відкриваємо нову сесію Hibernate
         Session session = HibernateUtil.getSessionFactory().openSession();
-
+        try {
+            // Спробуємо видалити вибраний запис з таблиці
             switch (tableEnum) {
                 case OBJECT:
                     ObjectViewModel selectedObject = (ObjectViewModel)
@@ -208,22 +313,81 @@ public class MainWindowController {
                     tableView.getItems().remove(selectedConsultation);
                     break;
             }
+        } catch (NullPointerException e) {
+            // Якщо виникає NullPointerException, показуємо попередження
+            warningLabel.setVisible(true);
+            // Приховуємо попередження після 3 секунд
+            labelClose(warningLabel);
+        } finally {
+            // Закриваємо сесію Hibernate в будь-якому випадку
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
-    private void closeTransaction (java.lang.Object someObject, Session session){
+    /**
+     * Закриває попередження після певного періоду часу.
+     *
+     * @param label попередження, яке закривається
+     */
+    private void labelClose(Label label) {
+        // Пауза для видимості попередження
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(3));
+
+        // Після закінчення паузи приховуємо попередження
+        visiblePause.setOnFinished(event -> label.setVisible(false));
+        visiblePause.play();
+    }
+
+    /**
+     * Закриває транзакцію Hibernate і сесію.
+     *
+     * @param someObject об'єкт, який видаляється з бази даних
+     * @param session    сесія Hibernate, в якій відбувається транзакція
+     */
+    private void closeTransaction(java.lang.Object someObject, Session session) {
+        /* Відкриваємо транзакцію, видаляємо об'єкт з бази даних,
+        завершуємо транзакцію та закриваємо сесію */
         session.beginTransaction();
         session.delete(someObject);
         session.getTransaction().commit();
         session.close();
     }
 
+    /**
+     * Створює PDF-документ з вмістом таблиці та відображає діалогове вікно.
+     * Після генерації закриває попереджувальний підпис через 3 секунди.
+     */
+    public void createPdfDocument() {
+        PdfGenerator pdfGenerator = new PdfGenerator();
+        pdfGenerator.generatePdfFromTableViewWithDialog(mainTableView, warningLabel);
+        labelClose(warningLabel);
+    }
 
+
+    /**
+     * Ініціалізує таблицю об'єктів нерухомості відповідно до моделі даних.
+     *
+     * @param tableView таблиця, яку потрібно ініціалізувати
+     */
     public void initObjectTable(TableView tableView) {
-        ObjectModel objectModel = new ObjectModel();
-        tableEnum = TableEnum.OBJECT;
+        // Константи для ширини колонок
+        final int ID_COLUMN_WIDTH = 30;
+        final int STREET_COLUMN_WIDTH = 130;
+        final int STREET_NUM_COLUMN_WIDTH = 40;
+        final int AREA_COLUMN_WIDTH = 60;
+        final int PRICE_COLUMN_WIDTH = 80;
+        final int STATUS_COLUMN_WIDTH = 140;
+        final int ROOM_COUNT_COLUMN_WIDTH = 90;
 
-        tableView.getColumns().clear();
+        ObjectModel objectModel = new ObjectModel();   // Створюємо модель об'єктів нерухомості
+        tableEnum = TableEnum.OBJECT;                  // Встановлюємо тип таблиці
 
+        tableView.getColumns().clear();                // Очищуємо колонки таблиці
+
+        // Створюємо колонки таблиці з відповідними назвами
         TableColumn<ObjectViewModel, Integer> idColumn =
                 new TableColumn<>("ID");
         TableColumn<ObjectViewModel, String> streetColumn =
@@ -239,55 +403,60 @@ public class MainWindowController {
         TableColumn<ObjectViewModel, Integer> roomCountColumn =
                 new TableColumn<>("К-сть кімнат");
 
-        idColumn.setPrefWidth(30);
-        streetColumn.setPrefWidth(130);
-        streetNumColumn.setPrefWidth(40);
-        areaColumn.setPrefWidth(60);
-        priceColumn.setPrefWidth(80);
-        statusColumn.setPrefWidth(140);
-        roomCountColumn.setPrefWidth(90);
+        // Встановлюємо ширину колонок
+        idColumn.setPrefWidth(ID_COLUMN_WIDTH);
+        streetColumn.setPrefWidth(STREET_COLUMN_WIDTH);
+        streetNumColumn.setPrefWidth(STREET_NUM_COLUMN_WIDTH);
+        areaColumn.setPrefWidth(AREA_COLUMN_WIDTH);
+        priceColumn.setPrefWidth(PRICE_COLUMN_WIDTH);
+        statusColumn.setPrefWidth(STATUS_COLUMN_WIDTH);
+        roomCountColumn.setPrefWidth(ROOM_COUNT_COLUMN_WIDTH);
 
+        // Встановлюємо значення для кожної колонки
         idColumn.setCellValueFactory(cellData -> Bindings.createObjectBinding(
                 () -> cellData.getValue().getObjectId().getValue()));
-
         streetColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getStreet());
-
         streetNumColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getStreet_num().getValue()));
-
         areaColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getArea().getValue()));
-
         priceColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getPrice().getValue()));
-
         statusColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getStatus());
-
         roomCountColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getRoomCount().getValue()));
 
+        // Встановлюємо дані у таблицю
         tableView.setItems(objectModel.getObjectViewModels());
+        // Додаємо колонки до таблиці
         tableView.getColumns().addAll(idColumn, streetColumn,
                 streetNumColumn, areaColumn, priceColumn, statusColumn,
                 roomCountColumn);
     }
 
-    public void createPdfDocument(){
-        PdfGenerator pdfGenerator = new PdfGenerator();
-        pdfGenerator.generatePdfFromTableViewWithDialog(mainTableView);
-    }
 
+    /**
+     * Ініціалізує таблицю договорів з моделлю договорів.
+     *
+     * @param tableView Таблиця, яку потрібно ініціалізувати
+     */
     public void initAgreementTable(TableView tableView) {
+        // Створення моделі договорів
         AgreementModel agreementModel = new AgreementModel();
+
+        // Очищення колонок таблиці
         tableView.getColumns().clear();
+
+        // Встановлення типу таблиці на AGREEMENT
         tableEnum = TableEnum.AGREEMENT;
 
+        // Створення колонок таблиці
         TableColumn<AgreementViewModel, Integer> agreementIdColumn =
                 new TableColumn<>("ID");
         TableColumn<AgreementViewModel, Integer> objectIdColumn =
@@ -301,6 +470,7 @@ public class MainWindowController {
         TableColumn<AgreementViewModel, String> agreementStatusColumn =
                 new TableColumn<>("Статус");
 
+        // Встановлення значень для фабрики значень в колонках
         agreementIdColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getAgreementId()
@@ -327,28 +497,43 @@ public class MainWindowController {
         agreementStatusColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getAgreementStatus());
 
+        // Встановлення елементів у таблицю
         tableView.setItems(agreementModel.getAgreementViewModels());
+
+        // Додавання колонок до таблиці
         tableView.getColumns().addAll(agreementIdColumn, objectIdColumn,
                 clientIdColumn, agreementDateColumn, agreementPriceColumn,
                 agreementStatusColumn);
     }
 
+    /**
+     * Ініціалізує таблицю клієнтів з моделлю клієнтів.
+     *
+     * @param tableView Таблиця, яку потрібно ініціалізувати
+     */
     public void initClientTable(TableView tableView) {
+        // Створення моделі клієнтів
         ClientModel clientModel = new ClientModel();
+
+        // Очищення колонок таблиці
         tableView.getColumns().clear();
+
+        // Встановлення типу таблиці на CLIENT
         tableEnum = TableEnum.CLIENT;
 
+        // Створення колонок таблиці
         TableColumn<ClientViewModel, Integer> clientIdColumn =
                 new TableColumn<>("ID");
         TableColumn<ClientViewModel, String> firstNameColumn =
                 new TableColumn<>("Ім'я");
         TableColumn<ClientViewModel, String> secondNameColumn =
-                new TableColumn<>("Прізвище ");
+                new TableColumn<>("Прізвище");
         TableColumn<ClientViewModel, Long> contactNumColumn =
                 new TableColumn<>("Номер телефону");
         TableColumn<ClientViewModel, Integer> reqIdColumn =
                 new TableColumn<>("ID вимоги");
 
+        // Встановлення значень для фабрики значень в колонках
         clientIdColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getClientId().getValue()));
@@ -367,16 +552,31 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getReqId().getValue()));
 
+        // Встановлення елементів у таблицю
         tableView.setItems(clientModel.getClientViewModels());
+
+        // Додавання колонок до таблиці
         tableView.getColumns().addAll(clientIdColumn, firstNameColumn,
                 secondNameColumn, contactNumColumn, reqIdColumn);
     }
 
+
+    /**
+     * Ініціалізує таблицю консультацій з моделлю консультацій.
+     *
+     * @param tableView Таблиця, яку потрібно ініціалізувати
+     */
     public void initConsultationTable(TableView tableView) {
+        // Створення моделі консультацій
         ConsultationModel consultationModel = new ConsultationModel();
+
+        // Очищення колонок таблиці
         tableView.getColumns().clear();
+
+        // Встановлення типу таблиці на CONSULTATION
         tableEnum = TableEnum.CONSULTATION;
 
+        // Створення колонок таблиці
         TableColumn<ConsultationViewModel, Integer> consIdColumn =
                 new TableColumn<>("ID");
         TableColumn<ConsultationViewModel, Integer> clientIdColumn =
@@ -386,6 +586,7 @@ public class MainWindowController {
         TableColumn<ConsultationViewModel, String> consStatusColumn =
                 new TableColumn<>("Статус");
 
+        // Встановлення значень для фабрики значень в колонках
         consIdColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getConsId().getValue()));
@@ -401,18 +602,32 @@ public class MainWindowController {
         consStatusColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getConsStatus());
 
+        // Встановлення елементів у таблицю
         tableView.setItems(consultationModel.getConsultationViewModels());
+
+        // Додавання колонок до таблиці
         tableView.getColumns().addAll(consIdColumn, clientIdColumn,
                 consDateColumn, consStatusColumn);
     }
 
+    /**
+     * Ініціалізує таблицю приміщень з моделлю приміщень.
+     *
+     * @param tableView Таблиця, яку потрібно ініціалізувати
+     */
     public void initFacilityTable(TableView tableView) {
+        // Створення моделі приміщень
         FacilityModel facilityModel = new FacilityModel();
+
+        // Очищення колонок таблиці
         tableView.getColumns().clear();
+
+        // Встановлення типу таблиці на FACILITY
         tableEnum = TableEnum.FACILITY;
 
+        // Створення колонок таблиці
         TableColumn<FacilityViewModel, Integer> facilityIdColumn =
-                new TableColumn<>("ID ");
+                new TableColumn<>("ID");
         TableColumn<FacilityViewModel, Integer> objectReferenceIdColumn =
                 new TableColumn<>("ID об'єкту");
         TableColumn<FacilityViewModel, Short> minBedroomsColumn =
@@ -426,6 +641,7 @@ public class MainWindowController {
         TableColumn<FacilityViewModel, Boolean> poolColumn =
                 new TableColumn<>("Басейн");
 
+        // Встановлення значень для фабрики значень в колонках
         facilityIdColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getFacilityId().getValue()));
@@ -457,24 +673,40 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getPool().getValue()));
 
+        // Встановлення елементів у таблицю
         tableView.setItems(facilityModel.getFacilityViewModels());
+
+        // Додавання колонок до таблиці
         tableView.getColumns().addAll(facilityIdColumn,
                 objectReferenceIdColumn, minBedroomsColumn, minBathroomsColumn,
                 garageColumn, gardenColumn, poolColumn);
     }
 
 
-    public void initRequirementTable(TableView tableView) {
-        RequirementModel requirementModel = new RequirementModel();
-        tableView.getColumns().clear();
-        tableEnum = TableEnum.REQUIREMENT;
 
+    /**
+     * Ініціалізує таблицю вимог з моделлю вимог.
+     *
+     * @param tableView Таблиця, яку потрібно ініціалізувати
+     */
+    public void initRequirementTable(TableView tableView) {
+        final int ID_COLUMN_WIDTH = 30;
+        final int GARAGE_COLUMN_WIDTH = 40;
+        final int GARDEN_COLUMN_WIDTH = 40;
+        final int POOL_COLUMN_WIDTH = 40;
+        final int MIN_COLUMN_WIDTH = 40;
+
+        RequirementModel requirementModel = new RequirementModel();   // Створення моделі вимог
+        tableView.getColumns().clear();    // Очищення колонок таблиці
+        tableEnum = TableEnum.REQUIREMENT;   // Встановлення типу таблиці на REQUIREMENT
+
+        // Створення колонок таблиці
         TableColumn<RequirementViewModel, Integer> reqIdColumn =
                 new TableColumn<>("ID");
         TableColumn<RequirementViewModel, Integer> reqMinBedroomsColumn =
                 new TableColumn<>("К-сть спален");
         TableColumn<RequirementViewModel, Integer> reqMinBathroomsColumn =
-                new TableColumn<>("К-сть ванних ");
+                new TableColumn<>("К-сть ванних");
         TableColumn<RequirementViewModel, Double> reqMinimalAreaColumn =
                 new TableColumn<>("Площа (min)");
         TableColumn<RequirementViewModel, Integer> reqMaxPriceColumn =
@@ -488,15 +720,17 @@ public class MainWindowController {
         TableColumn<RequirementViewModel, Boolean> reqPoolColumn =
                 new TableColumn<>("Басейн");
 
-        reqIdColumn.setPrefWidth(30);
-        reqGarageColumn.setPrefWidth(40);
-        reqGardenColumn.setPrefWidth(40);
-        reqPoolColumn.setPrefWidth(40);
-        reqMinBathroomsColumn.setPrefWidth(40);
-        reqMinBedroomsColumn.setPrefWidth(40);
-        reqMinimalAreaColumn.setPrefWidth(40);
-        reqMaxPriceColumn.setPrefWidth(40);
+        // Встановлення ширини колонок
+        reqIdColumn.setPrefWidth(ID_COLUMN_WIDTH);
+        reqGarageColumn.setPrefWidth(GARAGE_COLUMN_WIDTH);
+        reqGardenColumn.setPrefWidth(GARDEN_COLUMN_WIDTH);
+        reqPoolColumn.setPrefWidth(POOL_COLUMN_WIDTH);
+        reqMinBathroomsColumn.setPrefWidth(MIN_COLUMN_WIDTH);
+        reqMinBedroomsColumn.setPrefWidth(MIN_COLUMN_WIDTH);
+        reqMinimalAreaColumn.setPrefWidth(MIN_COLUMN_WIDTH);
+        reqMaxPriceColumn.setPrefWidth(MIN_COLUMN_WIDTH);
 
+        // Встановлення значень для фабрики значень в колонках
         reqIdColumn.setCellValueFactory(
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getReqId().getValue()));
@@ -536,37 +770,15 @@ public class MainWindowController {
                 cellData -> Bindings.createObjectBinding(
                         () -> cellData.getValue().getReqPool().getValue()));
 
+        // Встановлення елементів у таблицю
         tableView.setItems(requirementModel.getRequirementViewModels());
+
+        // Додавання колонок до таблиці
         tableView.getColumns().addAll(reqIdColumn, reqMinBedroomsColumn,
                 reqMinBathroomsColumn, reqMinimalAreaColumn, reqMaxPriceColumn,
                 reqStreetColumn, reqGarageColumn, reqGardenColumn,
                 reqPoolColumn);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
