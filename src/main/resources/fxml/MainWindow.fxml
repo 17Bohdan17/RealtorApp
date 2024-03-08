@@ -15,7 +15,7 @@
     <children>
         <Pane layoutX="16.0" layoutY="46.0" prefHeight="708.0" prefWidth="1376.0" styleClass="mainPain">
             <children>
-            <TableView fx:id="mainTableView" editable="true" layoutX="342.0" layoutY="25.0" prefHeight="666.0" prefWidth="1024.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />
+            <TableView fx:id="mainTableView" editable="true" layoutX="349.0" layoutY="13.0" prefHeight="678.0" prefWidth="1017.0" style="-fx-border-color: black; -fx-border-width: 3;" stylesheets="@../css/MainWindowStyle.css" />
             <MenuButton fx:id="addTableMenuBtn" layoutX="21.0" layoutY="25.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="308.0" styleClass="button" stylesheets="@../css/MainWindowStyle.css" text="Показати таблицю" textAlignment="CENTER">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#clickButtonAddObjectTable" text="Об'єкти нерухомості" />
@@ -58,6 +58,11 @@
             <Button fx:id="deleteButton" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onAction="#clickDeleteRecordButton" prefHeight="38.0" prefWidth="308.0" text="Видалити запис" />
             <Button fx:id="printButton" layoutX="21.0" layoutY="232.0" mnemonicParsing="false" onAction="#createPdfDocument" prefHeight="38.0" prefWidth="308.0" text="Друкувати PDF-файл" />
             <Label fx:id="warningLabel" layoutX="24.0" layoutY="281.0" prefHeight="38.0" prefWidth="308.0" style="-fx-background-color: white; -fx-background-radius: 28; -fx-alignment: center; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 28;" text="Відобразіть таблицю для наступних дій!" textAlignment="CENTER" textFill="#ff0707" />
+            <ImageView fx:id="wallpaperImage" fitHeight="672.0" fitWidth="1011.0" layoutX="352.0" layoutY="16.0">
+               <image>
+                  <Image url="@../images/wallpaper.jpg" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
         <Pane fx:id="titlePane" layoutX="25.0" layoutY="2.0" prefHeight="32.0" prefWidth="1363.0">

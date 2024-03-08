@@ -24,9 +24,7 @@ import RealtorApp.view.RecordWindow;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -51,6 +49,22 @@ public class MainWindowController {
     private TableView mainTableView;
     @FXML
     private Label     warningLabel;
+    @FXML
+    private ImageView wallpaperImage;
+    @FXML
+    private MenuButton addTableMenuBtn;
+    @FXML
+    private MenuButton addRecordMenu;
+    @FXML
+    private MenuButton updateRecordMenu;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button printButton;
+
+
+
+
 
     private double x;
     private double y;
@@ -66,6 +80,7 @@ public class MainWindowController {
             mainTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
             mainTableView.autosize();
             warningLabel.setVisible(false);
+            initTooltips();
     }
 
 
@@ -196,6 +211,7 @@ public class MainWindowController {
      */
     public void clickButtonAddObjectTable() {
         initObjectTable(mainTableView);
+        wallpaperImage.setVisible(false);
     }
 
     /**
@@ -203,6 +219,7 @@ public class MainWindowController {
      */
     public void clickButtonAddAgreementTable() {
         initAgreementTable(mainTableView);
+        wallpaperImage.setVisible(false);
     }
 
     /**
@@ -210,6 +227,7 @@ public class MainWindowController {
      */
     public void clickButtonAddClientTable() {
         initClientTable(mainTableView);
+        wallpaperImage.setVisible(false);
     }
 
     /**
@@ -217,6 +235,7 @@ public class MainWindowController {
      */
     public void clickButtonAddConsultationTable() {
         initConsultationTable(mainTableView);
+        wallpaperImage.setVisible(false);
     }
 
     /**
@@ -224,6 +243,7 @@ public class MainWindowController {
      */
     public void clickButtonAddFacilityTable() {
         initFacilityTable(mainTableView);
+        wallpaperImage.setVisible(false);
     }
 
     /**
@@ -231,6 +251,7 @@ public class MainWindowController {
      */
     public void clickButtonAddRequirementTable() {
         initRequirementTable(mainTableView);
+        wallpaperImage.setVisible(false);
     }
 
     /**
@@ -324,6 +345,26 @@ public class MainWindowController {
                 session.close();
             }
         }
+    }
+
+    /**
+     * Створює вспливаючі підказки до кнопок основного меню.
+     */
+    private void initTooltips(){
+        Tooltip.install(addTableMenuBtn, new Tooltip(
+                "Оберіть таблицю для відображення"));
+
+        Tooltip.install(addRecordMenu, new Tooltip(
+                "Оберіть тип запису для додавання"));
+
+        Tooltip.install(updateRecordMenu, new Tooltip(
+                "Оберіть тип запису для редагування"));
+
+        Tooltip.install(deleteButton, new Tooltip(
+                "Оберіть запис на таблиці для видалення"));
+
+        Tooltip.install(printButton, new Tooltip(
+                "Відобразіть таблицю для друкування"));
     }
 
     /**
@@ -806,7 +847,7 @@ public class MainWindowController {
 
 
 
- 
+
 
 
 

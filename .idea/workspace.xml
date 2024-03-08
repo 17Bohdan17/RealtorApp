@@ -5,54 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a79d991-ceb4-48ec-8f00-615dc0f4af71" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/logs/realtorApp-1.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logs/realtorApp.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/realtorApp-2.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/realtorApp-3.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/realtorApp-4.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/realtorApp-5.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/wallpaper.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postgresql/SqlQuiries.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postgresql/tasks/Tasks.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/controller/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/realtorApp.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/realtorApp.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/controller/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/controller/SecondaryWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/controller/SecondaryWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/enums/RecordStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/enums/RecordStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/enums/TableEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/enums/TableEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Agreement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Consultation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Consultation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Facilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Facilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Object.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/entity/Requirement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/AgreementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/AgreementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/AgreementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/AgreementViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ClientModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ClientModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ClientViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ClientViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ConsultationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ConsultationModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ConsultationViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ConsultationViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/FacilityModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/FacilityModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/FacilityViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/FacilityViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ObjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ObjectModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ObjectViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/ObjectViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/RequirementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/RequirementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/RequirementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/model/modelView/RequirementViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/util/ChoiceBoxInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/util/ChoiceBoxInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/util/PdfGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/util/PdfGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/util/StageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/util/StageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/util/hibernate/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/util/hibernate/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddAgreement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddAgreement.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddClient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddConsultation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddConsultation.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddFacility.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddFacility.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddObject.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddObject.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddRequirement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddRequirement.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RealtorApp/view/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RealtorApp/view/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UpdateAgreement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UpdateAgreement.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UpdateClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UpdateClient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UpdateConsultation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UpdateConsultation.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UpdateFacility.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UpdateFacility.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UpdateObject.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UpdateObject.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UpdateRequirement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UpdateRequirement.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +125,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "I:/RealtorApp/RealtorApp/src/main/resources",
+    "last_opened_file_path": "I:/RealtorApp/RealtorApp/src/main/resources/images",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -182,11 +147,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\RealtorApp\RealtorApp\src\main\resources\images" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\img" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\recordFxml" />
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\updateRecordFxml" />
-      <recent name="I:\RealtorApp\RealtorApp\src\main\java\org\example\Hibernate" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\RealtorApp\RealtorApp\src\main\resources\fxml" />
@@ -337,7 +302,7 @@
       <workItem from="1709045116731" duration="30127000" />
       <workItem from="1709220123544" duration="8430000" />
       <workItem from="1709362119995" duration="6243000" />
-      <workItem from="1709446071958" duration="91936000" />
+      <workItem from="1709446071958" duration="111361000" />
     </task>
     <servers />
   </component>

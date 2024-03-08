@@ -76,14 +76,16 @@ public class PdfGenerator {
         Document document = new Document(PageSize.A4);
 
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            PdfWriter writer = PdfWriter.getInstance(document,
+                    new FileOutputStream(filePath));
 
             // Устанавлюємо події для шапки сторінки
             PdfPageEventHelper eventHelper = new PdfPageEventHelper() {
                 @Override
                 public void onStartPage(PdfWriter writer, Document document) {
                     try {
-                        PdfPTable headerTable = createHeaderTable(tableView.getColumns(), tableView, document);
+                        PdfPTable headerTable =
+                                createHeaderTable(tableView.getColumns(), tableView, document);
                         headerTable.setWidthPercentage(100);
                         document.add(headerTable);
                     } catch (DocumentException e) {
@@ -96,7 +98,8 @@ public class PdfGenerator {
                     PdfContentByte cb = writer.getDirectContent();
                     Phrase footer = new Phrase(" " + writer.getPageNumber());
                     ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, footer,
-                            (document.right() - document.left()) / 2 + document.leftMargin(),
+                            (document.right() -
+                                    document.left()) / 2 + document.leftMargin(),
                             document.bottom() - 10, 0);
                 }
             };
@@ -108,7 +111,8 @@ public class PdfGenerator {
             pdfTable.setWidthPercentage(100);
 
             // Додаємо шрифт Arial для кирилиці
-            BaseFont baseFont = BaseFont.createFont(FONT_PATH, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            BaseFont baseFont =
+                    BaseFont.createFont(FONT_PATH, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font font = new Font(baseFont, FONT_SIZE, Font.NORMAL);
 
             // Визначаємо ширину кожної колонки у відсотках від ширини сторінки
@@ -127,7 +131,8 @@ public class PdfGenerator {
                     PdfPCell bodyCell = new PdfPCell(new Phrase(cellValue, font));
                     bodyCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                     // Перемикаємо кольори рядків
-                    bodyCell.setBackgroundColor((i % 2 == 0) ? BODY_EVEN_ROW_COLOR : BODY_ODD_ROW_COLOR);
+                    bodyCell.setBackgroundColor((i % 2 == 0)
+                            ? BODY_EVEN_ROW_COLOR : BODY_ODD_ROW_COLOR);
                     pdfTable.addCell(bodyCell);
                 }
             }

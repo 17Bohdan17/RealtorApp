@@ -177,6 +177,8 @@ public class SecondaryWindowController {
             objectRoomCount =
                     Short.parseShort(objectRoomCountTextField.getText());
 
+            object = new Object();
+
             // Збереження введених даних у об'єкті класу Object
             object.setStreet(objectStreet);
             object.setStreetNum(objectNumber);
@@ -264,6 +266,7 @@ public class SecondaryWindowController {
             // Початок транзакції для збереження даних
             startTransaction();
 
+            agreement = new Agreement();
             // Збереження введених даних у об'єкті класу Agreement
             agreement.setObjectId(objectId);
             agreement.setClientId(clientId);
@@ -342,6 +345,8 @@ public class SecondaryWindowController {
             idRequirement =
                     Integer.parseInt(clientIdRequirementTextField.getText());
 
+            client = new Client();
+
             // Заповнення об'єкта клієнта
             client.setFirstName(firstName);
             client.setSecondName(secondName);
@@ -351,6 +356,7 @@ public class SecondaryWindowController {
             // Збереження клієнта в базі даних
             session.persist(client);
             session.getTransaction().commit();
+
 
             // Показ успішного повідомлення
             addRecordDoneLabel.setVisible(true);
@@ -418,6 +424,8 @@ public class SecondaryWindowController {
             clientId = Integer.parseInt(consultationIdClientTextField.getText());
             consultationDate = Date.valueOf(consultationDatePicker.getValue());
             consultationStatus = (String) consultationStatusChoiceBox.getValue();
+
+            consultation = new Consultation();
 
             // Встановлення отриманих даних для запису консультації
             consultation.setClientId(clientId);
@@ -502,6 +510,8 @@ public class SecondaryWindowController {
             garden = facilityGardenChoiceBox.getValue();
             pool = facilityPoolChoiceBox.getValue();
 
+            facility = new Facilities();
+
             // Встановлення отриманих даних для запису про об'єкт нерухомості
             facility.setObjectReferenceId(objectId);
             facility.setMinBedrooms(minBedrooms);
@@ -514,8 +524,9 @@ public class SecondaryWindowController {
             session.persist(facility);
             session.getTransaction().commit();
 
+
             // Відображення мітки з попередженням
-            warningLabel.setVisible(true);
+            addRecordDoneLabel.setVisible(true);
             labelClose(addRecordDoneLabel);
 
             // Очищення полів введення
@@ -599,6 +610,8 @@ public class SecondaryWindowController {
             garden = requirementGardenChoiceBox.getValue();
             pool = requirementPoolChoiceBox.getValue();
 
+            requirement = new Requirement();
+
             // Встановлення отриманих даних для запису про вимогу
             requirement.setReqStreet(street);
             requirement.setReqMaxPrice(maxPrice);
@@ -614,7 +627,7 @@ public class SecondaryWindowController {
             session.getTransaction().commit();
 
             // Відображення мітки з попередженням
-            warningLabel.setVisible(true);
+            addRecordDoneLabel.setVisible(true);
             labelClose(addRecordDoneLabel);
 
             // Очищення полів введення
